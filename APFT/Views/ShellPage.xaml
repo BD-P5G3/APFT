@@ -43,32 +43,32 @@
                 TODO: Update item icons by updating FontIcon.Glyph properties.
                 https://docs.microsoft.com/windows/apps/design/style/segoe-fluent-icons-font#icon-list
                 -->
-                <NavigationViewItem x:Uid="Shell_Início" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.InícioViewModel">
+                <NavigationViewItem x:Uid="Shell_Home" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.InícioViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe7c3;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="Shell_Obras" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.ObrasViewModel">
+                <NavigationViewItem x:Uid="Shell_Constructions" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.ObrasViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe7c3;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="Shell_Clientes" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.ClientesViewModel">
+                <NavigationViewItem x:Uid="Shell_Customers" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.ClientesViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe7c3;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="Shell_Empregados" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.EmpregadosViewModel">
+                <NavigationViewItem x:Uid="Shell_Employees" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.EmpregadosViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe7c3;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="Shell_Fornecedores" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.FornecedoresViewModel">
+                <NavigationViewItem x:Uid="Shell_Suppliers" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.FornecedoresViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe7c3;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="Shell_Encomendas" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.EncomendasViewModel">
+                <NavigationViewItem x:Uid="Shell_Orders" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.EncomendasViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe7c3;"/>
                     </NavigationViewItem.Icon>
