@@ -12,14 +12,14 @@
 
   <Identity
     Name="8680a544-5811-487f-a426-832312a29b96"
-    Publisher="CN=José Gameiro, Rúben Garrido"
+    Publisher="CN=José Gameiro e Rúben Garrido"
     Version="1.0.0.0" />
     
   <mp:PhoneIdentity PhoneProductId="8680a544-5811-487f-a426-832312a29b96" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
     
   <Properties>
     <DisplayName>APFT</DisplayName>
-    <PublisherDisplayName>ruben</PublisherDisplayName>
+    <PublisherDisplayName>José Gameiro, Rúben Garrido</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
