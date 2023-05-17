@@ -12,7 +12,7 @@
 
   <Identity
     Name="8680a544-5811-487f-a426-832312a29b96"
-    Publisher="CN=ruben"
+    Publisher="CN=José Gameiro, Rúben Garrido"
     Version="1.0.0.0" />
     
   <mp:PhoneIdentity PhoneProductId="8680a544-5811-487f-a426-832312a29b96" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
