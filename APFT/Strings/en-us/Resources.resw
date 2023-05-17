@@ -140,7 +140,7 @@
     <value>Suppliers</value>
   </data>
   <data name="Shell_Orders.Content" xml:space="preserve">
-    <value>Order</value>
+    <value>Orders</value>
   </data>
   <data name="Settings_Personalization.Text" xml:space="preserve">
     <value>Personalization</value>
@@ -163,10 +163,7 @@
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>Project for "Base de Dados", 2022/2023</value>
   </data>
-  <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
-    <value>Privacy Statement</value>
-  </data>
-  <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
-    <value>https://YourPrivacyUrlGoesHere/</value>
+  <data name="Settings_Authors.Text" xml:space="preserve">
+    <value>Made with ❤️ by José Gameiro &amp; Rúben Garrido</value>
   </data>
 </root>
