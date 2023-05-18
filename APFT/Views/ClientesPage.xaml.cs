@@ -1,4 +1,5 @@
-﻿using APFT.ViewModels;
+﻿using System.Collections.ObjectModel;
+using APFT.ViewModels;
 
 using Microsoft.UI.Xaml.Controls;
 
@@ -16,4 +17,78 @@ public sealed partial class ClientesPage : Page
         ViewModel = App.GetService<ClientesViewModel>();
         InitializeComponent();
     }
+
+    // C# Code
+
+    // To create a collection of grouped items, create a query that groups
+    // an existing list, or returns a grouped collection from a database.
+    // The following method is used to create the ItemsSource for our CollectionViewSource:
+
+    public static async Task<ObservableCollection<GroupInfoList>> GetContactsGroupedAsync()
+    {
+        // Grab Contact objects from pre-existing list (list is returned from function GetContactsAsync())
+        var query = from item in await GetContactsAsync()
+
+                        // Group the items returned from the query, sort and select the ones you want to keep
+                    group item by item.LastName.Substring(0, 1).ToUpper() into g
+                    orderby g.Key
+
+                    // GroupInfoList is a simple custom class that has an IEnumerable type attribute, and
+                    // a key attribute. The IGrouping-typed variable g now holds the Contact objects,
+                    // and these objects will be used to create a new GroupInfoList object.
+                    select new GroupInfoList(g) { Key = g.Key };
+
+        return new ObservableCollection<GroupInfoList>(query);
+    }
+
+    // GroupInfoList class definition:
+    public class GroupInfoList : List<object>
+    {
+        public GroupInfoList(IEnumerable<object> items) : base(items)
+        {
+        }
+        public object Key
+        {
+            get; set;
+        }
+
+        public override string ToString()
+        {
+            return "Group " + Key.ToString();
+        }
+    }
+
+    // Contact class definition:
+    public class Contact
+    {
+        public string FirstName
+        {
+            get; private set;
+        }
+        public string LastName
+        {
+            get; private set;
+        }
+        public string Company
+        {
+            get; private set;
+        }
+        public string Name => FirstName + " " + LastName;
+
+        public Contact(string firstName, string lastName, string company)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Company = company;
+        }
+
+        // ... Methods ...
+    }
+
+    public static async Task<ObservableCollection<Contact>> GetContactsAsync()
+    {
+        return null;
+    }
+
+    ContactsCVS.Source = await Contact.GetContactsGroupedAsync();
 }
