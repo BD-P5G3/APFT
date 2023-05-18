@@ -1,13 +1,15 @@
 ﻿using APFT.Contracts.Services;
 using APFT.Helpers;
 using APFT.ViewModels;
-
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 
 using Windows.System;
+using WinRT.Interop;
 
 namespace APFT.Views;
 
@@ -16,6 +18,16 @@ public sealed partial class ShellPage : Page
     public ShellViewModel ViewModel
     {
         get;
+    }
+
+    private AppWindow m_AppWindow;
+
+    private AppWindow GetAppWindowForCurrentWindow()
+    {
+        var mainWindow = App.MainWindow;
+        var hWnd = WindowNative.GetWindowHandle(mainWindow);
+        var wndId = Win32Interop.GetWindowIdFromWindow(hWnd);
+        return AppWindow.GetFromWindowId(wndId);
     }
 
     public ShellPage(ShellViewModel viewModel)
@@ -29,7 +41,13 @@ public sealed partial class ShellPage : Page
         // TODO: Set the title bar icon by updating /Assets/WindowIcon.ico.
         // A custom title bar is required for full window theme and Mica support.
         // https://docs.microsoft.com/windows/apps/develop/title-bar?tabs=winui3#full-customization
-        App.MainWindow.ExtendsContentIntoTitleBar = true;
+
+        m_AppWindow = GetAppWindowForCurrentWindow();
+        var titleBar = m_AppWindow.TitleBar;
+        titleBar.ExtendsContentIntoTitleBar = true;
+        titleBar.ButtonBackgroundColor = Colors.Transparent;
+
+        //App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
         AppTitleBarText.Text = "AppDisplayName".GetLocalized();
