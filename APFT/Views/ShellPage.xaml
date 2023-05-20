@@ -67,6 +67,24 @@
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
+
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem x:Uid="Shell_DatabaseStatus" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.DatabaseStatusViewModel">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF0B9;"/>
+                    </NavigationViewItem.Icon>
+                    <NavigationViewItem.InfoBadge>
+                        <InfoBadge x:Name="infoBadge1"
+                                   Style="{StaticResource AttentionDotInfoBadgeStyle}"
+                                   Background="Red"
+                                   Height="6"
+                                   Width="6"
+                                   Margin="4"/>
+                    </NavigationViewItem.InfoBadge>
+
+                </NavigationViewItem>
+            </NavigationView.FooterMenuItems>
+            
             <NavigationView.HeaderTemplate>
                 <DataTemplate>
                     <Grid>

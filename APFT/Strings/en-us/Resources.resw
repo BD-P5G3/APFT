@@ -166,4 +166,7 @@
   <data name="Settings_Authors.Text" xml:space="preserve">
     <value>Made with ❤️ (and lots of pain) by José Gameiro &amp; Rúben Garrido</value>
   </data>
+  <data name="Shell_DatabaseStatus.Content" xml:space="preserve">
+    <value>Database Connection</value>
+  </data>
 </root>
