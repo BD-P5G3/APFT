@@ -19,13 +19,13 @@
             </Grid>
 
             <!-- Text input -->
-            <TextBox Name="databaseTextBox" x:Uid="DatabaseStatus_databaseTextBox" Text="{x:Bind Database, Mode=TwoWay}" />
-            <TextBox Name="userTextBox" x:Uid="DatabaseStatus_usernameTextBox" Text="{x:Bind Username, Mode=TwoWay}" />
-            <PasswordBox Name="passwordBox" x:Uid="DatabaseStatus_passwordBox" Password="{x:Bind Password, Mode=TwoWay}" />
+            <TextBox Name="databaseTextBox" x:Uid="/DatabaseStatus/databaseTextBox" Text="{x:Bind Database, Mode=TwoWay}" />
+            <TextBox Name="userTextBox" x:Uid="/DatabaseStatus/usernameTextBox" Text="{x:Bind Username, Mode=TwoWay}" />
+            <PasswordBox Name="passwordBox" x:Uid="/DatabaseStatus/passwordBox" Password="{x:Bind Password, Mode=TwoWay}" />
 
             <!-- Connect Button-->
             <Button x:Name="testConnectionButton" Style="{StaticResource AccentButtonStyle}" Click="testConnectionButton_Click">
-                <TextBlock x:Uid="DatabaseStatus_testConnectionButton" />
+                <TextBlock x:Uid="/DatabaseStatus/testConnectionButton" />
             </Button>
         </StackPanel>
     </Grid>

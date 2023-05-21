@@ -117,10 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppDisplayName" xml:space="preserve">
-    <value>APFT</value>
+  <data name="Constructions.Content" xml:space="preserve">
+    <value>Constructions</value>
+    <comment>-</comment>
   </data>
-  <data name="AppDescription" xml:space="preserve">
-    <value>APFT</value>
+  <data name="Customers.Content" xml:space="preserve">
+    <value>Customers</value>
+  </data>
+  <data name="DatabaseStatus.Content" xml:space="preserve">
+    <value>Database Status</value>
+  </data>
+  <data name="Employees.Content" xml:space="preserve">
+    <value>Employees</value>
+  </data>
+  <data name="Home.Content" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Orders.Content" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+  <data name="Suppliers.Content" xml:space="preserve">
+    <value>Suppliers</value>
   </data>
 </root>

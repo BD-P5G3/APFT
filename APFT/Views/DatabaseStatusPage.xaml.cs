@@ -91,7 +91,7 @@ public sealed partial class DatabaseStatusPage : Page, INotifyPropertyChanged
         InitializeComponent();
     }
 
-    private readonly ResourceLoader resourceLoader = new();
+    private readonly ResourceLoader resourceLoader = new("resources.pri", "DatabaseStatus");
 
     private void LoadStoredValues()
     {
@@ -100,7 +100,7 @@ public sealed partial class DatabaseStatusPage : Page, INotifyPropertyChanged
         var colorString = localSettings.Values.ContainsKey("IconBadgeColor") ? localSettings.Values["IconBadgeColor"].ToString() : "#FFFF0000";
         IconBadgeColor = new SolidColorBrush(colorString == "#FF008000" ? Colors.Green : Colors.Red);
 
-        ConnectionStatus = localSettings.Values.ContainsKey("ConnectionStatus") ? localSettings.Values["ConnectionStatus"].ToString() : resourceLoader.GetString("DatabaseStatus_New");
+        ConnectionStatus = localSettings.Values.ContainsKey("ConnectionStatus") ? localSettings.Values["ConnectionStatus"].ToString() : resourceLoader.GetString("New");
         Database = localSettings.Values.ContainsKey("Database") ? localSettings.Values["Database"].ToString() : "p5g3";
         Username = localSettings.Values.ContainsKey("Username") ? localSettings.Values["Username"].ToString() : "p5g3";
         Password = localSettings.Values.ContainsKey("Password") ? localSettings.Values["Password"].ToString() : "";
@@ -126,13 +126,13 @@ public sealed partial class DatabaseStatusPage : Page, INotifyPropertyChanged
             await cn.OpenAsync();
             ShellPage.Current.SetInfoBadgeColor(Colors.Green);
             IconBadgeColor = new SolidColorBrush(Colors.Green);
-            ConnectionStatus = string.Format(resourceLoader.GetString("DatabaseStatus_Success"), cn.Database, cn.DataSource);
+            ConnectionStatus = string.Format(resourceLoader.GetString("Success"), cn.Database, cn.DataSource);
         }
         catch (Exception ex)
         {
             ShellPage.Current.SetInfoBadgeColor(Colors.Red);
             IconBadgeColor = new SolidColorBrush(Colors.Red);
-            ConnectionStatus = string.Format(resourceLoader.GetString("DatabaseStatus_Error"), cn.Database, ex.Message);
+            ConnectionStatus = string.Format(resourceLoader.GetString("Error"), cn.Database, ex.Message);
         }
 
         SavePropertyValues();

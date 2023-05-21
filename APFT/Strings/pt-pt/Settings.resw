@@ -117,10 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppDisplayName" xml:space="preserve">
-    <value>APFT</value>
+  <data name="About.Text" xml:space="preserve">
+    <value>Acerca desta aplicação</value>
   </data>
-  <data name="AppDescription" xml:space="preserve">
-    <value>APFT</value>
+  <data name="AboutDescription.Text" xml:space="preserve">
+    <value>Projeto para "Base de Dados", 2022/2023</value>
+  </data>
+  <data name="Authors.Text" xml:space="preserve">
+    <value>Feito com ❤️ (e muita dor) por José Gameiro e Rúben Garrido</value>
+  </data>
+  <data name="Personalization.Text" xml:space="preserve">
+    <value>Personalização</value>
+  </data>
+  <data name="Theme.Text" xml:space="preserve">
+    <value>Tema</value>
+  </data>
+  <data name="Theme_Dark.Content" xml:space="preserve">
+    <value>Escuro</value>
+  </data>
+  <data name="Theme_Default.Content" xml:space="preserve">
+    <value>Predefinição do sistema</value>
+  </data>
+  <data name="Theme_Light.Content" xml:space="preserve">
+    <value>Claro</value>
   </data>
 </root>

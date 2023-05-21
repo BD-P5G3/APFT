@@ -36,32 +36,32 @@
             DisplayModeChanged="NavigationViewControl_DisplayModeChanged"
             Header="{x:Bind ((ContentControl)ViewModel.Selected).Content, Mode=OneWay}">
             <NavigationView.MenuItems>
-                <NavigationViewItem x:Uid="Shell_Home" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.InícioViewModel">
+                <NavigationViewItem x:Uid="/Shell/Home" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.InícioViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE80F;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="Shell_Constructions" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.ObrasViewModel">
+                <NavigationViewItem x:Uid="/Shell/Constructions" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.ObrasViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE98F;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="Shell_Customers" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.ClientesViewModel">
+                <NavigationViewItem x:Uid="/Shell/Customers" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.ClientesViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE77B;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="Shell_Employees" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.EmpregadosViewModel">
+                <NavigationViewItem x:Uid="/Shell/Employees" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.EmpregadosViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE822;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="Shell_Suppliers" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.FornecedoresViewModel">
+                <NavigationViewItem x:Uid="/Shell/Suppliers" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.FornecedoresViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE719;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="Shell_Orders" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.EncomendasViewModel">
+                <NavigationViewItem x:Uid="/Shell/Orders" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.EncomendasViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE7B8;"/>
                     </NavigationViewItem.Icon>
@@ -69,7 +69,7 @@
             </NavigationView.MenuItems>
 
             <NavigationView.FooterMenuItems>
-                <NavigationViewItem x:Uid="Shell_DatabaseStatus" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.DatabaseStatusViewModel">
+                <NavigationViewItem x:Uid="/Shell/DatabaseStatus" helpers:NavigationHelper.NavigateTo="APFT.ViewModels.DatabaseStatusViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF0B9;"/>
                     </NavigationViewItem.Icon>

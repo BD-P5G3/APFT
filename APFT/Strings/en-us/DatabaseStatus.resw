@@ -117,10 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppDisplayName" xml:space="preserve">
-    <value>APFT</value>
+  <data name="databaseTextBox.Header" xml:space="preserve">
+    <value>Database</value>
   </data>
-  <data name="AppDescription" xml:space="preserve">
-    <value>APFT</value>
+  <data name="Error" xml:space="preserve">
+    <value>Failed to open connection to database {0} due to the following error: {1}</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Waiting for the first connection</value>
+  </data>
+  <data name="passwordBox.Header" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Successful connection to database {0} on the {1} server.</value>
+  </data>
+  <data name="testConnectionButton.Text" xml:space="preserve">
+    <value>Test connection and save data</value>
+  </data>
+  <data name="usernameTextBox.Header" xml:space="preserve">
+    <value>Username</value>
   </data>
 </root>
