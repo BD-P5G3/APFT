@@ -74,7 +74,7 @@
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF0B9;"/>
                     </NavigationViewItem.Icon>
                     <NavigationViewItem.InfoBadge>
-                        <InfoBadge x:Name="infoBadge1"
+                        <InfoBadge x:Name="cnInfoBadge_nv"
                                    Style="{StaticResource AttentionDotInfoBadgeStyle}"
                                    Background="Red"
                                    Height="6"

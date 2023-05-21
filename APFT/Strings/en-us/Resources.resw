@@ -167,6 +167,27 @@
     <value>Made with ❤️ (and lots of pain) by José Gameiro &amp; Rúben Garrido</value>
   </data>
   <data name="Shell_DatabaseStatus.Content" xml:space="preserve">
-    <value>Database Connection</value>
+    <value>Database Status</value>
+  </data>
+  <data name="DatabaseStatus_Error" xml:space="preserve">
+    <value>Failed to open connection to database {0} due to the following error: {1}</value>
+  </data>
+  <data name="DatabaseStatus_New" xml:space="preserve">
+    <value>Waiting for first connection</value>
+  </data>
+  <data name="DatabaseStatus_Success" xml:space="preserve">
+    <value>Successful connection to database {0} on the {1} server.</value>
+  </data>
+  <data name="DatabaseStatus_databaseTextBox.Header" xml:space="preserve">
+    <value>Database</value>
+  </data>
+  <data name="DatabaseStatus_passwordBox.Header" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="DatabaseStatus_usernameTextBox.Header" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="DatabaseStatus_testConnectionButton.Text" xml:space="preserve">
+    <value>Test connection and save data</value>
   </data>
 </root>

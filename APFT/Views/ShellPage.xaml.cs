@@ -1,4 +1,5 @@
-﻿using APFT.Contracts.Services;
+﻿using System.Data;
+using APFT.Contracts.Services;
 using APFT.Helpers;
 using APFT.ViewModels;
 using Microsoft.UI;
@@ -7,8 +8,9 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
-
+using Windows.Storage;
 using Windows.System;
+using Windows.UI;
 using WinRT.Interop;
 
 namespace APFT.Views;
@@ -34,6 +36,7 @@ public sealed partial class ShellPage : Page
     {
         ViewModel = viewModel;
         InitializeComponent();
+        Current = this;
 
         ViewModel.NavigationService.Frame = NavigationFrame;
         ViewModel.NavigationViewService.Initialize(NavigationViewControl);
@@ -51,7 +54,18 @@ public sealed partial class ShellPage : Page
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
         AppTitleBarText.Text = "AppDisplayName".GetLocalized();
+
+        var localSettings = ApplicationData.Current.LocalSettings;
+        localSettings.Values.Remove("IconBadgeColor");
+        localSettings.Values.Remove("ConnectionStatus");
+        localSettings.Values.Remove("Password");
+        localSettings.Values["Database"] = "p5g3";
+        localSettings.Values["Username"] = "p5g3";
     }
+
+    public static ShellPage Current;
+
+    public void SetInfoBadgeColor(Color color) => cnInfoBadge_nv.Background = new SolidColorBrush(color);
 
     private void OnLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {

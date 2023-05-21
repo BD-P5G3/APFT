@@ -3,10 +3,30 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="using:APFT.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:DatabaseStatusViewModel}"
     mc:Ignorable="d">
 
     <Grid x:Name="ContentArea">
-        
+        <StackPanel Orientation="Vertical" VerticalAlignment="Top" Spacing="16">
+            <Grid ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <InfoBadge x:Name="cnInfoBadge_pg" Background="{x:Bind IconBadgeColor, Mode=OneWay}" Height="10" Width="10" Grid.Column="0"/>
+                <TextBlock Name="connectedTextBox" Text="{x:Bind ConnectionStatus, Mode=OneWay}" TextWrapping="Wrap" Style="{StaticResource NavigationViewItemHeaderTextStyle}" Grid.Column="1" />
+            </Grid>
+
+            <!-- Text input -->
+            <TextBox Name="databaseTextBox" x:Uid="DatabaseStatus_databaseTextBox" Text="{x:Bind Database, Mode=TwoWay}" />
+            <TextBox Name="userTextBox" x:Uid="DatabaseStatus_usernameTextBox" Text="{x:Bind Username, Mode=TwoWay}" />
+            <PasswordBox Name="passwordBox" x:Uid="DatabaseStatus_passwordBox" Password="{x:Bind Password, Mode=TwoWay}" />
+
+            <!-- Connect Button-->
+            <Button x:Name="testConnectionButton" Style="{StaticResource AccentButtonStyle}" Click="testConnectionButton_Click">
+                <TextBlock x:Uid="DatabaseStatus_testConnectionButton" />
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>

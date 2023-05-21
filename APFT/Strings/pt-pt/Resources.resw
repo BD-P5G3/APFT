@@ -169,4 +169,25 @@
   <data name="Shell_DatabaseStatus.Content" xml:space="preserve">
     <value>Estado da base de dados</value>
   </data>
+  <data name="DatabaseStatus_Error" xml:space="preserve">
+    <value>Erro na ligação à base de dados {0} devido ao seguinte erro: {1}</value>
+  </data>
+  <data name="DatabaseStatus_New" xml:space="preserve">
+    <value>A aguardar a primeira ligação</value>
+  </data>
+  <data name="DatabaseStatus_Success" xml:space="preserve">
+    <value>Ligação bem-sucedida à base de dados {0} no servidor {1}.</value>
+  </data>
+  <data name="DatabaseStatus_databaseTextBox.Header" xml:space="preserve">
+    <value>Base de dados</value>
+  </data>
+  <data name="DatabaseStatus_passwordBox.Header" xml:space="preserve">
+    <value>Palavra-passe</value>
+  </data>
+  <data name="DatabaseStatus_usernameTextBox.Header" xml:space="preserve">
+    <value>Nome de utilizador</value>
+  </data>
+  <data name="DatabaseStatus_testConnectionButton.Text" xml:space="preserve">
+    <value>Testar ligação e guardar dados</value>
+  </data>
 </root>
