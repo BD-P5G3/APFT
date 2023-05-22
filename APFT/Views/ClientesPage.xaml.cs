@@ -29,11 +29,14 @@ public sealed partial class ClientesPage : Page
         try
         {
             CustomersCVS.Source = await Customer.GetClientsGroupedAsync();
+            FetchingDataGrid.Visibility = Visibility.Collapsed;
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
             ShellPage.Current.SetInfoBadgeColor(Colors.Red);
+            FetchingDataGrid.Visibility = Visibility.Collapsed;
+            FetchingDataGridError.Visibility = Visibility.Visible;
 
             var dialog = new ContentDialog
             {
@@ -94,7 +97,7 @@ public class Customer
         // Grab Contact objects from pre-existing list (list is returned from function GetContactsAsync())
         var query = from item in await GetClientsAsync()
 
-                        // Group the items returned from the query, sort and select the ones you want to keep
+                    // Group the items returned from the query, sort and select the ones you want to keep
                     group item by item.LastName.Substring(0, 1).ToUpper() into g
                     orderby g.Key
 

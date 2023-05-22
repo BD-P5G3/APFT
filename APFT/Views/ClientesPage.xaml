@@ -50,7 +50,27 @@
             </DataTemplate>
         </Grid.Resources>
 
-        <ListView x:Name="CustomersListView" ItemsSource="{x:Bind CustomersCVS.View, Mode=OneWay}" ItemTemplate="{StaticResource CustomerListViewTemplate}">
+        <Grid ColumnSpacing="8" Visibility="Visible" VerticalAlignment="Top" x:Name="FetchingDataGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <ProgressRing IsActive="True" Grid.Column="0" Height="16" Width="16" />
+            <TextBlock x:Uid="/Customers/FetchingDataGrid_Text" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Column="1" />
+        </Grid>
+
+        <Grid ColumnSpacing="8" Visibility="Collapsed" VerticalAlignment="Top" x:Name="FetchingDataGridError">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <FontIcon Grid.Column="0" FontFamily="{StaticResource SymbolThemeFontFamily}" Foreground="Red" Glyph="&#xE783;"/>
+            <TextBlock x:Uid="/Customers/FetchingDataGridError_Text" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Column="1" />
+        </Grid>
+
+        <ListView ItemsSource="{x:Bind CustomersCVS.View, Mode=OneWay}" ItemTemplate="{StaticResource CustomerListViewTemplate}">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <ItemsStackPanel AreStickyGroupHeadersEnabled="True"/>
