@@ -50,6 +50,7 @@ public sealed partial class ShellPage : Page
         var titleBar = m_AppWindow.TitleBar;
         titleBar.ExtendsContentIntoTitleBar = true;
         titleBar.ButtonBackgroundColor = Colors.Transparent;
+        titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
 
         //App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
