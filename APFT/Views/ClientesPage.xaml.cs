@@ -116,14 +116,14 @@ public class Customer
         var customers = new ObservableCollection<Customer>();
         var localSettings = ApplicationData.Current.LocalSettings;
 
-        using (var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString()))
+        await using (var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString()))
         {
                 await cn.OpenAsync();
                 var cmd = new SqlCommand("SELECT * FROM EMPRESA_CONSTRUCAO.CLIENTE", cn);
 
-                var reader = cmd.ExecuteReader();
+                var reader = await cmd.ExecuteReaderAsync();
 
-                while (reader.Read())
+                while (await reader.ReadAsync())
                 {
                     customers.Add(new Customer(
                         reader.GetInt32(0),

@@ -124,7 +124,7 @@ public sealed partial class DatabaseStatusPage : Page, INotifyPropertyChanged
 
     private async void TestDBConnection(string dbServer, string dbName, string userName, string userPass)
     {
-        using var cn = new SqlConnection("Data Source = " + dbServer + "; " +
+        await using var cn = new SqlConnection("Data Source = " + dbServer + "; " +
                                          "Initial Catalog = " + dbName + "; uid = " + userName + "; " +
                                          "password = " + userPass + "; TrustServerCertificate = True");
         try
