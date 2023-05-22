@@ -1,7 +1,13 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using APFT.ViewModels;
-
+using Microsoft.Data.SqlClient;
+using Microsoft.UI;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
+using Windows.Storage;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace APFT.Views;
 
@@ -18,16 +24,75 @@ public sealed partial class ClientesPage : Page
         InitializeComponent();
     }
 
-    // C# Code
+    protected async override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        try
+        {
+            CustomersCVS.Source = await Customer.GetClientsGroupedAsync();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            ShellPage.Current.SetInfoBadgeColor(Colors.Red);
 
-    // To create a collection of grouped items, create a query that groups
-    // an existing list, or returns a grouped collection from a database.
-    // The following method is used to create the ItemsSource for our CollectionViewSource:
+            var dialog = new ContentDialog
+            {
+                XamlRoot = ContentArea.XamlRoot,
+                Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+                Title = "Table content",
+                PrimaryButtonText = "Close",
+                DefaultButton = ContentDialogButton.Primary,
+                Content = "Unable to fetch data due to the following error: " + ex.Message,
+            };
+            _ = await dialog.ShowAsync();
+        }
+    }
+}
 
-    public static async Task<ObservableCollection<GroupInfoList>> GetContactsGroupedAsync()
+
+// Contact class definition:
+public class Customer
+{
+    public int NIF
+    {
+        get; private set;
+    }
+    public string FirstName
+    {
+        get; private set;
+    }
+    public string LastName
+    {
+        get; private set;
+    }
+    public string Email
+    {
+        get; private set;
+    }
+    public int Phone
+    {
+        get; private set;
+    }
+    public string? Address
+    {
+        get; private set;
+    }
+    public string Name => FirstName + " " + LastName;
+
+    public Customer(int nif, string firstName, string lastName, string email, int phone, string address)
+    {
+        NIF = nif;
+        FirstName = firstName;
+        LastName = lastName;
+        Email = email;
+        Phone = phone;
+        Address = address;
+    }
+
+    public static async Task<ObservableCollection<GroupInfoList>> GetClientsGroupedAsync()
     {
         // Grab Contact objects from pre-existing list (list is returned from function GetContactsAsync())
-        var query = from item in await GetContactsAsync()
+        var query = from item in await GetClientsAsync()
 
                         // Group the items returned from the query, sort and select the ones you want to keep
                     group item by item.LastName.Substring(0, 1).ToUpper() into g
@@ -38,57 +103,55 @@ public sealed partial class ClientesPage : Page
                     // and these objects will be used to create a new GroupInfoList object.
                     select new GroupInfoList(g) { Key = g.Key };
 
+        Debug.WriteLine(query);
+
         return new ObservableCollection<GroupInfoList>(query);
     }
 
-    // GroupInfoList class definition:
-    public class GroupInfoList : List<object>
+    public static async Task<ObservableCollection<Customer>> GetClientsAsync()
     {
-        public GroupInfoList(IEnumerable<object> items) : base(items)
+        var customers = new ObservableCollection<Customer>();
+        var localSettings = ApplicationData.Current.LocalSettings;
+
+        using (var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString()))
         {
-        }
-        public object Key
-        {
-            get; set;
+                await cn.OpenAsync();
+                var cmd = new SqlCommand("SELECT * FROM EMPRESA_CONSTRUCAO.CLIENTE", cn);
+
+                var reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    customers.Add(new Customer(
+                        reader.GetInt32(0),
+                        reader.GetString(1),
+                        reader.GetString(2),
+                        reader.GetString(3),
+                        reader.GetInt32(4),
+                        reader.GetString(5)
+                    ));
+                }
+            
         }
 
-        public override string ToString()
-        {
-            return "Group " + Key.ToString();
-        }
+        return customers;
+    }
+}
+
+// GroupInfoList class definition:
+public class GroupInfoList : List<object>
+{
+    public GroupInfoList(IEnumerable<object> items) : base(items)
+    {
+        Key = 0; // Fix
+    }
+    public object Key
+    {
+        get; set;
     }
 
-    // Contact class definition:
-    public class Contact
+    public override string ToString()
     {
-        public string FirstName
-        {
-            get; private set;
-        }
-        public string LastName
-        {
-            get; private set;
-        }
-        public string Company
-        {
-            get; private set;
-        }
-        public string Name => FirstName + " " + LastName;
-
-        public Contact(string firstName, string lastName, string company)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-            Company = company;
-        }
-
-        // ... Methods ...
+        return "Group " + Key.ToString();
     }
-
-    public static async Task<ObservableCollection<Contact>> GetContactsAsync()
-    {
-        return null;
-    }
-
-    ContactsCVS.Source = await Contact.GetContactsGroupedAsync();
 }

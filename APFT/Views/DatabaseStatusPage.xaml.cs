@@ -1,6 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Resources;
+using System.Xml.Linq;
 using APFT.ViewModels;
 using Microsoft.Data.SqlClient;
 using Microsoft.UI;
@@ -10,6 +12,7 @@ using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Windows.ApplicationModel.Resources;
 using Windows.Storage;
 using Windows.UI;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace APFT.Views;
 
@@ -114,6 +117,9 @@ public sealed partial class DatabaseStatusPage : Page, INotifyPropertyChanged
         localSettings.Values["Database"] = Database;
         localSettings.Values["Username"] = Username;
         localSettings.Values["Password"] = Password;
+        localSettings.Values["SQLConnectionString"] = "Data Source = " + serverAddress + "; " +
+                                                      "Initial Catalog = " + Database + "; uid = " + Username + "; " +
+                                                      "password = " + Password + "; TrustServerCertificate = True";
     }
 
     private async void TestDBConnection(string dbServer, string dbName, string userName, string userPass)

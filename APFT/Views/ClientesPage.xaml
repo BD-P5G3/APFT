@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local1="using:APFT.Views"
     mc:Ignorable="d">
 
     <Grid x:Name="ContentArea">
@@ -13,9 +14,43 @@
         This CollectionViewSource is defined in the XAML below, but is bound to an ItemsSource in the C#
         code-behind. See the C# code below for more details on how to create/bind to a grouped list. -->
 
-        <CollectionViewSource x:Name="ContactsCVS" IsSourceGrouped="True"/>
+        <Grid.Resources>
+            <CollectionViewSource x:Name="CustomersCVS" IsSourceGrouped="True"/>
+            
+            <DataTemplate x:Key="CustomerListViewTemplate" x:DataType="local1:Customer">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Ellipse x:Name="Ellipse"
+                        Grid.RowSpan="2"
+                        Width ="32"
+                        Height="32"
+                        Margin="6"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Fill="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
+                    <TextBlock Grid.Column="1"
+                        Text="{x:Bind Name}"
+                        x:Phase="1"
+                        Style="{ThemeResource BaseTextBlockStyle}"
+                        Margin="12,6,0,0"/>
+                    <TextBlock  Grid.Column="1"
+                        Grid.Row="1"
+                        Text="{x:Bind Email}"
+                        x:Phase="2"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Margin="12,0,0,6"/>
+                </Grid>
+            </DataTemplate>
+        </Grid.Resources>
 
-        <ListView ItemsSource="{x:Bind ContactsCVS.View, Mode=OneWay}">
+        <ListView x:Name="CustomersListView" ItemsSource="{x:Bind CustomersCVS.View, Mode=OneWay}" ItemTemplate="{StaticResource CustomerListViewTemplate}">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <ItemsStackPanel AreStickyGroupHeadersEnabled="True"/>
@@ -33,38 +68,5 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-
-        <!-- Data template used is same as above examples. -->
-        <DataTemplate x:Key="ContactListViewTemplate" x:DataType="local1:Contact">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Ellipse x:Name="Ellipse"
-                    Grid.RowSpan="2"
-                    Width ="32"
-                    Height="32"
-                    Margin="6"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Fill="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
-                <TextBlock Grid.Column="1"
-                    Text="{x:Bind Name}"
-                    x:Phase="1"
-                    Style="{ThemeResource BaseTextBlockStyle}"
-                    Margin="12,6,0,0"/>
-                <TextBlock  Grid.Column="1"
-                    Grid.Row="1"
-                    Text="{x:Bind Company}"
-                    x:Phase="2"
-                    Style="{ThemeResource BodyTextBlockStyle}"
-                    Margin="12,0,0,6"/>
-            </Grid>
-        </DataTemplate>
     </Grid>
 </Page>

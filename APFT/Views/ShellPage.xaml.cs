@@ -12,6 +12,7 @@ using Windows.Storage;
 using Windows.System;
 using Windows.UI;
 using WinRT.Interop;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace APFT.Views;
 
@@ -61,6 +62,9 @@ public sealed partial class ShellPage : Page
         localSettings.Values.Remove("Password");
         localSettings.Values["Database"] = "p5g3";
         localSettings.Values["Username"] = "p5g3";
+        localSettings.Values["SQLConnectionString"] = "Data Source = " + DatabaseStatusPage.serverAddress + "; " +
+                                                      "Initial Catalog = p5g3; uid = p5g3; " +
+                                                      "password = ''; TrustServerCertificate = True";
     }
 
     public static ShellPage Current;
