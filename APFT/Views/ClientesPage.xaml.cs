@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Windows.Storage;
+using Microsoft.Windows.ApplicationModel.Resources;
 
 namespace APFT.Views;
 
@@ -22,6 +23,8 @@ public sealed partial class ClientesPage
         ViewModel = App.GetService<ClientesViewModel>();
         InitializeComponent();
     }
+
+    private readonly ResourceLoader _resourceLoader = new("resources.pri", "Customers");
 
     protected async override void OnNavigatedTo(NavigationEventArgs e)
     {
@@ -41,10 +44,10 @@ public sealed partial class ClientesPage
             {
                 XamlRoot = ContentArea.XamlRoot,
                 Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
-                Title = "Table content",
-                PrimaryButtonText = "Close",
+                Title = _resourceLoader.GetString("ContentDialog_Title"),
+                PrimaryButtonText = _resourceLoader.GetString("ContentDialog_PrimaryButtonText"),
                 DefaultButton = ContentDialogButton.Primary,
-                Content = "Unable to fetch data due to the following error: " + ex.Message,
+                Content = string.Format(_resourceLoader.GetString("ContentDialog_Content"), ex.Message)
             };
             _ = await dialog.ShowAsync();
         }
