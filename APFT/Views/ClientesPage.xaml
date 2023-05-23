@@ -69,14 +69,17 @@
             <TextBlock x:Uid="/Customers/FetchingDataGridError_Text" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Column="1" />
         </Grid>
 
-        <ListView ItemsSource="{x:Bind CustomersCVS.View, Mode=OneWay}" ItemTemplate="{StaticResource CustomerListViewTemplate}">
+        <ListView ItemsSource="{x:Bind CustomersCVS.View, Mode=OneWay}"
+                  ItemTemplate="{StaticResource CustomerListViewTemplate}"
+                  ItemClick="ListViewBase_OnItemClick"
+                  IsItemClickEnabled="True">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <ItemsStackPanel AreStickyGroupHeadersEnabled="True"/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.GroupStyle>
-                <GroupStyle >
+                <GroupStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate x:DataType="local1:GroupInfoList">
                             <Border AutomationProperties.AccessibilityView="Raw">

@@ -22,6 +22,7 @@ public class PageService : IPageService
         Configure<EncomendasViewModel, EncomendasPage>();
         Configure<SettingsViewModel, SettingsPage>();
         Configure<DatabaseStatusViewModel, DatabaseStatusPage>();
+        Configure<CustomerDetailsViewModel, CustomerDetailsPage>();
     }
 
     public Type GetPageType(string key)

@@ -52,6 +52,14 @@ public sealed partial class ClientesPage
             _ = await dialog.ShowAsync();
         }
     }
+
+    private void ListViewBase_OnItemClick(object sender, ItemClickEventArgs e)
+    {
+        var localSettings = ApplicationData.Current.LocalSettings;
+        localSettings.Values["CustomerNif"] = ((Customer)e.ClickedItem).Nif.ToString();
+
+        Frame.Navigate(typeof(CustomerDetailsPage));
+    }
 }
 
 
