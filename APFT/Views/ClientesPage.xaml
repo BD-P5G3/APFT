@@ -27,16 +27,24 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Ellipse x:Name="Ellipse"
-                             Grid.Row="0"
-                             Grid.RowSpan="2"
-                             Grid.Column="0"
-                             Width ="32"
-                             Height="32"
-                             Margin="6"
-                             VerticalAlignment="Center"
-                             HorizontalAlignment="Center"
-                             Fill="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
+                    <Grid Grid.Row="0"
+                          Grid.RowSpan="2"
+                          Grid.Column="0"
+                          Height="32"
+                          Width="32"
+                          Margin="6"
+                          CornerRadius="16"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          Background="#22000000">
+                        <Viewbox Width="16"
+                                 Height="16">
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                      Glyph="&#xE77B;"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center"/>
+                        </Viewbox>
+                    </Grid>
                     <TextBlock Grid.Row="0" Grid.Column="1"
                                Text="{x:Bind Name}"
                                x:Phase="1"
