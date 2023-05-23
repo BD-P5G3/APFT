@@ -1,22 +1,14 @@
-﻿using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Resources;
-using System.Xml.Linq;
+﻿using System.ComponentModel;
 using APFT.ViewModels;
 using Microsoft.Data.SqlClient;
 using Microsoft.UI;
-using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Windows.ApplicationModel.Resources;
 using Windows.Storage;
-using Windows.UI;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace APFT.Views;
 
-public sealed partial class DatabaseStatusPage : Page, INotifyPropertyChanged
+public sealed partial class DatabaseStatusPage : INotifyPropertyChanged
 {
     public DatabaseStatusViewModel ViewModel
     {
@@ -30,59 +22,59 @@ public sealed partial class DatabaseStatusPage : Page, INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    public static readonly string serverAddress = "tcp:mednat.ieeta.pt\\SQLSERVER,8101";
+    public static readonly string ServerAddress = "tcp:mednat.ieeta.pt\\SQLSERVER,8101";
 
-    private SolidColorBrush iconBadgeColor;
+    private SolidColorBrush _iconBadgeColor;
     public SolidColorBrush IconBadgeColor
     {
-        get => iconBadgeColor;
+        get => _iconBadgeColor;
         set
         {
-            iconBadgeColor = value;
+            _iconBadgeColor = value;
             OnPropertyChanged(nameof(IconBadgeColor));
         }
     }
 
-    private string connectionStatus;
+    private string _connectionStatus;
     public string ConnectionStatus
     {
-        get => connectionStatus;
+        get => _connectionStatus;
         set
         {
-            connectionStatus = value;
+            _connectionStatus = value;
             OnPropertyChanged(nameof(ConnectionStatus));
         }
     }
 
-    private string database;
+    private string _database;
     public string Database
     {
-        get => database;
+        get => _database;
         set
         {
-            database = value;
+            _database = value;
             OnPropertyChanged(nameof(Database));
         }
     }
 
-    private string username;
+    private string _username;
     public string Username
     {
-        get => username;
+        get => _username;
         set
         {
-            username = value;
+            _username = value;
             OnPropertyChanged(nameof(Username));
         }
     }
 
-    private string password;
+    private string _password;
     public string Password
     {
-        get => password;
+        get => _password;
         set
         {
-            password = value;
+            _password = value;
             OnPropertyChanged(nameof(Password));
         }
     }
@@ -94,19 +86,42 @@ public sealed partial class DatabaseStatusPage : Page, INotifyPropertyChanged
         InitializeComponent();
     }
 
-    private readonly ResourceLoader resourceLoader = new("resources.pri", "DatabaseStatus");
+    private readonly ResourceLoader _resourceLoader = new("resources.pri", "DatabaseStatus");
 
     private void LoadStoredValues()
     {
         var localSettings = ApplicationData.Current.LocalSettings;
 
-        var colorString = localSettings.Values.ContainsKey("IconBadgeColor") ? localSettings.Values["IconBadgeColor"].ToString() : "#FFFF0000";
+        var colorString = "#FFFF0000";
+        if (localSettings.Values.TryGetValue("IconBadgeColor", out var value))
+        {
+            colorString = value.ToString();
+        }
         IconBadgeColor = new SolidColorBrush(colorString == "#FF008000" ? Colors.Green : Colors.Red);
 
-        ConnectionStatus = localSettings.Values.ContainsKey("ConnectionStatus") ? localSettings.Values["ConnectionStatus"].ToString() : resourceLoader.GetString("New");
-        Database = localSettings.Values.ContainsKey("Database") ? localSettings.Values["Database"].ToString() : "p5g3";
-        Username = localSettings.Values.ContainsKey("Username") ? localSettings.Values["Username"].ToString() : "p5g3";
-        Password = localSettings.Values.ContainsKey("Password") ? localSettings.Values["Password"].ToString() : "";
+        ConnectionStatus = _resourceLoader.GetString("New");
+        if (localSettings.Values.TryGetValue("ConnectionStatus", out value))
+        {
+            ConnectionStatus = value?.ToString() ?? _resourceLoader.GetString("New");
+        }
+
+        Database = "p5g3";
+        if (localSettings.Values.TryGetValue("Database", out value))
+        {
+            Database = value?.ToString() ?? "p5g3";
+        }
+
+        Username = "p5g3";
+        if (localSettings.Values.TryGetValue("Username", out value))
+        {
+            Username = value?.ToString() ?? "p5g3";
+        }
+
+        Password = "";
+        if (localSettings.Values.TryGetValue("Password", out value))
+        {
+            Password = value?.ToString() ?? "";
+        }
     }
 
     private void SavePropertyValues()
@@ -117,12 +132,12 @@ public sealed partial class DatabaseStatusPage : Page, INotifyPropertyChanged
         localSettings.Values["Database"] = Database;
         localSettings.Values["Username"] = Username;
         localSettings.Values["Password"] = Password;
-        localSettings.Values["SQLConnectionString"] = "Data Source = " + serverAddress + "; " +
+        localSettings.Values["SQLConnectionString"] = "Data Source = " + ServerAddress + "; " +
                                                       "Initial Catalog = " + Database + "; uid = " + Username + "; " +
                                                       "password = " + Password + "; TrustServerCertificate = True";
     }
 
-    private async void TestDBConnection(string dbServer, string dbName, string userName, string userPass)
+    private async void TestDbConnection(string dbServer, string dbName, string userName, string userPass)
     {
         await using var cn = new SqlConnection("Data Source = " + dbServer + "; " +
                                          "Initial Catalog = " + dbName + "; uid = " + userName + "; " +
@@ -132,20 +147,17 @@ public sealed partial class DatabaseStatusPage : Page, INotifyPropertyChanged
             await cn.OpenAsync();
             ShellPage.Current.SetInfoBadgeColor(Colors.Green);
             IconBadgeColor = new SolidColorBrush(Colors.Green);
-            ConnectionStatus = string.Format(resourceLoader.GetString("Success"), cn.Database, cn.DataSource);
+            ConnectionStatus = string.Format(_resourceLoader.GetString("Success"), cn.Database, cn.DataSource);
         }
         catch (Exception ex)
         {
             ShellPage.Current.SetInfoBadgeColor(Colors.Red);
             IconBadgeColor = new SolidColorBrush(Colors.Red);
-            ConnectionStatus = string.Format(resourceLoader.GetString("Error"), cn.Database, ex.Message);
+            ConnectionStatus = string.Format(_resourceLoader.GetString("Error"), cn.Database, ex.Message);
         }
 
         SavePropertyValues();
     }
 
-    private void testConnectionButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
-    {
-        TestDBConnection(serverAddress, databaseTextBox.Text, userTextBox.Text, passwordBox.Password);
-    }
+    private void TestConnectionButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) => TestDbConnection(ServerAddress, DatabaseTextBox.Text, UserTextBox.Text, PasswordBox.Password);
 }

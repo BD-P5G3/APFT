@@ -7,11 +7,10 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Windows.Storage;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace APFT.Views;
 
-public sealed partial class ClientesPage : Page
+public sealed partial class ClientesPage
 {
     public ClientesViewModel ViewModel
     {
@@ -56,7 +55,7 @@ public sealed partial class ClientesPage : Page
 // Contact class definition:
 public class Customer
 {
-    public int NIF
+    public int Nif
     {
         get; private set;
     }
@@ -84,7 +83,7 @@ public class Customer
 
     public Customer(int nif, string firstName, string lastName, string email, int phone, string address)
     {
-        NIF = nif;
+        Nif = nif;
         FirstName = firstName;
         LastName = lastName;
         Email = email;
@@ -116,25 +115,23 @@ public class Customer
         var customers = new ObservableCollection<Customer>();
         var localSettings = ApplicationData.Current.LocalSettings;
 
-        await using (var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString()))
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+        
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("SELECT * FROM EMPRESA_CONSTRUCAO.CLIENTE", cn);
+
+        var reader = await cmd.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
         {
-                await cn.OpenAsync();
-                var cmd = new SqlCommand("SELECT * FROM EMPRESA_CONSTRUCAO.CLIENTE", cn);
-
-                var reader = await cmd.ExecuteReaderAsync();
-
-                while (await reader.ReadAsync())
-                {
-                    customers.Add(new Customer(
-                        reader.GetInt32(0),
-                        reader.GetString(1),
-                        reader.GetString(2),
-                        reader.GetString(3),
-                        reader.GetInt32(4),
-                        reader.GetString(5)
-                    ));
-                }
-            
+            customers.Add(new Customer(
+                reader.GetInt32(0),
+                reader.GetString(1),
+                reader.GetString(2),
+                reader.GetString(3),
+                reader.GetInt32(4),
+                reader.GetString(5))
+            );
         }
 
         return customers;
@@ -155,6 +152,6 @@ public class GroupInfoList : List<object>
 
     public override string ToString()
     {
-        return "Group " + Key.ToString();
+        return "Group " + Key;
     }
 }
