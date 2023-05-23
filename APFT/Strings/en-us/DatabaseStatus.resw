@@ -123,6 +123,9 @@
   <data name="Error" xml:space="preserve">
     <value>Failed to open connection to database {0} due to the following error: {1}</value>
   </data>
+  <data name="Header.Text" xml:space="preserve">
+    <value>Database Status</value>
+  </data>
   <data name="New" xml:space="preserve">
     <value>Waiting for the first connection</value>
   </data>

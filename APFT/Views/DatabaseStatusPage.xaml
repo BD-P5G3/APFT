@@ -9,7 +9,17 @@
     mc:Ignorable="d">
 
     <Grid>
-        <StackPanel Orientation="Vertical" VerticalAlignment="Top" Spacing="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Margin="0,10,0,24"
+                   x:Uid="/DatabaseStatus/Header"
+                   Style="{ThemeResource TitleTextBlockStyle}" />
+
+        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Top" Spacing="16">
             <Grid ColumnSpacing="8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>

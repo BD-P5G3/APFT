@@ -132,4 +132,7 @@
   <data name="FetchingDataGrid_Text.Text" xml:space="preserve">
     <value>Fetching data...</value>
   </data>
+  <data name="Header.Text" xml:space="preserve">
+    <value>Customers</value>
+  </data>
 </root>

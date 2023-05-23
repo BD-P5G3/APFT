@@ -11,8 +11,17 @@
         <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
     </Page.Resources>
     <Grid>
-        <StackPanel
-            x:Name="ContentArea">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Margin="0,10,0,24"
+                   x:Uid="/Settings/Header"
+                   Style="{ThemeResource TitleTextBlockStyle}" />
+
+        <StackPanel x:Name="ContentArea" Grid.Row="1">
             <TextBlock x:Uid="/Settings/Personalization" Style="{ThemeResource SubtitleTextBlockStyle}" />
             <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
                 <TextBlock x:Uid="/Settings/Theme" />

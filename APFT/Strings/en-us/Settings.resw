@@ -126,6 +126,9 @@
   <data name="Authors.Text" xml:space="preserve">
     <value>Made with ❤️ (and lots of pain) by José Gameiro &amp; Rúben Garrido</value>
   </data>
+  <data name="Header.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="Personalization.Text" xml:space="preserve">
     <value>Personalization</value>
   </data>

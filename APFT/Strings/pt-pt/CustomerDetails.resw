@@ -129,6 +129,9 @@
   <data name="FirstNameTextBox.Header" xml:space="preserve">
     <value>Nome próprio</value>
   </data>
+  <data name="Header.Text" xml:space="preserve">
+    <value>Detalhes do cliente</value>
+  </data>
   <data name="LastNameTextBox.Header" xml:space="preserve">
     <value>Apelido</value>
   </data>

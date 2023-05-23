@@ -117,28 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="databaseTextBox.Header" xml:space="preserve">
-    <value>Base de dados</value>
-  </data>
-  <data name="Error" xml:space="preserve">
-    <value>Erro na ligação à base de dados {0} devido ao seguinte erro: {1}</value>
-  </data>
   <data name="Header.Text" xml:space="preserve">
-    <value>Estado da base de dados</value>
-  </data>
-  <data name="New" xml:space="preserve">
-    <value>A aguardar a primeira ligação</value>
-  </data>
-  <data name="passwordBox.Header" xml:space="preserve">
-    <value>Palavra-passe</value>
-  </data>
-  <data name="Success" xml:space="preserve">
-    <value>Ligação bem-sucedida à base de dados {0} no servidor {1}.</value>
-  </data>
-  <data name="testConnectionButton.Text" xml:space="preserve">
-    <value>Testar ligação e guardar dados</value>
-  </data>
-  <data name="usernameTextBox.Header" xml:space="preserve">
-    <value>Nome de utilizador</value>
+    <value>Suppliers</value>
   </data>
 </root>

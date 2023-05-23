@@ -49,7 +49,18 @@
             </DataTemplate>
         </Grid.Resources>
 
-        <Grid ColumnSpacing="8" Visibility="Visible" VerticalAlignment="Top" x:Name="FetchingDataGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Margin="0,10,0,24"
+                   x:Uid="/Customers/Header"
+                   Style="{ThemeResource TitleTextBlockStyle}" />
+
+        <Grid Grid.Row="1" ColumnSpacing="8" Visibility="Collapsed" VerticalAlignment="Top" x:Name="FetchingDataGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -59,7 +70,7 @@
             <TextBlock x:Uid="/Customers/FetchingDataGrid_Text" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Column="1" />
         </Grid>
 
-        <Grid ColumnSpacing="8" Visibility="Collapsed" VerticalAlignment="Top" x:Name="FetchingDataGridError">
+        <Grid Grid.Row="1" ColumnSpacing="8" Visibility="Collapsed" VerticalAlignment="Top" x:Name="FetchingDataGridError">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -69,7 +80,7 @@
             <TextBlock x:Uid="/Customers/FetchingDataGridError_Text" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Column="1" />
         </Grid>
 
-        <ListView ItemsSource="{x:Bind CustomersCVS.View, Mode=OneWay}"
+        <ListView Grid.Row="2" ItemsSource="{x:Bind CustomersCVS.View, Mode=OneWay}"
                   ItemTemplate="{StaticResource CustomerListViewTemplate}"
                   ItemClick="ListViewBase_OnItemClick"
                   IsItemClickEnabled="True">
