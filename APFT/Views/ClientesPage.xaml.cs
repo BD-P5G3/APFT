@@ -30,7 +30,7 @@ public sealed partial class ClientesPage
     {
         try
         {
-            CustomersCVS.Source = await Customer.GetClientsGroupedAsync();
+            CustomersCVS.Source = await Customer.GetCustomersGroupedAsync();
             FetchingDataGrid.Visibility = Visibility.Collapsed;
         }
         catch (Exception ex)
@@ -94,13 +94,13 @@ public class Customer
         Address = address;
     }
 
-    public static async Task<ObservableCollection<GroupInfoList>> GetClientsGroupedAsync()
+    public static async Task<ObservableCollection<GroupInfoList>> GetCustomersGroupedAsync()
     {
         // Grab Contact objects from pre-existing list (list is returned from function GetContactsAsync())
-        var query = from item in await GetClientsAsync()
+        var query = from item in await GetCustomersAsync()
 
                     // Group the items returned from the query, sort and select the ones you want to keep
-                    group item by item.LastName.Substring(0, 1).ToUpper() into g
+                    group item by item.FirstName[..1].ToUpper() into g
                     orderby g.Key
 
                     // GroupInfoList is a simple custom class that has an IEnumerable type attribute, and
@@ -108,12 +108,10 @@ public class Customer
                     // and these objects will be used to create a new GroupInfoList object.
                     select new GroupInfoList(g) { Key = g.Key };
 
-        Debug.WriteLine(query);
-
         return new ObservableCollection<GroupInfoList>(query);
     }
 
-    public static async Task<ObservableCollection<Customer>> GetClientsAsync()
+    public static async Task<ObservableCollection<Customer>> GetCustomersAsync()
     {
         var customers = new ObservableCollection<Customer>();
         var localSettings = ApplicationData.Current.LocalSettings;
@@ -146,7 +144,7 @@ public class GroupInfoList : List<object>
 {
     public GroupInfoList(IEnumerable<object> items) : base(items)
     {
-        Key = 0; // Fix
+        Key = 0;
     }
     public object Key
     {
