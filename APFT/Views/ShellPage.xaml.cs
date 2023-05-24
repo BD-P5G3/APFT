@@ -51,6 +51,8 @@ public sealed partial class ShellPage : Page
         titleBar.ExtendsContentIntoTitleBar = true;
         titleBar.ButtonBackgroundColor = Colors.Transparent;
         titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+        titleBar.ButtonHoverBackgroundColor = Color.FromArgb(31, 0, 0, 0);
+        titleBar.ButtonPressedBackgroundColor = Color.FromArgb(63, 0, 0, 0);
 
         //App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
