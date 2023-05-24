@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Windows.Storage;
 using Microsoft.Windows.ApplicationModel.Resources;
+using WinUICommunity;
 
 namespace APFT.Views;
 
@@ -49,7 +50,7 @@ public sealed partial class ClientesPage
                 DefaultButton = ContentDialogButton.Primary,
                 Content = string.Format(_resourceLoader.GetString("ContentDialog_Content"), ex.Message)
             };
-            _ = await dialog.ShowAsync();
+            _ = await dialog.ShowAsyncQueue();
         }
     }
 
