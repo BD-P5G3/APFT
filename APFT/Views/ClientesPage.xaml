@@ -55,10 +55,41 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0"
-                   Margin="0,10,0,24"
-                   x:Uid="/Customers/Header"
-                   Style="{ThemeResource TitleTextBlockStyle}" />
+        <Grid Grid.Row="0" ColumnSpacing="8" Margin="0,10,0,24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0"
+                       x:Uid="/Customers/Header"
+                       Style="{ThemeResource TitleTextBlockStyle}" />
+            <AutoSuggestBox Grid.Column="1"
+                            x:Uid="/Customers/AutoSuggestBox"
+                            x:Name="SearchBox"
+                            VerticalAlignment="Center"
+                            TextChanged="AutoSuggestBox_OnTextChanged"
+                            QueryIcon="Find"
+                            SuggestionChosen="AutoSuggestBox_OnSuggestionChosen"/>
+            <Button Grid.Column="2"
+                    x:Name="FilterButton"
+                    Click="FilterButton_OnClick"
+                    VerticalAlignment="Center">
+                <Viewbox Height="16" Width="16">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE71C;"/>
+                </Viewbox>
+            </Button>
+            <Button Grid.Column="3"
+                    x:Name="AddButton"
+                    Click="AddButton_OnClick"
+                    Style="{StaticResource AccentButtonStyle}"
+                    VerticalAlignment="Center">
+                <Viewbox Height="16" Width="16">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE710;"/>
+                </Viewbox>
+            </Button>
+        </Grid>
 
         <Grid Grid.Row="1" ColumnSpacing="8" Visibility="Collapsed" VerticalAlignment="Top" x:Name="FetchingDataGrid">
             <Grid.ColumnDefinitions>
