@@ -87,11 +87,7 @@ public sealed partial class ClientesPage
                 await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
         
                 await cn.OpenAsync();
-                var cmd = new SqlCommand("SELECT * FROM getClientByName('" +
-                                         splitText[0] +
-                                         "', " +
-                                         (splitText.Length > 1 ? "'" + splitText[1] + "'" : "null") +
-                                         ")", cn);
+                var cmd = new SqlCommand("SELECT * FROM getClientByName('" + sender.Text.ToLower() + "')", cn);
 
                 var reader = await cmd.ExecuteReaderAsync();
 
