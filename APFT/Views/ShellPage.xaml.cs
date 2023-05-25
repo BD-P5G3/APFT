@@ -67,7 +67,7 @@ public sealed partial class ShellPage : Page
         localSettings.Values["Username"] = "p5g3";
         localSettings.Values["SQLConnectionString"] = "Data Source = " + DatabaseStatusPage.ServerAddress + "; " +
                                                       "Initial Catalog = p5g3; uid = p5g3; " +
-                                                      "password = ''; TrustServerCertificate = True";
+                                                      "password = '" + localSettings.Values["Password"] + "'; TrustServerCertificate = True";
     }
 
     public static ShellPage Current;
