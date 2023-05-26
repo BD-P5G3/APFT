@@ -81,7 +81,6 @@ public sealed partial class ClientesPage
             if (sender.Text.Length >= 3)
             {
                 var suitableItems = new List<string>();
-                var splitText = sender.Text.ToLower().Split(" ");
                 var localSettings = ApplicationData.Current.LocalSettings;
 
                 await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
