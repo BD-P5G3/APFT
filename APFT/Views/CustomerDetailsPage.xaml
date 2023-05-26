@@ -4,26 +4,33 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:APFT.Views"
     mc:Ignorable="d">
 
-    <Grid x:Name="ContentArea" VerticalAlignment="Top" RowSpacing="16">
+    <Grid x:Name="ContentArea" VerticalAlignment="Top" RowSpacing="32">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Margin="0,10,0,-8"
+                   x:Uid="/CustomerDetails/Header"
+                   Style="{ThemeResource TitleTextBlockStyle}" />
+
+        <Grid Grid.Row="1" RowSpacing="16">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0"
-                       Margin="0,10,0,8"
-                       x:Uid="/CustomerDetails/Header"
-                       Style="{ThemeResource TitleTextBlockStyle}" />
+            <TextBox Grid.Row="0" Grid.Column="0" Text="{x:Bind Nif, Mode=TwoWay}" x:Uid="/CustomerDetails/NifTextBox" />
 
-            <TextBox Grid.Row="1" Grid.Column="0" Text="{x:Bind Nif, Mode=TwoWay}" x:Uid="/CustomerDetails/NifTextBox" />
-
-            <Grid Grid.Row="2" ColumnSpacing="16">
+            <Grid Grid.Row="1" ColumnSpacing="16">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -33,7 +40,7 @@
                 <TextBox Grid.Column="1" Text="{x:Bind LastName, Mode=TwoWay}" x:Uid="/CustomerDetails/LastNameTextBox" />
             </Grid>
 
-            <Grid Grid.Row="3" ColumnSpacing="16">
+            <Grid Grid.Row="2" ColumnSpacing="16">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -43,8 +50,79 @@
                 <TextBox Grid.Column="1" Text="{x:Bind Phone, Mode=TwoWay}" x:Uid="/CustomerDetails/PhoneTextBox" />
             </Grid>
 
-            <TextBox Grid.Row="4" Grid.Column="0" Text="{x:Bind Address, Mode=TwoWay}" x:Uid="/CustomerDetails/AddressTextBox" />
+            <TextBox Grid.Row="3" Grid.Column="0" Text="{x:Bind Address, Mode=TwoWay}" x:Uid="/CustomerDetails/AddressTextBox" />
 
-            <Button Grid.Row="5" x:Uid="/CustomerDetails/EditInfoButton" Click="EditInfoButton_OnClick" Style="{StaticResource AccentButtonStyle}"/>
+            <Button Grid.Row="4" x:Uid="/CustomerDetails/EditInfoButton" Click="EditInfoButton_OnClick" Style="{StaticResource AccentButtonStyle}"/>
         </Grid>
+
+        <Grid Grid.Row="2" RowSpacing="8">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       x:Uid="/CustomerDetails/ConstructionsSubheader"
+                       Style="{ThemeResource SubtitleTextBlockStyle}" />
+
+            <ListView Grid.Row="1"
+                      x:Name="ConstructionsGridView"
+                      IsItemClickEnabled="True"
+                      ItemClick="ConstructionsGridView_OnItemClick"
+                      SelectionMode="None">
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListViewItem">
+                                    <Grid Margin="0, 0, 0 4">
+                                        <Border CornerRadius="8"
+                                                Padding="12"
+                                                BorderThickness="1"
+                                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
+                                        <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="views:Construction">
+                        <Grid ColumnSpacing="8" Padding="12, 12, 8, 12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Column="0"
+                                       Grid.Row="0"
+                                       Text="{x:Bind Location}"
+                                       x:Phase="1"
+                                       Style="{StaticResource BodyStrongTextBlockStyle}"/>
+
+                            <TextBlock Grid.Column="0"
+                                       Grid.Row="1">
+                                <Run Text="{x:Bind StartDateString}"/> - 
+                                <Run Text="{x:Bind EndDateString}"/>
+                            </TextBlock>
+
+                            <FontIcon Grid.Column="1"
+                                      Grid.Row="0"
+                                      Grid.RowSpan="2"
+                                      FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                      Glyph="&#xE76C;"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
 </Page>

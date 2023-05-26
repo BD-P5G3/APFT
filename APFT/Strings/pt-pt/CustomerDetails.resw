@@ -120,6 +120,9 @@
   <data name="AddressTextBox.Header" xml:space="preserve">
     <value>Morada</value>
   </data>
+  <data name="ConstructionsSubheader.Text" xml:space="preserve">
+    <value>Obras</value>
+  </data>
   <data name="EditInfoButton.Content" xml:space="preserve">
     <value>Editar informação</value>
   </data>
