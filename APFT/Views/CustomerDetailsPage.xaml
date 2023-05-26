@@ -77,12 +77,30 @@
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListViewItem">
                                     <Grid Margin="0, 0, 0 4">
-                                        <Border CornerRadius="8"
-                                                Padding="12"
-                                                BorderThickness="1"
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal" />
+                                                <VisualState x:Name="PointerOver">
+                                                    <VisualState.Setters>
+                                                        <Setter Target="CardBorder.Opacity" Value="0.4" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                                <VisualState x:Name="Pressed">
+                                                    <VisualState.Setters>
+                                                        <Setter Target="CardBorder.Opacity" Value="0.2" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Border x:Name="CardBorder"
+                                                CornerRadius="8"
+                                                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"/>
+                                        <Border BorderThickness="1"
                                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
-                                        <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                                CornerRadius="8"
+                                                Padding="12"/>
+                                        <ContentPresenter Content="{TemplateBinding Content}"
+                                                          ContentTemplate="{TemplateBinding ContentTemplate}" />
                                     </Grid>
                                 </ControlTemplate>
                             </Setter.Value>
