@@ -18,11 +18,20 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
+
             <TextBlock Grid.Column="0"
                        x:Uid="/CustomerDetails/Header"
                        Style="{ThemeResource TitleTextBlockStyle}" />
+
             <Button Grid.Column="1"
+                    x:Name="DeleteButton"
+                    x:Uid="/CustomerDetails/DeleteButton"
+                    Click="DeleteButton_OnClick"/>
+
+            <Button Grid.Column="2"
+                    x:Name="EditInfoButton"
                     x:Uid="/CustomerDetails/EditInfoButton"
                     Click="EditInfoButton_OnClick"
                     Style="{StaticResource AccentButtonStyle}"/>

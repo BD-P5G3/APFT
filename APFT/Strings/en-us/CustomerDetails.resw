@@ -123,6 +123,21 @@
   <data name="ConstructionsSubheader.Text" xml:space="preserve">
     <value>Constructions</value>
   </data>
+  <data name="DeleteButton.Content" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteCustomerCD_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DeleteCustomerCD_Content" xml:space="preserve">
+    <value>Are you sure you want to delete this customer? This action cannot be undone!</value>
+  </data>
+  <data name="DeleteCustomerCD_PrimaryButton" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteCustomerCD_Title" xml:space="preserve">
+    <value>Delete customer</value>
+  </data>
   <data name="EditInfoButton.Content" xml:space="preserve">
     <value>Edit info</value>
   </data>

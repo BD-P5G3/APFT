@@ -123,6 +123,21 @@
   <data name="ConstructionsSubheader.Text" xml:space="preserve">
     <value>Obras</value>
   </data>
+  <data name="DeleteButton.Content" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="DeleteCustomerCD_CancelButton" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="DeleteCustomerCD_Content" xml:space="preserve">
+    <value>Tem a certeza que pretende eliminar este cliente? Esta operação é irreversível!</value>
+  </data>
+  <data name="DeleteCustomerCD_PrimaryButton" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="DeleteCustomerCD_Title" xml:space="preserve">
+    <value>Eliminar cliente</value>
+  </data>
   <data name="EditInfoButton.Content" xml:space="preserve">
     <value>Editar informação</value>
   </data>

@@ -136,6 +136,21 @@ public sealed partial class CustomerDetailsPage : INotifyPropertyChanged
         _ = await dialog.ShowAsync();
     }
 
+    private async void DeleteButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var dialog = new ContentDialog
+        {
+            XamlRoot = ContentArea.XamlRoot,
+            Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+            Title = _resourceLoader.GetString("DeleteCustomerCD_Title"),
+            PrimaryButtonText = _resourceLoader.GetString("DeleteCustomerCD_PrimaryButton"),
+            DefaultButton = ContentDialogButton.Primary,
+            CloseButtonText = _resourceLoader.GetString("DeleteCustomerCD_CancelButton"),
+            Content = _resourceLoader.GetString("DeleteCustomerCD_Content")
+        };
+        _ = await dialog.ShowAsync();
+    }
+
     private async void ConstructionsGridView_OnItemClick(object sender, ItemClickEventArgs e)
     {
         var dialog = new ContentDialog
