@@ -10,8 +10,7 @@
     <Grid x:Name="ContentArea" VerticalAlignment="Top" RowSpacing="32">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" ColumnSpacing="8" Margin="0,10,0,-8">
@@ -37,125 +36,134 @@
                     Style="{StaticResource AccentButtonStyle}"/>
         </Grid>
 
-        <Grid Grid.Row="1" RowSpacing="16">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="1">
+            <Grid RowSpacing="32">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
-            <TextBox Grid.Row="0" Grid.Column="0" Text="{x:Bind Nif, Mode=TwoWay}" x:Uid="/CustomerDetails/NifTextBox" />
+                <Grid Grid.Row="0" RowSpacing="16">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
 
-            <Grid Grid.Row="1" ColumnSpacing="16">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-            
-                <TextBox Grid.Column="0" Text="{x:Bind FirstName, Mode=TwoWay}" x:Uid="/CustomerDetails/FirstNameTextBox" />
-                <TextBox Grid.Column="1" Text="{x:Bind LastName, Mode=TwoWay}" x:Uid="/CustomerDetails/LastNameTextBox" />
-            </Grid>
+                    <TextBox Grid.Row="0" Grid.Column="0" Text="{x:Bind Nif, Mode=TwoWay}" x:Uid="/CustomerDetails/NifTextBox" />
 
-            <Grid Grid.Row="2" ColumnSpacing="16">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-            
-                <TextBox Grid.Column="0" Text="{x:Bind Email, Mode=TwoWay}" x:Uid="/CustomerDetails/EmailTextBox" />
-                <TextBox Grid.Column="1" Text="{x:Bind Phone, Mode=TwoWay}" x:Uid="/CustomerDetails/PhoneTextBox" />
-            </Grid>
+                    <Grid Grid.Row="1" ColumnSpacing="16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-            <TextBox Grid.Row="3" Grid.Column="0" Text="{x:Bind Address, Mode=TwoWay}" x:Uid="/CustomerDetails/AddressTextBox" />
-        </Grid>
+                        <TextBox Grid.Column="0" Text="{x:Bind FirstName, Mode=TwoWay}" x:Uid="/CustomerDetails/FirstNameTextBox" />
+                        <TextBox Grid.Column="1" Text="{x:Bind LastName, Mode=TwoWay}" x:Uid="/CustomerDetails/LastNameTextBox" />
+                    </Grid>
 
-        <Grid Grid.Row="2" RowSpacing="8">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+                    <Grid Grid.Row="2" ColumnSpacing="16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0"
+                        <TextBox Grid.Column="0" Text="{x:Bind Email, Mode=TwoWay}" x:Uid="/CustomerDetails/EmailTextBox" />
+                        <TextBox Grid.Column="1" Text="{x:Bind Phone, Mode=TwoWay}" x:Uid="/CustomerDetails/PhoneTextBox" />
+                    </Grid>
+
+                    <TextBox Grid.Row="3" Grid.Column="0" Text="{x:Bind Address, Mode=TwoWay}" x:Uid="/CustomerDetails/AddressTextBox" />
+                </Grid>
+
+                <Grid Grid.Row="1" RowSpacing="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
                        x:Uid="/CustomerDetails/ConstructionsSubheader"
                        Style="{ThemeResource SubtitleTextBlockStyle}" />
 
-            <ListView Grid.Row="1"
+                    <ListView Grid.Row="1"
                       x:Name="ConstructionsGridView"
                       IsItemClickEnabled="True"
                       ItemClick="ConstructionsGridView_OnItemClick"
                       SelectionMode="None">
 
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ListViewItem">
-                                    <Grid Margin="0, 0, 0 4">
-                                        <VisualStateManager.VisualStateGroups>
-                                            <VisualStateGroup x:Name="CommonStates">
-                                                <VisualState x:Name="Normal" />
-                                                <VisualState x:Name="PointerOver">
-                                                    <VisualState.Setters>
-                                                        <Setter Target="CardBorder.Opacity" Value="0.4" />
-                                                    </VisualState.Setters>
-                                                </VisualState>
-                                                <VisualState x:Name="Pressed">
-                                                    <VisualState.Setters>
-                                                        <Setter Target="CardBorder.Opacity" Value="0.2" />
-                                                    </VisualState.Setters>
-                                                </VisualState>
-                                            </VisualStateGroup>
-                                        </VisualStateManager.VisualStateGroups>
-                                        <Border x:Name="CardBorder"
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListViewItem">
+                                            <Grid Margin="0, 0, 0 4">
+                                                <VisualStateManager.VisualStateGroups>
+                                                    <VisualStateGroup x:Name="CommonStates">
+                                                        <VisualState x:Name="Normal" />
+                                                        <VisualState x:Name="PointerOver">
+                                                            <VisualState.Setters>
+                                                                <Setter Target="CardBorder.Opacity" Value="0.4" />
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+                                                        <VisualState x:Name="Pressed">
+                                                            <VisualState.Setters>
+                                                                <Setter Target="CardBorder.Opacity" Value="0.2" />
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+                                                    </VisualStateGroup>
+                                                </VisualStateManager.VisualStateGroups>
+                                                <Border x:Name="CardBorder"
                                                 CornerRadius="8"
                                                 Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"/>
-                                        <Border BorderThickness="1"
+                                                <Border BorderThickness="1"
                                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                                 CornerRadius="8"
                                                 Padding="12"/>
-                                        <ContentPresenter Content="{TemplateBinding Content}"
+                                                <ContentPresenter Content="{TemplateBinding Content}"
                                                           ContentTemplate="{TemplateBinding ContentTemplate}" />
-                                    </Grid>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListView.ItemContainerStyle>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
 
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="views:Construction">
-                        <Grid ColumnSpacing="8" Padding="12, 12, 8, 12">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="views:Construction">
+                                <Grid ColumnSpacing="8" Padding="12, 12, 8, 12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Column="0"
+                                    <TextBlock Grid.Column="0"
                                        Grid.Row="0"
                                        Text="{x:Bind Location}"
                                        x:Phase="1"
                                        Style="{StaticResource BodyStrongTextBlockStyle}"/>
 
-                            <TextBlock Grid.Column="0"
+                                    <TextBlock Grid.Column="0"
                                        Grid.Row="1">
                                 <Run Text="{x:Bind StartDateString}"/> - 
                                 <Run Text="{x:Bind EndDateString}"/>
-                            </TextBlock>
+                                    </TextBlock>
 
-                            <FontIcon Grid.Column="1"
+                                    <FontIcon Grid.Column="1"
                                       Grid.Row="0"
                                       Grid.RowSpan="2"
                                       FontFamily="{StaticResource SymbolThemeFontFamily}"
                                       Glyph="&#xE76C;"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>
