@@ -96,6 +96,8 @@
 
                     <TextBlock Grid.Row="0"
                        x:Uid="/CustomerDetails/ConstructionsSubheader"
+                       x:Name="ConstructionsSubtitle"
+                       Visibility="Collapsed"
                        Style="{ThemeResource SubtitleTextBlockStyle}" />
 
                     <ListView Grid.Row="1"

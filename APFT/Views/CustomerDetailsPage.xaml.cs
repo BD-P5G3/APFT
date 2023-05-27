@@ -118,6 +118,10 @@ public sealed partial class CustomerDetailsPage : INotifyPropertyChanged
         Address = reader.GetString(5);
 
         ConstructionsGridView.ItemsSource = await Construction.GetConstructionsAsync(Nif);
+        if (ConstructionsGridView.Items.Count > 0)
+        {
+            ConstructionsSubtitle.Visibility = Visibility.Visible;
+        }
     }
 
     private readonly ResourceLoader _resourceLoader = new("resources.pri", "CustomerDetails");
