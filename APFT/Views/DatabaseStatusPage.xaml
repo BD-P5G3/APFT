@@ -14,12 +14,15 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        <!-- Header -->
         <TextBlock Grid.Row="0"
                    Margin="0,10,0,24"
                    x:Uid="/DatabaseStatus/Header"
                    Style="{ThemeResource TitleTextBlockStyle}" />
 
+        <!-- Content -->
         <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Top" Spacing="16">
+            <!-- Status -->
             <Grid ColumnSpacing="8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -30,9 +33,13 @@
                 <TextBlock Text="{x:Bind ConnectionStatus, Mode=OneWay}" TextWrapping="Wrap" Style="{StaticResource NavigationViewItemHeaderTextStyle}" Grid.Column="1" />
             </Grid>
 
-            <!-- Text input -->
+            <!-- Database input -->
             <TextBox Name="DatabaseTextBox" x:Uid="/DatabaseStatus/databaseTextBox" Text="{x:Bind Database, Mode=TwoWay}" />
+            
+            <!-- Username input -->
             <TextBox Name="UserTextBox" x:Uid="/DatabaseStatus/usernameTextBox" Text="{x:Bind Username, Mode=TwoWay}" />
+            
+            <!-- Password input -->
             <PasswordBox Name="PasswordBox" x:Uid="/DatabaseStatus/passwordBox" Password="{x:Bind Password, Mode=TwoWay}" />
 
             <!-- Connect Button-->

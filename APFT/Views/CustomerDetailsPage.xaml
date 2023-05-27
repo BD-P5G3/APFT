@@ -13,6 +13,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        <!-- Header -->
         <Grid Grid.Row="0" ColumnSpacing="8" Margin="0,10,0,-8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -20,10 +21,12 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
+            <!-- Header text -->
             <TextBlock Grid.Column="0"
                        x:Uid="/CustomerDetails/Header"
                        Style="{ThemeResource TitleTextBlockStyle}" />
 
+            <!-- Delete button -->
             <Button Grid.Column="1"
                     x:Name="DeleteButton"
                     Click="DeleteButton_OnClick">
@@ -35,6 +38,7 @@
                 </ToolTipService.ToolTip>
             </Button>
 
+            <!-- Edit info button -->
             <Button Grid.Column="2"
                     x:Name="EditInfoButton"
                     Click="EditInfoButton_OnClick"
@@ -48,6 +52,7 @@
             </Button>
         </Grid>
 
+        <!-- Content -->
         <ScrollViewer Grid.Row="1">
             <Grid RowSpacing="32" Padding="0,0,0,16">
                 <Grid.RowDefinitions>
@@ -55,6 +60,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
+                <!-- Customer info area -->
                 <Grid Grid.Row="0" RowSpacing="16">
                     <Grid.RowDefinitions>
                         <RowDefinition />
@@ -63,8 +69,10 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
+                    <!-- NIF -->
                     <TextBox Grid.Row="0" Grid.Column="0" Text="{x:Bind Nif, Mode=TwoWay}" x:Uid="/CustomerDetails/NifTextBox" />
 
+                    <!-- First & last names -->
                     <Grid Grid.Row="1" ColumnSpacing="16">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -75,6 +83,7 @@
                         <TextBox Grid.Column="1" Text="{x:Bind LastName, Mode=TwoWay}" x:Uid="/CustomerDetails/LastNameTextBox" />
                     </Grid>
 
+                    <!-- E-mail & phone number -->
                     <Grid Grid.Row="2" ColumnSpacing="16">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -85,27 +94,32 @@
                         <TextBox Grid.Column="1" Text="{x:Bind Phone, Mode=TwoWay}" x:Uid="/CustomerDetails/PhoneTextBox" />
                     </Grid>
 
+                    <!-- Address -->
                     <TextBox Grid.Row="3" Grid.Column="0" Text="{x:Bind Address, Mode=TwoWay}" x:Uid="/CustomerDetails/AddressTextBox" />
                 </Grid>
 
+                <!-- Customer's constructions -->
                 <Grid Grid.Row="1" RowSpacing="8">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
+                    <!-- Header (i.e., a subtitle) -->
                     <TextBlock Grid.Row="0"
-                       x:Uid="/CustomerDetails/ConstructionsSubheader"
-                       x:Name="ConstructionsSubtitle"
-                       Visibility="Collapsed"
-                       Style="{ThemeResource SubtitleTextBlockStyle}" />
+                               x:Uid="/CustomerDetails/ConstructionsSubheader"
+                               x:Name="ConstructionsSubtitle"
+                               Visibility="Collapsed"
+                               Style="{ThemeResource SubtitleTextBlockStyle}" />
 
+                    <!-- Constructions list -->
                     <ListView Grid.Row="1"
-                      x:Name="ConstructionsGridView"
-                      IsItemClickEnabled="True"
-                      ItemClick="ConstructionsGridView_OnItemClick"
-                      SelectionMode="None">
+                              x:Name="ConstructionsGridView"
+                              IsItemClickEnabled="True"
+                              ItemClick="ConstructionsGridView_OnItemClick"
+                              SelectionMode="None">
 
+                        <!-- Card style -->
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="Template">
@@ -115,11 +129,15 @@
                                                 <VisualStateManager.VisualStateGroups>
                                                     <VisualStateGroup x:Name="CommonStates">
                                                         <VisualState x:Name="Normal" />
+
+                                                        <!-- Hover effect -->
                                                         <VisualState x:Name="PointerOver">
                                                             <VisualState.Setters>
                                                                 <Setter Target="CardBorder.Opacity" Value="0.4" />
                                                             </VisualState.Setters>
                                                         </VisualState>
+
+                                                        <!-- Pressed effect -->
                                                         <VisualState x:Name="Pressed">
                                                             <VisualState.Setters>
                                                                 <Setter Target="CardBorder.Opacity" Value="0.2" />
@@ -127,15 +145,21 @@
                                                         </VisualState>
                                                     </VisualStateGroup>
                                                 </VisualStateManager.VisualStateGroups>
+                                                
+                                                <!-- Background -->
                                                 <Border x:Name="CardBorder"
-                                                CornerRadius="8"
-                                                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"/>
+                                                        CornerRadius="8"
+                                                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"/>
+                                                
+                                                <!-- Border -->
                                                 <Border BorderThickness="1"
-                                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                                CornerRadius="8"
-                                                Padding="12"/>
+                                                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                                        CornerRadius="8"
+                                                        Padding="12"/>
+                                                
+                                                <!-- Content template (see ListView.ItemTemplate) -->
                                                 <ContentPresenter Content="{TemplateBinding Content}"
-                                                          ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                                                  ContentTemplate="{TemplateBinding ContentTemplate}" />
                                             </Grid>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -143,6 +167,7 @@
                             </Style>
                         </ListView.ItemContainerStyle>
 
+                        <!-- List item template -->
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="views:Construction">
                                 <Grid ColumnSpacing="8" Padding="12, 12, 8, 12">
@@ -155,18 +180,21 @@
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
 
+                                    <!-- Location -->
                                     <TextBlock Grid.Column="0"
-                                       Grid.Row="0"
-                                       Text="{x:Bind Location}"
-                                       x:Phase="1"
-                                       Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                                               Grid.Row="0"
+                                               Text="{x:Bind Location}"
+                                               x:Phase="1"
+                                               Style="{StaticResource BodyStrongTextBlockStyle}"/>
 
+                                    <!-- Dates -->
                                     <TextBlock Grid.Column="0"
-                                       Grid.Row="1">
-                                <Run Text="{x:Bind StartDateString}"/> - 
-                                <Run Text="{x:Bind EndDateString}"/>
+                                               Grid.Row="1">
+                                        <Run Text="{x:Bind StartDateString}"/> - 
+                                        <Run Text="{x:Bind EndDateString}"/>
                                     </TextBlock>
 
+                                    <!-- Chevron -->
                                     <Viewbox Grid.Column="1"
                                              Grid.Row="0"
                                              Grid.RowSpan="2"
