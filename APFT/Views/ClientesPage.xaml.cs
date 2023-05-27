@@ -61,11 +61,7 @@ public sealed partial class ClientesPage
 
         Frame.Navigate(typeof(CustomerDetailsPage));
     }
-
-    private void FilterButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        Debug.WriteLine("Filter button pressed");
-    }
+    
 
     private void AddButton_OnClick(object sender, RoutedEventArgs e)
     {
