@@ -152,7 +152,23 @@ public sealed partial class CustomerDetailsPage : INotifyPropertyChanged
             CloseButtonText = _resourceLoader.GetString("DeleteCustomerCD_CancelButton"),
             Content = _resourceLoader.GetString("DeleteCustomerCD_Content")
         };
-        _ = await dialog.ShowAsync();
+        
+        var choice = await dialog.ShowAsync();
+
+        if (choice != ContentDialogResult.Primary) { return; }
+
+            var localSettings = ApplicationData.Current.LocalSettings;
+
+            await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+        
+            await cn.OpenAsync();
+            var cmd = new SqlCommand("EXEC delete_client " + Nif, cn);
+
+            var rowsAffected = await cmd.ExecuteNonQueryAsync();
+            Debug.Assert(rowsAffected > 0);
+            Debug.WriteLine(rowsAffected);
+
+            Frame.GoBack();
     }
 
     private async void ConstructionsGridView_OnItemClick(object sender, ItemClickEventArgs e)
