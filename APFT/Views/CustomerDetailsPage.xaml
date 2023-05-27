@@ -26,14 +26,26 @@
 
             <Button Grid.Column="1"
                     x:Name="DeleteButton"
-                    x:Uid="/CustomerDetails/DeleteButton"
-                    Click="DeleteButton_OnClick"/>
+                    Click="DeleteButton_OnClick">
+                <Viewbox Height="16" Width="16">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE74D;"/>
+                </Viewbox>
+                <ToolTipService.ToolTip>
+                    <ToolTip x:Uid="/CustomerDetails/DeleteButton"/>
+                </ToolTipService.ToolTip>
+            </Button>
 
             <Button Grid.Column="2"
                     x:Name="EditInfoButton"
-                    x:Uid="/CustomerDetails/EditInfoButton"
                     Click="EditInfoButton_OnClick"
-                    Style="{StaticResource AccentButtonStyle}"/>
+                    Style="{StaticResource AccentButtonStyle}">
+                <Viewbox Height="16" Width="16">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE70F;"/>
+                </Viewbox>
+                <ToolTipService.ToolTip>
+                    <ToolTip x:Uid="/CustomerDetails/EditInfoButton"/>
+                </ToolTipService.ToolTip>
+            </Button>
         </Grid>
 
         <ScrollViewer Grid.Row="1">
