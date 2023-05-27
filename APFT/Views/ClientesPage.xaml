@@ -120,7 +120,8 @@
         <ListView Grid.Row="2" ItemsSource="{x:Bind CustomersCVS.View, Mode=OneWay}"
                   ItemTemplate="{StaticResource CustomerListViewTemplate}"
                   ItemClick="ListViewBase_OnItemClick"
-                  IsItemClickEnabled="True">
+                  IsItemClickEnabled="True"
+                  Padding="0,0,0,16">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <ItemsStackPanel AreStickyGroupHeadersEnabled="True"/>
