@@ -79,6 +79,9 @@
                 <Viewbox Height="16" Width="16">
                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE71C;"/>
                 </Viewbox>
+                <ToolTipService.ToolTip>
+                    <ToolTip x:Uid="/Customers/FilterButton"/>
+                </ToolTipService.ToolTip>
             </Button>
             <Button Grid.Column="3"
                     x:Name="AddButton"
@@ -88,6 +91,9 @@
                 <Viewbox Height="16" Width="16">
                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE710;"/>
                 </Viewbox>
+                <ToolTipService.ToolTip>
+                    <ToolTip x:Uid="/Customers/AddButton"/>
+                </ToolTipService.ToolTip>
             </Button>
         </Grid>
 
