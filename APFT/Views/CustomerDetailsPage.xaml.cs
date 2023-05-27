@@ -152,23 +152,23 @@ public sealed partial class CustomerDetailsPage : INotifyPropertyChanged
             CloseButtonText = _resourceLoader.GetString("DeleteCustomerCD_CancelButton"),
             Content = _resourceLoader.GetString("DeleteCustomerCD_Content")
         };
-        
+
         var choice = await dialog.ShowAsync();
 
         if (choice != ContentDialogResult.Primary) { return; }
 
-            var localSettings = ApplicationData.Current.LocalSettings;
+        var localSettings = ApplicationData.Current.LocalSettings;
 
-            await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
-        
-            await cn.OpenAsync();
-            var cmd = new SqlCommand("EXEC delete_client " + Nif, cn);
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
 
-            var rowsAffected = await cmd.ExecuteNonQueryAsync();
-            Debug.Assert(rowsAffected > 0);
-            Debug.WriteLine(rowsAffected);
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("EXEC delete_client " + Nif, cn);
 
-            Frame.GoBack();
+        var rowsAffected = await cmd.ExecuteNonQueryAsync();
+        Debug.Assert(rowsAffected > 0);
+        Debug.WriteLine(rowsAffected);
+
+        Frame.GoBack();
     }
 
     private async void ConstructionsGridView_OnItemClick(object sender, ItemClickEventArgs e)
@@ -188,11 +188,26 @@ public sealed partial class CustomerDetailsPage : INotifyPropertyChanged
 
 public class Construction
 {
-    public int Id { get; }
-    public string Location { get; }
-    public DateTime StartDate { get; }
-    public DateTime EndDate { get; }
-    public int CustomerNif { get; }
+    public int Id
+    {
+        get;
+    }
+    public string Location
+    {
+        get;
+    }
+    public DateTime StartDate
+    {
+        get;
+    }
+    public DateTime EndDate
+    {
+        get;
+    }
+    public int CustomerNif
+    {
+        get;
+    }
     public string StartDateString => StartDate.ToString().Split(" ")[0];
     public string EndDateString => EndDate.ToString().Split(" ")[0];
 
@@ -211,7 +226,7 @@ public class Construction
         var localSettings = ApplicationData.Current.LocalSettings;
 
         await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
-        
+
         await cn.OpenAsync();
         var cmd = new SqlCommand("SELECT * FROM getObraByClientNif(" + customerNif + ")", cn);
 
