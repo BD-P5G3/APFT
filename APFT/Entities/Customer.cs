@@ -8,27 +8,27 @@ public class Customer
 {
     public int Nif
     {
-        get; private set;
+        get; set;
     }
     public string FirstName
     {
-        get; private set;
+        get; set;
     }
     public string LastName
     {
-        get; private set;
+        get; set;
     }
     public string Email
     {
-        get; private set;
+        get; set;
     }
     public int Phone
     {
-        get; private set;
+        get; set;
     }
     public string? Address
     {
-        get; private set;
+        get; set;
     }
     public string Name => FirstName + " " + LastName;
 
