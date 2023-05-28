@@ -63,9 +63,24 @@ public sealed partial class ClientesPage
     }
     
 
-    private void AddButton_OnClick(object sender, RoutedEventArgs e)
+    private async void AddButton_OnClick(object sender, RoutedEventArgs e)
     {
-        Debug.WriteLine("Add button pressed");
+        var localSettings = ApplicationData.Current.LocalSettings;
+
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("EXEC create_client " + NifTextBox.Text + ", " +
+                                 "'" + FNameTextBox.Text + "', " +
+                                 "'" + LNameTextBox.Text + "', " +
+                                 "'" + EmailTextBox.Text + "', " +
+                                 PhoneTextBox.Text + ", " +
+                                 "'" + AddressTextBox.Text + "'", cn);
+
+        _ = await cmd.ExecuteNonQueryAsync();
+
+        localSettings.Values["CustomerNif"] = NifTextBox.Text;
+        Frame.Navigate(typeof(CustomerDetailsPage));
     }
 
     private async void AutoSuggestBox_OnTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
