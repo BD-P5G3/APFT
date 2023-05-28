@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:APFT.Views"
+    xmlns:entities="using:APFT.Entities"
     mc:Ignorable="d">
 
     <Grid x:Name="ContentArea" VerticalAlignment="Top" RowSpacing="32">
@@ -187,7 +188,7 @@
 
                         <!-- List item template -->
                         <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="views:Construction">
+                            <DataTemplate x:DataType="entities:Construction">
                                 <Grid ColumnSpacing="8" Padding="12, 12, 8, 12">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>

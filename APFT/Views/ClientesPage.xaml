@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local1="using:APFT.Views"
+    xmlns:entities="using:APFT.Entities"
     mc:Ignorable="d">
 
     <Grid x:Name="ContentArea">
@@ -107,7 +107,7 @@
                   Padding="0,0,0,16">
             <!-- List Item Template -->
             <ListView.ItemTemplate>
-                <DataTemplate x:Key="CustomerListViewTemplate" x:DataType="local1:Customer">
+                <DataTemplate x:Key="CustomerListViewTemplate" x:DataType="entities:Customer">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -150,7 +150,7 @@
             <ListView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
-                        <DataTemplate x:DataType="local1:GroupInfoList">
+                        <DataTemplate x:DataType="entities:GroupInfoList">
                             <Border AutomationProperties.AccessibilityView="Raw">
                                 <TextBlock Text="{x:Bind Key}" Style="{ThemeResource TitleTextBlockStyle}" AutomationProperties.AccessibilityView="Raw"/>
                             </Border>
