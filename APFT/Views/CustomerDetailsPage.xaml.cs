@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.Windows.ApplicationModel.Resources;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using Microsoft.UI.Xaml.Media.Animation;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace APFT.Views;
@@ -128,6 +129,36 @@ public sealed partial class CustomerDetailsPage : INotifyPropertyChanged
 
     private async void EditInfoButton_OnClick(object sender, RoutedEventArgs e)
     {
+        // Create a fade-out animation for the edit icon
+        var fadeOutEditAnimation = new DoubleAnimation
+        {
+            From = 1,
+            To = 0,
+            Duration = TimeSpan.FromSeconds(0.2),
+            EnableDependentAnimation = true
+        };
+        Storyboard.SetTarget(fadeOutEditAnimation, EditInfoIcon);
+        Storyboard.SetTargetProperty(fadeOutEditAnimation, "Opacity");
+
+        // Create a fade-in animation for the progress ring
+        var fadeInPrAnimation = new DoubleAnimation
+        {
+            From = 0,
+            To = 1,
+            Duration = TimeSpan.FromSeconds(0.2),
+            EnableDependentAnimation = true
+        };
+        Storyboard.SetTarget(fadeInPrAnimation, EditInfoProgressRing);
+        Storyboard.SetTargetProperty(fadeInPrAnimation, "Opacity");
+
+        // Run animations
+        var sb = new Storyboard();
+        sb.Children.Add(fadeOutEditAnimation);
+        sb.Children.Add(fadeInPrAnimation);
+        sb.Begin();
+
+
+        // Action
         var dialog = new ContentDialog
         {
             XamlRoot = ContentArea.XamlRoot,
@@ -138,6 +169,65 @@ public sealed partial class CustomerDetailsPage : INotifyPropertyChanged
             Content = _resourceLoader.GetString("NotImplemented_Content")
         };
         _ = await dialog.ShowAsync();
+
+
+        // Create a fade-out animation for the ProgressRing
+        var fadeOutPrAnimation = new DoubleAnimation
+        {
+            From = 1,
+            To = 0,
+            Duration = TimeSpan.FromSeconds(0.2),
+            EnableDependentAnimation = true
+        };
+        Storyboard.SetTarget(fadeOutPrAnimation, EditInfoProgressRing);
+        Storyboard.SetTargetProperty(fadeOutPrAnimation, "Opacity");
+
+        // Create a fade-in animation for the checkmark icon
+        var fadeInCheckmarkAnimation = new DoubleAnimation
+        {
+            From = 0,
+            To = 1,
+            Duration = TimeSpan.FromSeconds(0.2),
+            EnableDependentAnimation = true
+        };
+        Storyboard.SetTarget(fadeInCheckmarkAnimation, EditInfoIconCheckmark);
+        Storyboard.SetTargetProperty(fadeInCheckmarkAnimation, "Opacity");
+
+        // Run animations
+        sb = new Storyboard();
+        sb.Children.Add(fadeOutPrAnimation);
+        sb.Children.Add(fadeInCheckmarkAnimation);
+        sb.Begin();
+
+
+        await Task.Delay(TimeSpan.FromSeconds(2));
+
+        // Create a fade-out animation for the checkmark icon
+        var fadeOutCheckmarkAnimation = new DoubleAnimation
+        {
+            From = 1,
+            To = 0,
+            Duration = TimeSpan.FromSeconds(0.2),
+            EnableDependentAnimation = true
+        };
+        Storyboard.SetTarget(fadeOutCheckmarkAnimation, EditInfoIconCheckmark);
+        Storyboard.SetTargetProperty(fadeOutCheckmarkAnimation, "Opacity");
+
+        // Create a fade-in animation for the edit icon
+        var fadeInEditAnimation = new DoubleAnimation
+        {
+            From = 0,
+            To = 1,
+            Duration = TimeSpan.FromSeconds(0.2),
+            EnableDependentAnimation = true
+        };
+        Storyboard.SetTarget(fadeInEditAnimation, EditInfoIcon);
+        Storyboard.SetTargetProperty(fadeInEditAnimation, "Opacity");
+
+        sb = new Storyboard();
+        sb.Children.Add(fadeOutCheckmarkAnimation);
+        sb.Children.Add(fadeInEditAnimation);
+        sb.Begin();
     }
 
     private async void DeleteButton_OnClick(object sender, RoutedEventArgs e)

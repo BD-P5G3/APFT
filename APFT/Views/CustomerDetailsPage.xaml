@@ -43,9 +43,27 @@
                     x:Name="EditInfoButton"
                     Click="EditInfoButton_OnClick"
                     Style="{StaticResource AccentButtonStyle}">
-                <Viewbox Height="16" Width="16">
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE70F;"/>
-                </Viewbox>
+                <Grid>
+                    <Viewbox Height="16" Width="16" x:Name="EditInfoViewBox">
+                        <Grid>
+                            <FontIcon x:Name="EditInfoIcon"
+                                      FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                      Glyph="&#xE70F;"
+                                      Opacity="1"/>
+                            <FontIcon x:Name="EditInfoIconCheckmark"
+                                      FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                      Glyph="&#xE73E;"
+                                      Opacity="0"/>
+                        </Grid>
+                    </Viewbox>
+                    <ProgressRing IsActive="True"
+                                  Height="16"
+                                  Width="16"
+                                  Foreground="White"
+                                  Opacity="0"
+                                  x:Name="EditInfoProgressRing"/>
+                </Grid>
+
                 <ToolTipService.ToolTip>
                     <ToolTip x:Uid="/CustomerDetails/EditInfoButton"/>
                 </ToolTipService.ToolTip>
