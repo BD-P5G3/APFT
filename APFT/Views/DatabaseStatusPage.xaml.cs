@@ -5,6 +5,8 @@ using Microsoft.UI;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.Windows.ApplicationModel.Resources;
 using Windows.Storage;
+using Windows.System;
+using Microsoft.UI.Xaml.Input;
 
 namespace APFT.Views;
 
@@ -160,4 +162,12 @@ public sealed partial class DatabaseStatusPage : INotifyPropertyChanged
     }
 
     private void TestConnectionButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) => TestDbConnection(ServerAddress, DatabaseTextBox.Text, UserTextBox.Text, PasswordBox.Password);
+
+    private void TextBoxes_OnKeyDown(object sender, KeyRoutedEventArgs e)
+    {
+        if (e.Key == VirtualKey.Enter)
+        {
+            TestDbConnection(ServerAddress, DatabaseTextBox.Text, UserTextBox.Text, PasswordBox.Password);
+        }
+    }
 }

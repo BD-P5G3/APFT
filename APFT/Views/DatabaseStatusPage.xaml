@@ -34,13 +34,13 @@
             </Grid>
 
             <!-- Database input -->
-            <TextBox Name="DatabaseTextBox" x:Uid="/DatabaseStatus/databaseTextBox" Text="{x:Bind Database, Mode=TwoWay}" />
+            <TextBox Name="DatabaseTextBox" x:Uid="/DatabaseStatus/databaseTextBox" Text="{x:Bind Database, Mode=TwoWay}" KeyDown="TextBoxes_OnKeyDown" />
             
             <!-- Username input -->
-            <TextBox Name="UserTextBox" x:Uid="/DatabaseStatus/usernameTextBox" Text="{x:Bind Username, Mode=TwoWay}" />
+            <TextBox Name="UserTextBox" x:Uid="/DatabaseStatus/usernameTextBox" Text="{x:Bind Username, Mode=TwoWay}" KeyDown="TextBoxes_OnKeyDown" />
             
             <!-- Password input -->
-            <PasswordBox Name="PasswordBox" x:Uid="/DatabaseStatus/passwordBox" Password="{x:Bind Password, Mode=TwoWay}" />
+            <PasswordBox Name="PasswordBox" x:Uid="/DatabaseStatus/passwordBox" Password="{x:Bind Password, Mode=TwoWay}" KeyDown="TextBoxes_OnKeyDown" />
 
             <!-- Connect Button-->
             <Button Style="{StaticResource AccentButtonStyle}" Click="TestConnectionButton_Click">
