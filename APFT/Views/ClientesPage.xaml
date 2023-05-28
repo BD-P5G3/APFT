@@ -20,7 +20,6 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -102,7 +101,7 @@
         </Grid>
 
         <!-- Customers list view -->
-        <ListView Grid.Row="2" ItemsSource="{x:Bind CustomersCVS.View, Mode=OneWay}"
+        <ListView Grid.Row="1" ItemsSource="{x:Bind CustomersCVS.View, Mode=OneWay}"
                   ItemClick="ListViewBase_OnItemClick"
                   IsItemClickEnabled="True"
                   Padding="0,0,0,16">
