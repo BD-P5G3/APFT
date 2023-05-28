@@ -159,16 +159,18 @@ public sealed partial class CustomerDetailsPage : INotifyPropertyChanged
 
 
         // Action
-        var dialog = new ContentDialog
-        {
-            XamlRoot = ContentArea.XamlRoot,
-            Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
-            Title = _resourceLoader.GetString("NotImplemented_Title"),
-            PrimaryButtonText = _resourceLoader.GetString("NotImplemented_Close"),
-            DefaultButton = ContentDialogButton.Primary,
-            Content = _resourceLoader.GetString("NotImplemented_Content")
-        };
-        _ = await dialog.ShowAsync();
+        var localSettings = ApplicationData.Current.LocalSettings;
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("EXEC update_client " + Nif + ", " +
+                                 "'" + FirstName + "', " +
+                                 "'" + LastName + "', " +
+                                 "'" + Email + "', " +
+                                 Phone + ", " +
+                                 "'" + Address + "'", cn);
+
+        _ = await cmd.ExecuteNonQueryAsync();
 
 
         // Create a fade-out animation for the ProgressRing
