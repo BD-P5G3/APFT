@@ -120,6 +120,9 @@
   <data name="AddButton.Content" xml:space="preserve">
     <value>New</value>
   </data>
+  <data name="AddButtonFlyout.Content" xml:space="preserve">
+    <value>Add new customer</value>
+  </data>
   <data name="AutoSuggestBox.PlaceholderText" xml:space="preserve">
     <value>Search by name</value>
   </data>
