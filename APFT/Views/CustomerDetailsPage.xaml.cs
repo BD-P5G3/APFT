@@ -116,7 +116,7 @@ public sealed partial class CustomerDetailsPage : INotifyPropertyChanged
         Phone = reader.GetInt32(4);
         Address = reader.GetString(5);
 
-        ConstructionsGridView.ItemsSource = await Construction.GetConstructionsAsync(Nif);
+        ConstructionsGridView.ItemsSource = await Construction.GetConstructionsByCustomerNifAsync(Nif);
         if (ConstructionsGridView.Items.Count > 0)
         {
             ConstructionsSubtitle.Visibility = Visibility.Visible;

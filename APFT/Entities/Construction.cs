@@ -38,7 +38,7 @@ public class Construction
         CustomerNif = customerNif;
     }
 
-    public static async Task<ObservableCollection<Construction>> GetConstructionsAsync(int customerNif)
+    public static async Task<ObservableCollection<Construction>> GetConstructionsByCustomerNifAsync(int customerNif)
     {
         var constructions = new ObservableCollection<Construction>();
         var localSettings = ApplicationData.Current.LocalSettings;
