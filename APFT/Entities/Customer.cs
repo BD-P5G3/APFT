@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Windows.Storage;
 
 namespace APFT.Entities;
@@ -105,5 +106,33 @@ public class Customer
                 reader.GetString(3),
                 reader.GetInt32(4),
                 await reader.IsDBNullAsync(5) ? string.Empty : reader.GetString(5));
+    }
+
+    public static async Task<int> EditCustomer(int nif, string firstName, string lastName, string email, int phone, string? address)
+    {
+        var localSettings = ApplicationData.Current.LocalSettings;
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("EXEC update_client " + nif + ", " +
+                                 "'" + firstName + "', " +
+                                 "'" + lastName + "', " +
+                                 "'" + email + "', " +
+                                 phone + ", " +
+                                 (string.IsNullOrEmpty(address) ? "null" : "'" + address + "'"), cn);
+
+        return await cmd.ExecuteNonQueryAsync();
+    }
+
+    public static async Task<int> DeleteCustomer(int nif)
+    {
+        var localSettings = ApplicationData.Current.LocalSettings;
+
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("EXEC delete_client " + nif, cn);
+
+        return await cmd.ExecuteNonQueryAsync();
     }
 }

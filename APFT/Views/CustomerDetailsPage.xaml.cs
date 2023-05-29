@@ -58,8 +58,8 @@ public sealed partial class CustomerDetailsPage : INotifyPropertyChanged
         }
     }
 
-    private string _address;
-    public string Address
+    private string? _address;
+    public string? Address
     {
         get => _address;
         set
@@ -101,20 +101,14 @@ public sealed partial class CustomerDetailsPage : INotifyPropertyChanged
     private async void FetchData()
     {
         var localSettings = ApplicationData.Current.LocalSettings;
+        var customer = await Customer.GetCustomerByNifAsync(int.Parse(localSettings.Values["CustomerNif"].ToString() ?? "0"));
 
-        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
-        await cn.OpenAsync();
-
-        var cmd = new SqlCommand("SELECT * FROM EMPRESA_CONSTRUCAO.CLIENTE WHERE nif=" + localSettings.Values["CustomerNif"], cn);
-        var reader = await cmd.ExecuteReaderAsync();
-        await reader.ReadAsync();
-
-        Nif = reader.GetInt32(0);
-        FirstName = reader.GetString(1);
-        LastName = reader.GetString(2);
-        Email = reader.GetString(3);
-        Phone = reader.GetInt32(4);
-        Address = reader.GetString(5);
+        Nif = customer.Nif;
+        FirstName = customer.FirstName;
+        LastName = customer.LastName;
+        Email = customer.Email;
+        Phone = customer.Phone;
+        Address = customer.Address;
 
         ConstructionsGridView.ItemsSource = await Construction.GetConstructionsByCustomerNifAsync(Nif);
         if (ConstructionsGridView.Items.Count > 0)
@@ -157,18 +151,7 @@ public sealed partial class CustomerDetailsPage : INotifyPropertyChanged
 
 
         // Action
-        var localSettings = ApplicationData.Current.LocalSettings;
-        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
-
-        await cn.OpenAsync();
-        var cmd = new SqlCommand("EXEC update_client " + Nif + ", " +
-                                 "'" + FirstName + "', " +
-                                 "'" + LastName + "', " +
-                                 "'" + Email + "', " +
-                                 Phone + ", " +
-                                 "'" + Address + "'", cn);
-
-        _ = await cmd.ExecuteNonQueryAsync();
+        await Customer.EditCustomer(Nif, FirstName, LastName, Email, Phone, Address);
 
 
         // Create a fade-out animation for the ProgressRing
@@ -247,16 +230,7 @@ public sealed partial class CustomerDetailsPage : INotifyPropertyChanged
 
         if (choice != ContentDialogResult.Primary) { return; }
 
-        var localSettings = ApplicationData.Current.LocalSettings;
-
-        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
-
-        await cn.OpenAsync();
-        var cmd = new SqlCommand("EXEC delete_client " + Nif, cn);
-
-        var rowsAffected = await cmd.ExecuteNonQueryAsync();
-        Debug.Assert(rowsAffected > 0);
-        Debug.WriteLine(rowsAffected);
+        await Customer.DeleteCustomer(Nif);
 
         Frame.GoBack();
     }
