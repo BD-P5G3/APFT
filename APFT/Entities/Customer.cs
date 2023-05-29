@@ -108,6 +108,42 @@ public class Customer
                 await reader.IsDBNullAsync(5) ? string.Empty : reader.GetString(5));
     }
 
+    public static async Task<List<string>> GetCustomersByNameAsync(string name)
+    {
+        var suitableItems = new List<string>();
+        var localSettings = ApplicationData.Current.LocalSettings;
+
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+        
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("SELECT * FROM getClientByName('" + name + "')", cn);
+
+        var reader = await cmd.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            suitableItems.Add(reader.GetString(1) + " " + reader.GetString(2) + " (" + reader.GetInt32(0) + ")");
+        }
+
+        return suitableItems;
+    }
+
+    public static async Task<int> AddCustomer(int nif, string firstName, string lastName, string email, int phone, string? address)
+    {
+        var localSettings = ApplicationData.Current.LocalSettings;
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("EXEC create_client " + nif + ", " +
+                                 "'" + firstName + "', " +
+                                 "'" + lastName + "', " +
+                                 "'" + email + "', " +
+                                 phone + ", " +
+                                 (string.IsNullOrEmpty(address) ? "null" : "'" + address + "'"), cn);
+
+        return await cmd.ExecuteNonQueryAsync();
+    }
+
     public static async Task<int> EditCustomer(int nif, string firstName, string lastName, string email, int phone, string? address)
     {
         var localSettings = ApplicationData.Current.LocalSettings;

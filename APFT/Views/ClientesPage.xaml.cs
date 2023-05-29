@@ -67,17 +67,8 @@ public sealed partial class ClientesPage
     {
         var localSettings = ApplicationData.Current.LocalSettings;
 
-        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
-
-        await cn.OpenAsync();
-        var cmd = new SqlCommand("EXEC create_client " + NifTextBox.Text + ", " +
-                                 "'" + FNameTextBox.Text + "', " +
-                                 "'" + LNameTextBox.Text + "', " +
-                                 "'" + EmailTextBox.Text + "', " +
-                                 PhoneTextBox.Text + ", " +
-                                 "'" + AddressTextBox.Text + "'", cn);
-
-        _ = await cmd.ExecuteNonQueryAsync();
+        await Customer.AddCustomer(int.Parse(NifTextBox.Text), FNameTextBox.Text, LNameTextBox.Text, EmailTextBox.Text,
+            int.Parse(PhoneTextBox.Text), AddressTextBox.Text);
 
         localSettings.Values["CustomerNif"] = NifTextBox.Text;
         Frame.Navigate(typeof(CustomerDetailsPage));
@@ -85,38 +76,11 @@ public sealed partial class ClientesPage
 
     private async void AutoSuggestBox_OnTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
     {
-        // Since selecting an item will also change the text,
-        // only listen to changes caused by user entering text.
         if(args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
         {
-            if (sender.Text.Length >= 3)
-            {
-                var suitableItems = new List<string>();
-                var localSettings = ApplicationData.Current.LocalSettings;
-
-                await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
-        
-                await cn.OpenAsync();
-                var cmd = new SqlCommand("SELECT * FROM getClientByName('" + sender.Text.ToLower() + "')", cn);
-
-                var reader = await cmd.ExecuteReaderAsync();
-
-                while (await reader.ReadAsync())
-                {
-                    suitableItems.Add(reader.GetString(1) + " " + reader.GetString(2) + " (" + reader.GetInt32(0) + ")");
-                }
-
-                if(suitableItems.Count == 0)
-                {
-                    suitableItems.Add(_resourceLoader.GetString("AutoSuggestBox_NotFound"));
-                }
-
-                sender.ItemsSource = suitableItems;
-            }
-            else
-            {
-                sender.ItemsSource = null;
-            }
+            sender.ItemsSource = sender.Text.Length >= 3 
+                ? await Customer.GetCustomersByNameAsync(sender.Text.ToLower()) 
+                : null;
         }
     }
 
