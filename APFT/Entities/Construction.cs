@@ -32,7 +32,7 @@ public class Construction
     }
 
     public string StartDateString => StartDate.ToString().Split(" ")[0];
-    public string EndDateString => EndDate == null ? EndDate.ToString().Split(" ")[0] : string.Empty;
+    public string EndDateString => EndDate == null ? string.Empty : EndDate.ToString().Split(" ")[0];
 
     public Construction(int id, string location, DateTime startDate, DateTime? endDate, int customerNif)
     {
