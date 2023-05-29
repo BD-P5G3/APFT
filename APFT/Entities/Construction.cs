@@ -1,5 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Collections.ObjectModel;
+using System.Net;
+using Windows.Networking;
 using Windows.Storage;
 
 namespace APFT.Entities;
@@ -120,5 +122,46 @@ public class Construction
         }
 
         return constructions;
+    }
+
+    public static async Task<int> AddConstruction(int id, string location, string startDateString, string endDateString, int customerNif)
+    {
+        var localSettings = ApplicationData.Current.LocalSettings;
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("EXEC create_obra " + id + ", " + 
+                                 "'" + location + "', " +
+                                 "'" + startDateString + "', " +
+                                 (string.IsNullOrEmpty(endDateString) ? "null" : "'" + endDateString + "'") + 
+                                 customerNif, cn);
+
+        return await cmd.ExecuteNonQueryAsync();
+    }
+
+    public static async Task<int> EditConstruction(int id, string location, string startDateString, string endDateString)
+    {
+        var localSettings = ApplicationData.Current.LocalSettings;
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("EXEC update_obra " + id + ", " + 
+                                 "'" + location + "', " +
+                                 "'" + startDateString + "', " +
+                                 (string.IsNullOrEmpty(endDateString) ? "null" : "'" + endDateString + "'"), cn);
+
+        return await cmd.ExecuteNonQueryAsync();
+    }
+
+    public static async Task<int> DeleteConstruction(int id)
+    {
+        var localSettings = ApplicationData.Current.LocalSettings;
+
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("EXEC delete_obra " + id, cn);
+
+        return await cmd.ExecuteNonQueryAsync();
     }
 }
