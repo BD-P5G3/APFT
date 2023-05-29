@@ -172,4 +172,100 @@ public class Employee
 
         return employees;
     }
+
+    public static async Task<List<string>> GetEmployeesByNameAsync(string name)
+    {
+        var suitableItems = new List<string>();
+        var localSettings = ApplicationData.Current.LocalSettings;
+
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+        
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("SELECT * FROM getEmpregadoByName('" + name + "')", cn);
+
+        var reader = await cmd.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            suitableItems.Add(reader.GetString(1) + " " + reader.GetString(2) + " (" + reader.GetInt32(0) + ")");
+        }
+
+        return suitableItems;
+    }
+
+    public static async Task<Employee> GetEmployeeByNifAsync(int nif)
+    {
+        var localSettings = ApplicationData.Current.LocalSettings;
+
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+        
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("SELECT * FROM EMPRESA_CONSTRUCAO.CLIENTE WHERE nif=" + nif, cn);
+
+        var reader = await cmd.ExecuteReaderAsync();
+        await reader.ReadAsync();
+        
+        return new Employee(
+            reader.GetInt32(0),
+            reader.GetString(1),
+            reader.GetString(2),
+            reader.GetString(3),
+            reader.GetInt32(4),
+            await reader.IsDBNullAsync(5) ? string.Empty : reader.GetString(5),
+            await reader.IsDBNullAsync(6) ? string.Empty : reader.GetString(6),
+            await reader.IsDBNullAsync(7) ? new DateTime(1970, 1, 1) : reader.GetDateTime(7),
+            reader.GetDecimal(8),
+            reader.GetInt32(9));
+    }
+
+    public static async Task<int> AddEmployee(int nif, string firstName, string lastName, string email, int phone, string? address, string? gender, string birthDateString, decimal salary, int departmentId)
+    {
+        var localSettings = ApplicationData.Current.LocalSettings;
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("EXEC add_employee " + nif + ", " +
+                                 "'" + firstName + "', " +
+                                 "'" + lastName + "', " +
+                                 "'" + email + "', " +
+                                 phone + ", " +
+                                 (string.IsNullOrEmpty(address) ? "null" : "'" + address + "'") + ", " +
+                                 (string.IsNullOrEmpty(gender) ? "null" : "'" + gender + "'") +
+                                 (string.IsNullOrEmpty(birthDateString) ? "null" : "'" + birthDateString + "'") + ", " + 
+                                 "'" + salary + "', " + 
+                                 departmentId, cn);
+
+        return await cmd.ExecuteNonQueryAsync();
+    }
+
+    public static async Task<int> EditEmployee(int nif, string firstName, string lastName, string email, int phone, string? address, string? gender, string birthDateString, decimal salary)
+    {
+        var localSettings = ApplicationData.Current.LocalSettings;
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("EXEC update_employee " + nif + ", " +
+                                 "'" + firstName + "', " +
+                                 "'" + lastName + "', " +
+                                 "'" + email + "', " +
+                                 phone + ", " +
+                                 (string.IsNullOrEmpty(address) ? "null" : "'" + address + "'") + ", " +
+                                 (string.IsNullOrEmpty(gender) ? "null" : "'" + gender + "'") +
+                                 (string.IsNullOrEmpty(birthDateString) ? "null" : "'" + birthDateString + "'") + ", " + 
+                                 "'" + salary + "'", cn);
+
+        return await cmd.ExecuteNonQueryAsync();
+    }
+
+    public static async Task<int> DeleteEmployee(int nif)
+    {
+        var localSettings = ApplicationData.Current.LocalSettings;
+
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("EXEC delete_employee " + nif, cn);
+
+        return await cmd.ExecuteNonQueryAsync();
+    }
 }
