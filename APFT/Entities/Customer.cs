@@ -32,7 +32,7 @@ public class Customer
     }
     public string Name => FirstName + " " + LastName;
 
-    public Customer(int nif, string firstName, string lastName, string email, int phone, string address)
+    public Customer(int nif, string firstName, string lastName, string email, int phone, string? address)
     {
         Nif = nif;
         FirstName = firstName;
@@ -79,10 +79,31 @@ public class Customer
                 reader.GetString(2),
                 reader.GetString(3),
                 reader.GetInt32(4),
-                reader.GetString(5))
+                await reader.IsDBNullAsync(5) ? string.Empty : reader.GetString(5))
             );
         }
 
         return customers;
+    }
+
+    public static async Task<Customer> GetCustomerByNifAsync(int nif)
+    {
+        var localSettings = ApplicationData.Current.LocalSettings;
+
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+        
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("SELECT * FROM EMPRESA_CONSTRUCAO.CLIENTE WHERE nif=" + nif, cn);
+
+        var reader = await cmd.ExecuteReaderAsync();
+        await reader.ReadAsync();
+        
+        return new Customer(
+                reader.GetInt32(0),
+                reader.GetString(1),
+                reader.GetString(2),
+                reader.GetString(3),
+                reader.GetInt32(4),
+                await reader.IsDBNullAsync(5) ? string.Empty : reader.GetString(5));
     }
 }
