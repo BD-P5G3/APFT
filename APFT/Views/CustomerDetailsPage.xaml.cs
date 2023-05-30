@@ -219,11 +219,11 @@ public sealed partial class CustomerDetailsPage : INotifyPropertyChanged
         {
             XamlRoot = ContentArea.XamlRoot,
             Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
-            Title = _resourceLoader.GetString("DeleteCustomerCD_Title"),
-            PrimaryButtonText = _resourceLoader.GetString("DeleteCustomerCD_PrimaryButton"),
+            Title = _resourceLoader.GetString("DeleteCD_Title"),
+            PrimaryButtonText = _resourceLoader.GetString("DeleteCD_PrimaryButton"),
             DefaultButton = ContentDialogButton.Primary,
-            CloseButtonText = _resourceLoader.GetString("DeleteCustomerCD_CancelButton"),
-            Content = _resourceLoader.GetString("DeleteCustomerCD_Content")
+            CloseButtonText = _resourceLoader.GetString("DeleteCD_CancelButton"),
+            Content = _resourceLoader.GetString("DeleteCD_Content")
         };
 
         var choice = await dialog.ShowAsync();
