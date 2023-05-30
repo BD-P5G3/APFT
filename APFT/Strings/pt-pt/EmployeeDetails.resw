@@ -120,6 +120,12 @@
   <data name="AddressTextBox.Header" xml:space="preserve">
     <value>Morada</value>
   </data>
+  <data name="CalendarDatePicker.Header" xml:space="preserve">
+    <value>Data de nascimento</value>
+  </data>
+  <data name="CalendarDatePicker.PlaceholderText" xml:space="preserve">
+    <value>Escolha uma data</value>
+  </data>
   <data name="ConstructionsSubheader.Text" xml:space="preserve">
     <value>Obras</value>
   </data>
@@ -150,6 +156,27 @@
   <data name="FirstNameTextBox.Header" xml:space="preserve">
     <value>Nome próprio</value>
   </data>
+  <data name="GenderComboBox.Header" xml:space="preserve">
+    <value>Género</value>
+  </data>
+  <data name="GenderComboBox.PlaceholderText" xml:space="preserve">
+    <value>Escolha um género</value>
+  </data>
+  <data name="Gender_All" xml:space="preserve">
+    <value>Todos</value>
+  </data>
+  <data name="Gender_Female" xml:space="preserve">
+    <value>Feminino</value>
+  </data>
+  <data name="Gender_Male" xml:space="preserve">
+    <value>Masculino</value>
+  </data>
+  <data name="Gender_NB" xml:space="preserve">
+    <value>Não binário</value>
+  </data>
+  <data name="Gender_Other" xml:space="preserve">
+    <value>Outro</value>
+  </data>
   <data name="Header.Text" xml:space="preserve">
     <value>Detalhes do cliente</value>
   </data>
@@ -170,5 +197,8 @@
   </data>
   <data name="PhoneTextBox.Header" xml:space="preserve">
     <value>Telefone</value>
+  </data>
+  <data name="SalaryTextBox.Header" xml:space="preserve">
+    <value>Salário</value>
   </data>
 </root>

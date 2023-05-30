@@ -140,19 +140,17 @@ public sealed partial class EmployeeDetailsPage : INotifyPropertyChanged
     public string SalaryString => Salary.ToString().Replace(',', '.');
     
 
-    public Dictionary<string, string> GenderDictionary = new()
-    {
-        {"M", "Male"},
-        {"F", "Female"},
-        {"N", "Non-binary"},
-        {"O", "Other"}
-    };
+    public Dictionary<string, string> GenderDictionary = new();
 
     public EmployeeDetailsPage()
     {
         ViewModel = App.GetService<EmployeeDetailsViewModel>();
         FetchData();
         InitializeComponent();
+        GenderDictionary.Add("M", _resourceLoader.GetString("Gender_Male"));
+        GenderDictionary.Add("F", _resourceLoader.GetString("Gender_Female"));
+        GenderDictionary.Add("N", _resourceLoader.GetString("Gender_NB"));
+        GenderDictionary.Add("O", _resourceLoader.GetString("Gender_Other"));
     }
 
     private async void FetchData()

@@ -125,18 +125,18 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <ComboBox Grid.Column="0" x:Name="GenderComboBox" SelectionChanged="GenderComboBox_OnSelectionChanged" Header="Gender" PlaceholderText="Pick a gender">
-                            <x:String>Male</x:String>
-                            <x:String>Female</x:String>
-                            <x:String>Non-binary</x:String>
-                            <x:String>Other</x:String>
-                        </ComboBox>
+                        <ComboBox Grid.Column="0"
+                                  x:Name="GenderComboBox"
+                                  x:Uid="/EmployeeDetails/GenderComboBox"
+                                  SelectionChanged="GenderComboBox_OnSelectionChanged"
+                                  ItemsSource="{x:Bind GenderDictionary.Values}" />
 						<CalendarDatePicker Grid.Column="1"
-                                            PlaceholderText="Pick a date"
-                                            Header="Birth Date"
+											x:Uid="/EmployeeDetails/CalendarDatePicker"
                                             x:Name="CalendarDatePicker"
                                             DateChanged="CalendarDatePicker_OnDateChanged"/>
-						<TextBox Grid.Column="2" Text="{x:Bind Salary, Mode=TwoWay}" Header="Salary"/>
+						<TextBox Grid.Column="2"
+                                 Text="{x:Bind Salary, Mode=TwoWay}"
+								 x:Uid="/EmployeeDetails/SalaryTextBox"/>
                     </Grid>
                 </Grid>
 
