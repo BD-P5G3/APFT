@@ -41,6 +41,44 @@
                             QueryIcon="Find"
                             SuggestionChosen="AutoSuggestBox_OnSuggestionChosen"/>
 
+            <!-- Filter button -->
+            <Button Grid.Column="2"
+                    x:Name="FilterButton"
+                    VerticalAlignment="Center">
+                <Viewbox Height="16" Width="16">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE71C;"/>
+                </Viewbox>
+                <ToolTipService.ToolTip>
+                    <ToolTip x:Uid="/Employees/FilterButton"/>
+                </ToolTipService.ToolTip>
+
+                <Button.Flyout>
+                    <Flyout ShouldConstrainToRootBounds="False">
+                        <StackPanel Spacing="16">
+                            <ComboBox x:Name="GenderComboBox"
+                                      x:Uid="/Employees/GenderComboBox"
+                                      Width="200"
+                                      SelectedItem="All"
+                                      SelectionChanged="GenderComboBox_OnSelectionChanged"
+                                      ItemsSource="{x:Bind Genders}"/>
+
+                            <CalendarDatePicker x:Name="CalendarDatePicker"
+                                                x:Uid="/Employees/CalendarDatePicker"
+                                                Width="200"
+                                                DateChanged="CalendarDatePicker_OnDateChanged" />
+
+                            <TextBox x:Name="SalaryTextBox"
+                                     x:Uid="/Employees/SalaryTextBox"
+                                     PlaceholderText="0"
+                                     Width="200"
+                                     TextChanged="SalaryTextBox_OnTextChanged"/>
+
+                            <Button x:Uid="/Employees/ClearFilterButton" Click="ClearFilterButton_OnClick" />
+                        </StackPanel>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+
             <!-- Add button -->
             <Button Grid.Column="3"
                     x:Name="AddButton"

@@ -19,10 +19,20 @@ public sealed partial class EmpregadosPage : Page
         get;
     }
 
+    public List<string> Genders { get; set; }
+
     public EmpregadosPage()
     {
         ViewModel = App.GetService<EmpregadosViewModel>();
         InitializeComponent();
+        Genders = new List<string>
+        {
+            _resourceLoader.GetString("Gender_All"),
+            _resourceLoader.GetString("Gender_Male"),
+            _resourceLoader.GetString("Gender_Female"),
+            _resourceLoader.GetString("Gender_NB"),
+            _resourceLoader.GetString("Gender_Other")
+        };
     }
 
     private readonly ResourceLoader _resourceLoader = new("resources.pri", "Employees");
@@ -135,5 +145,55 @@ public sealed partial class EmpregadosPage : Page
         localSettings.Values["EmployeeNif"] = nif;
 
         Frame.Navigate(typeof(EmployeeDetailsPage));
+    }
+
+    //
+    // Filter
+    //
+
+    private string _gender;
+    public string Gender
+    {
+        get => _gender != _resourceLoader.GetString("Gender_All") ? _gender[0].ToString() : string.Empty;
+        set => _gender = value;
+    }
+
+    private decimal _salary;
+    public string Salary
+    {
+        get => _salary.ToString().Replace(',', '.');
+        set => _salary = value == "" ? 0 : decimal.Parse(value);
+    }
+
+    private DateTime? BirthDate
+    {
+        get;
+        set;
+    }
+    public string BirthDateString => BirthDate != null ? BirthDate.Value.Year + "-" + BirthDate.Value.Month + "-" + BirthDate.Value.Day : string.Empty;
+
+    private async void GenderComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        Gender = (string)((ComboBox)sender).SelectedItem;
+        EmployeesCVS.Source = await Employee.GetEmployeesFilteredGroupedAsync(Gender, BirthDateString, Salary);
+    }
+
+    private async void SalaryTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+    {
+        Salary = ((TextBox)sender).Text;
+        EmployeesCVS.Source = await Employee.GetEmployeesFilteredGroupedAsync(Gender, BirthDateString, Salary);
+    }
+
+    private async void CalendarDatePicker_OnDateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
+    {
+        BirthDate = sender.Date != null ? sender.Date.Value.DateTime : null;
+        EmployeesCVS.Source = await Employee.GetEmployeesFilteredGroupedAsync(Gender, BirthDateString, Salary);
+    }
+
+    private void ClearFilterButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        GenderComboBox.SelectedItem = "All";
+        CalendarDatePicker.Date = null;
+        SalaryTextBox.Text = null;
     }
 }

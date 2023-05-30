@@ -123,7 +123,7 @@ public class Employee
         return employees;
     }
 
-    public static async Task<ObservableCollection<GroupInfoList>> GetEmployeesFilteredGroupedAsync(string? gender, string birthDateString, decimal salary)
+    public static async Task<ObservableCollection<GroupInfoList>> GetEmployeesFilteredGroupedAsync(string? gender, string birthDateString, string salary)
     {
         // Grab Contact objects from pre-existing list (list is returned from function GetContactsAsync())
         var query = from item in await GetEmployeesFilteredAsync(gender, birthDateString, salary)
@@ -140,7 +140,7 @@ public class Employee
         return new ObservableCollection<GroupInfoList>(query);
     }
 
-    public static async Task<ObservableCollection<Employee>> GetEmployeesFilteredAsync(string? gender, string birthDateString, decimal salary)
+    public static async Task<ObservableCollection<Employee>> GetEmployeesFilteredAsync(string? gender, string birthDateString, string salary)
     {
         var employees = new ObservableCollection<Employee>();
         var localSettings = ApplicationData.Current.LocalSettings;

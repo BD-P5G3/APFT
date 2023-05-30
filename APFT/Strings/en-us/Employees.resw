@@ -129,6 +129,15 @@
   <data name="AutoSuggestBox_NotFound" xml:space="preserve">
     <value>No results found</value>
   </data>
+  <data name="CalendarDatePicker.Header" xml:space="preserve">
+    <value>Date of birth after</value>
+  </data>
+  <data name="CalendarDatePicker.PlaceholderText" xml:space="preserve">
+    <value>Pick a date</value>
+  </data>
+  <data name="ClearFilterButton.Content" xml:space="preserve">
+    <value>Clear filters</value>
+  </data>
   <data name="ContentDialog_Content" xml:space="preserve">
     <value>Unable to get employees due to the following error: {0}</value>
   </data>
@@ -147,7 +156,31 @@
   <data name="FilterButton.Content" xml:space="preserve">
     <value>Filter</value>
   </data>
+  <data name="GenderComboBox.Header" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="GenderComboBox.PlaceholderText" xml:space="preserve">
+    <value>Pick a gender</value>
+  </data>
+  <data name="Gender_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Gender_Female" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="Gender_Male" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="Gender_NB" xml:space="preserve">
+    <value>Non-binary</value>
+  </data>
+  <data name="Gender_Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
   <data name="Header.Text" xml:space="preserve">
     <value>Employees</value>
+  </data>
+  <data name="SalaryTextBox.Header" xml:space="preserve">
+    <value>Salary bigger than</value>
   </data>
 </root>
