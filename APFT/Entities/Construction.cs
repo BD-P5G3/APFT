@@ -97,6 +97,32 @@ public class Construction
         return constructions;
     }
 
+    public static async Task<ObservableCollection<Construction>> GetConstructionsByEmployeeNifAsync(int employeeNif)
+    {
+        var constructions = new ObservableCollection<Construction>();
+        var localSettings = ApplicationData.Current.LocalSettings;
+
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("SELECT * FROM getObraEmpregadoByEmpregado(" + employeeNif + ")", cn);
+
+        var reader = await cmd.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            constructions.Add(new Construction(
+                reader.GetInt32(1),
+                reader.GetString(2),
+                reader.GetDateTime(3),
+                await reader.IsDBNullAsync(4) ? null : reader.GetDateTime(3),
+                0)
+            );
+        }
+
+        return constructions;
+    }
+
     public static async Task<ObservableCollection<Construction>> GetConstructionsByDateAsync(string startDateString, string endDateString)
     {
         var constructions = new ObservableCollection<Construction>();
