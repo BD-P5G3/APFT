@@ -59,7 +59,7 @@ public sealed partial class EmpregadosPage : Page
         var localSettings = ApplicationData.Current.LocalSettings;
         localSettings.Values["EmployeeNif"] = ((Employee)e.ClickedItem).Nif.ToString();
 
-        Frame.Navigate(typeof(CustomerDetailsPage));
+        Frame.Navigate(typeof(EmployeeDetailsPage));
     }
     
 
@@ -80,7 +80,7 @@ public sealed partial class EmpregadosPage : Page
         _ = await cmd.ExecuteNonQueryAsync();
 
         localSettings.Values["EmployeeNif"] = NifTextBox.Text;
-        Frame.Navigate(typeof(CustomerDetailsPage));
+        Frame.Navigate(typeof(EmployeeDetailsPage));
     }
 
     private async void AutoSuggestBox_OnTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
@@ -134,6 +134,6 @@ public sealed partial class EmpregadosPage : Page
         var localSettings = ApplicationData.Current.LocalSettings;
         localSettings.Values["EmployeeNif"] = nif;
 
-        Frame.Navigate(typeof(CustomerDetailsPage));
+        Frame.Navigate(typeof(EmployeeDetailsPage));
     }
 }
