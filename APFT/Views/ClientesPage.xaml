@@ -104,7 +104,8 @@
         <ListView Grid.Row="1" ItemsSource="{x:Bind CustomersCVS.View, Mode=OneWay}"
                   ItemClick="ListViewBase_OnItemClick"
                   IsItemClickEnabled="True"
-                  Padding="0,0,0,16">
+                  Padding="0,0,56,16"
+                  Margin="0,0,-56,0">
             <!-- List Item Template -->
             <ListView.ItemTemplate>
                 <DataTemplate x:Key="CustomerListViewTemplate" x:DataType="entities:Customer">
