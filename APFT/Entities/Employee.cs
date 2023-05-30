@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Windows.Storage;
 
 namespace APFT.Entities;
@@ -57,7 +58,8 @@ public class Employee
     }
 
     public string Name => FirstName + " " + LastName;
-    public string BirthDateString => BirthDate != null ? BirthDate.ToString().Split(" ")[0] : string.Empty;
+    public string BirthDateString => BirthDate != null ? BirthDate.Value.Year + "-" + BirthDate.Value.Month + "-" + BirthDate.Value.Day : string.Empty;
+    public string SalaryString => Salary.ToString().Replace(',', '.');
 
     public Employee(int nif, string firstName, string lastName, string email, int phone, string address, string gender, DateTime birthDate, decimal salary, int departmentId)
     {
@@ -217,7 +219,7 @@ public class Employee
             reader.GetInt32(9));
     }
 
-    public static async Task<int> AddEmployee(int nif, string firstName, string lastName, string email, int phone, string? address, string? gender, string birthDateString, decimal salary, int departmentId)
+    public static async Task<int> AddEmployee(int nif, string firstName, string lastName, string email, int phone, string? address, string? gender, string birthDateString, string salaryString, int departmentId)
     {
         var localSettings = ApplicationData.Current.LocalSettings;
         await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
@@ -231,27 +233,28 @@ public class Employee
                                  (string.IsNullOrEmpty(address) ? "null" : "'" + address + "'") + ", " +
                                  (string.IsNullOrEmpty(gender) ? "null" : "'" + gender + "'") +
                                  (string.IsNullOrEmpty(birthDateString) ? "null" : "'" + birthDateString + "'") + ", " + 
-                                 "'" + salary + "', " + 
+                                 "'" + salaryString + "', " + 
                                  departmentId, cn);
 
         return await cmd.ExecuteNonQueryAsync();
     }
 
-    public static async Task<int> EditEmployee(int nif, string firstName, string lastName, string email, int phone, string? address, string? gender, string birthDateString, decimal salary)
+    public static async Task<int> EditEmployee(int nif, string firstName, string lastName, string email, int phone, string? address, string? gender, string birthDateString, string salaryString)
     {
         var localSettings = ApplicationData.Current.LocalSettings;
         await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
 
         await cn.OpenAsync();
+
         var cmd = new SqlCommand("EXEC update_employee " + nif + ", " +
                                  "'" + firstName + "', " +
                                  "'" + lastName + "', " +
                                  "'" + email + "', " +
                                  phone + ", " +
                                  (string.IsNullOrEmpty(address) ? "null" : "'" + address + "'") + ", " +
-                                 (string.IsNullOrEmpty(gender) ? "null" : "'" + gender + "'") +
-                                 (string.IsNullOrEmpty(birthDateString) ? "null" : "'" + birthDateString + "'") + ", " + 
-                                 "'" + salary + "'", cn);
+                                 (string.IsNullOrEmpty(gender) ? "null" : "'" + gender + "'") + ", " +
+                                 (string.IsNullOrEmpty(birthDateString) ? "null" : "'" + "1978-10-25" + "'") + ", " + 
+                                 "'" + salaryString + "'", cn);
 
         return await cmd.ExecuteNonQueryAsync();
     }

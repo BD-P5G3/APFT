@@ -136,7 +136,8 @@ public sealed partial class EmployeeDetailsPage : INotifyPropertyChanged
         }
     }
     
-    public string BirthDateString => BirthDate != null ? BirthDate.ToString().Split(" ")[0] : string.Empty;
+    public string BirthDateString => BirthDate != null ? BirthDate.Value.Year + "-" + BirthDate.Value.Month + "-" + BirthDate.Value.Day : string.Empty;
+    public string SalaryString => Salary.ToString().Replace(',', '.');
     
 
     public Dictionary<string, string> GenderDictionary = new()
@@ -157,7 +158,6 @@ public sealed partial class EmployeeDetailsPage : INotifyPropertyChanged
     private async void FetchData()
     {
         var localSettings = ApplicationData.Current.LocalSettings;
-        Debug.WriteLine(localSettings.Values["EmployeeNif"].ToString());
         var employee = await Employee.GetEmployeeByNifAsync(int.Parse(localSettings.Values["EmployeeNif"].ToString() ?? "0"));
 
         Nif = employee.Nif;
@@ -172,7 +172,7 @@ public sealed partial class EmployeeDetailsPage : INotifyPropertyChanged
         DepartmentId = employee.DepartmentId;
 
         GenderComboBox.SelectedItem = GenderDictionary[employee.Gender ?? "O"];
-        CalendarDatePicker.Date = employee.BirthDate ?? new DateTime(0, 1, 1);
+        CalendarDatePicker.Date = employee.BirthDate;
 
         ConstructionsGridView.ItemsSource = await Construction.GetConstructionsByEmployeeNifAsync(Nif);
         if (ConstructionsGridView.Items.Count > 0)
@@ -215,7 +215,7 @@ public sealed partial class EmployeeDetailsPage : INotifyPropertyChanged
 
 
         // Action
-        await Employee.EditEmployee(Nif, FirstName, LastName, Email, Phone, Address, Gender, BirthDateString, Salary);
+        await Employee.EditEmployee(Nif, FirstName, LastName, Email, Phone, Address, Gender, BirthDateString, SalaryString);
 
 
         // Create a fade-out animation for the ProgressRing

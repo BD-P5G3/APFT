@@ -136,7 +136,7 @@
                                             Header="Birth Date"
                                             x:Name="CalendarDatePicker"
                                             DateChanged="CalendarDatePicker_OnDateChanged"/>
-						<NumberBox Grid.Column="2" Text="{x:Bind Salary, Mode=TwoWay}" Header="Salary"/>
+						<TextBox Grid.Column="2" Text="{x:Bind Salary, Mode=TwoWay}" Header="Salary"/>
                     </Grid>
                 </Grid>
 
