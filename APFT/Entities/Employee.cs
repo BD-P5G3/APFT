@@ -1,7 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Collections.ObjectModel;
 using Windows.Storage;
-using Microsoft.IdentityModel.Tokens;
 
 namespace APFT.Entities;
 
@@ -200,7 +199,7 @@ public class Employee
         await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
         
         await cn.OpenAsync();
-        var cmd = new SqlCommand("SELECT * FROM EMPRESA_CONSTRUCAO.CLIENTE WHERE nif=" + nif, cn);
+        var cmd = new SqlCommand("SELECT * FROM EMPRESA_CONSTRUCAO.EMPREGADO WHERE nif=" + nif, cn);
 
         var reader = await cmd.ExecuteReaderAsync();
         await reader.ReadAsync();
