@@ -117,7 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddButton.Content" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="AddButtonFlyout.Content" xml:space="preserve">
+    <value>Add new construction</value>
+  </data>
+  <data name="AutoSuggestBox.PlaceholderText" xml:space="preserve">
+    <value>Search by name</value>
+  </data>
+  <data name="AutoSuggestBox_NotFound" xml:space="preserve">
+    <value>No results found</value>
+  </data>
+  <data name="ContentDialog_Content" xml:space="preserve">
+    <value>Unable to get constructions due to the following error: {0}</value>
+  </data>
+  <data name="ContentDialog_PrimaryButtonText" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="ContentDialog_Title" xml:space="preserve">
+    <value>Error fetching data</value>
+  </data>
+  <data name="CustomerNifTextBox.Header" xml:space="preserve">
+    <value>Customer NIF</value>
+  </data>
+  <data name="FetchingDataGridError_Text.Text" xml:space="preserve">
+    <value>Error fetching data.</value>
+  </data>
+  <data name="FetchingDataGrid_Text.Text" xml:space="preserve">
+    <value>Fetching data...</value>
+  </data>
+  <data name="FilterButton.Content" xml:space="preserve">
+    <value>Filter</value>
+  </data>
   <data name="Header.Text" xml:space="preserve">
     <value>Constructions</value>
+  </data>
+  <data name="IdTextBox.Header" xml:space="preserve">
+    <value>Construction ID</value>
+  </data>
+  <data name="LocationTextBox.Header" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="StartCalendarDatePicker.Header" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="StartCalendarDatePicker.PlaceholderText" xml:space="preserve">
+    <value>Pick a date</value>
   </data>
 </root>
