@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using APFT.ViewModels;
-using Microsoft.Data.SqlClient;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
