@@ -67,17 +67,17 @@ public sealed partial class EmpregadosPage : Page
     {
         var localSettings = ApplicationData.Current.LocalSettings;
 
-        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
-
-        await cn.OpenAsync();
-        var cmd = new SqlCommand("EXEC add_employee " + NifTextBox.Text + ", " +
-                                 "'" + FNameTextBox.Text + "', " +
-                                 "'" + LNameTextBox.Text + "', " +
-                                 "'" + EmailTextBox.Text + "', " +
-                                 PhoneTextBox.Text + ", " +
-                                 "'" + AddressTextBox.Text + "'", cn);
-
-        _ = await cmd.ExecuteNonQueryAsync();
+        Debug.WriteLine(await Employee.AddEmployee(
+            int.Parse(NifTextBox.Text), 
+            FNameTextBox.Text, 
+            LNameTextBox.Text, 
+            EmailTextBox.Text,
+            int.Parse(PhoneTextBox.Text),
+            AddressTextBox.Text,
+            string.Empty,
+            string.Empty,
+            "0",
+            int.Parse(DepartmentIdTextBox.Text)));
 
         localSettings.Values["EmployeeNif"] = NifTextBox.Text;
         Frame.Navigate(typeof(EmployeeDetailsPage));

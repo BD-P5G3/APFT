@@ -219,21 +219,31 @@ public class Employee
             reader.GetInt32(9));
     }
 
-    public static async Task<int> AddEmployee(int nif, string firstName, string lastName, string email, int phone, string? address, string? gender, string birthDateString, string salaryString, int departmentId)
+    public static async Task<int> AddEmployee(int nif, string firstName, string lastName, string email, int phone, string address, string gender, string birthDateString, string salaryString, int departmentId)
     {
         var localSettings = ApplicationData.Current.LocalSettings;
         await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
 
         await cn.OpenAsync();
+        Debug.WriteLine("EXEC add_employee " + nif + ", " +
+                        "'" + firstName + "', " +
+                        "'" + lastName + "', " +
+                        "'" + email + "', " +
+                        phone + ", " +
+                        (string.IsNullOrEmpty(address) ? "null" : "'" + address + "'") + ", " +
+                        (string.IsNullOrEmpty(gender) ? "null" : "'" + gender + "'") + ", " +
+                        (string.IsNullOrEmpty(birthDateString) ? "null" : "'" + birthDateString + "'") + ", " + 
+                        "" + salaryString + ", " + 
+                        departmentId);
         var cmd = new SqlCommand("EXEC add_employee " + nif + ", " +
                                  "'" + firstName + "', " +
                                  "'" + lastName + "', " +
                                  "'" + email + "', " +
                                  phone + ", " +
                                  (string.IsNullOrEmpty(address) ? "null" : "'" + address + "'") + ", " +
-                                 (string.IsNullOrEmpty(gender) ? "null" : "'" + gender + "'") +
+                                 (string.IsNullOrEmpty(gender) ? "null" : "'" + gender + "'") + ", " +
                                  (string.IsNullOrEmpty(birthDateString) ? "null" : "'" + birthDateString + "'") + ", " + 
-                                 "'" + salaryString + "', " + 
+                                 "" + salaryString + ", " + 
                                  departmentId, cn);
 
         return await cmd.ExecuteNonQueryAsync();

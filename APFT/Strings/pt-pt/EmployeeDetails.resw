@@ -138,6 +138,9 @@
   <data name="DeleteCD_Title" xml:space="preserve">
     <value>Eliminar empregado</value>
   </data>
+  <data name="DepartmentIdTextBox.Header" xml:space="preserve">
+    <value>ID do departamento</value>
+  </data>
   <data name="EditInfoButton.Content" xml:space="preserve">
     <value>Editar informação</value>
   </data>

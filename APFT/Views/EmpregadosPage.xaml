@@ -56,12 +56,13 @@
                 <Button.Flyout>
                     <Flyout ShouldConstrainToRootBounds="False">
                         <StackPanel Spacing="16" Width="300">
-                            <TextBox x:Name="NifTextBox" x:Uid="/CustomerDetails/NifTextBox"/>
-                            <TextBox x:Name="FNameTextBox" x:Uid="/CustomerDetails/FirstNameTextBox"/>
-                            <TextBox x:Name="LNameTextBox" x:Uid="/CustomerDetails/LastNameTextBox"/>
-                            <TextBox x:Name="EmailTextBox" x:Uid="/CustomerDetails/EmailTextBox"/>
-                            <TextBox x:Name="PhoneTextBox" x:Uid="/CustomerDetails/PhoneTextBox"/>
-                            <TextBox x:Name="AddressTextBox" x:Uid="/CustomerDetails/AddressTextBox"/>
+                            <TextBox x:Name="NifTextBox" x:Uid="/EmployeeDetails/NifTextBox"/>
+                            <TextBox x:Name="FNameTextBox" x:Uid="/EmployeeDetails/FirstNameTextBox"/>
+                            <TextBox x:Name="LNameTextBox" x:Uid="/EmployeeDetails/LastNameTextBox"/>
+                            <TextBox x:Name="EmailTextBox" x:Uid="/EmployeeDetails/EmailTextBox"/>
+                            <TextBox x:Name="PhoneTextBox" x:Uid="/EmployeeDetails/PhoneTextBox"/>
+                            <TextBox x:Name="AddressTextBox" x:Uid="/EmployeeDetails/AddressTextBox"/>
+                            <TextBox x:Name="DepartmentIdTextBox" x:Uid="/EmployeeDetails/DepartmentIdTextBox"/>
 
                             <Button x:Uid="/Employees/AddButtonFlyout"
                                     Style="{StaticResource AccentButtonStyle}"
