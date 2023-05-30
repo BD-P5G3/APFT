@@ -25,8 +25,8 @@ public class Order
     {
         get; set;
     }
-
-    public string DateString => Date.ToString().Split(" ")[0];
+    
+    public string DateString => Date != null ? Date.Year + "-" + Date.Month + "-" + Date.Day : string.Empty;
     
     public Order(int id, DateTime date, int supplierNif, int constructionId)
     {

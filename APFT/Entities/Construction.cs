@@ -33,8 +33,8 @@ public class Construction
         get; set;
     }
 
-    public string StartDateString => StartDate.ToString().Split(" ")[0];
-    public string EndDateString => EndDate == null ? string.Empty : EndDate.ToString().Split(" ")[0];
+    public string StartDateString => StartDate != null ? StartDate.Year + "-" + StartDate.Month + "-" + StartDate.Day : string.Empty;
+    public string EndDateString => EndDate != null ? EndDate.Value.Year + "-" + EndDate.Value.Month + "-" + EndDate.Value.Day : string.Empty;
 
     public Construction(int id, string location, DateTime startDate, DateTime? endDate, int customerNif)
     {
