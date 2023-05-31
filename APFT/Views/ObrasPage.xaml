@@ -26,6 +26,36 @@
                        x:Uid="/Constructions/Header"
                        Style="{ThemeResource TitleTextBlockStyle}" />
 
+            <!-- Filter button -->
+            <Button Grid.Column="1"
+                    x:Name="FilterButton"
+                    VerticalAlignment="Center">
+                <Viewbox Height="16" Width="16">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE71C;"/>
+                </Viewbox>
+                <ToolTipService.ToolTip>
+                    <ToolTip x:Uid="/Constructions/FilterButton"/>
+                </ToolTipService.ToolTip>
+
+                <Button.Flyout>
+                    <Flyout ShouldConstrainToRootBounds="False">
+                        <StackPanel Spacing="16">
+                            <CalendarDatePicker x:Name="StartCalendarDatePicker"
+                                                x:Uid="/Constructions/StartCalendarDatePicker"
+                                                Width="200"
+                                                DateChanged="StartCalendarDatePicker_OnDateChanged" />
+
+                            <CalendarDatePicker x:Name="EndCalendarDatePicker"
+                                                x:Uid="/Constructions/EndCalendarDatePicker"
+                                                Width="200"
+                                                DateChanged="EndCalendarDatePicker_OnDateChanged" />
+
+                            <Button x:Uid="/Constructions/ClearFilterButton" x:Name="ClearFilterButton" Click="ClearFilterButton_OnClick" />
+                        </StackPanel>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+
             <!-- Add button -->
             <Button Grid.Column="2"
                     x:Name="AddButton"

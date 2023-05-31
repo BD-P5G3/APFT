@@ -129,6 +129,9 @@
   <data name="AutoSuggestBox_NotFound" xml:space="preserve">
     <value>Sem resultados</value>
   </data>
+  <data name="ClearFilterButton.Content" xml:space="preserve">
+    <value>Limpar filtros</value>
+  </data>
   <data name="ContentDialog_Content" xml:space="preserve">
     <value>Não foi possível obter a lista de obras devido ao seguinte erro: {0}</value>
   </data>
@@ -140,6 +143,12 @@
   </data>
   <data name="CustomerNifTextBox.Header" xml:space="preserve">
     <value>NIF do cliente</value>
+  </data>
+  <data name="EndCalendarDatePicker.Header" xml:space="preserve">
+    <value>Data de fim antes de</value>
+  </data>
+  <data name="EndCalendarDatePicker.PlaceholderText" xml:space="preserve">
+    <value>Escolha uma data</value>
   </data>
   <data name="FetchingDataGridError_Text.Text" xml:space="preserve">
     <value>Erro a obter dados.</value>
@@ -160,7 +169,7 @@
     <value>Localização</value>
   </data>
   <data name="StartCalendarDatePicker.Header" xml:space="preserve">
-    <value>Data de início</value>
+    <value>Data de início após</value>
   </data>
   <data name="StartCalendarDatePicker.PlaceholderText" xml:space="preserve">
     <value>Escolha uma data</value>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Net;
 using Windows.Networking;
 using Windows.Storage;
@@ -133,7 +134,13 @@ public class Construction
 
         await cn.OpenAsync();
 
-        var cmd = new SqlCommand("SELECT * FROM getObraByDate('" + startDateString + "', '" + endDateString + "')", cn);
+        Debug.WriteLine("SELECT * FROM getObraByDate(" +
+                        (string.IsNullOrEmpty(startDateString) ? "null" : "'" + startDateString + "'") + ", " +
+                        (string.IsNullOrEmpty(endDateString) ? "null" : "'" + endDateString + "'") + ")");
+
+        var cmd = new SqlCommand("SELECT * FROM getObraByDate(" +
+                                 (string.IsNullOrEmpty(startDateString) ? "null" : "'" + startDateString + "'") + ", " +
+                                 (string.IsNullOrEmpty(endDateString) ? "null" : "'" + endDateString + "'") + ")", cn);
 
         var reader = await cmd.ExecuteReaderAsync();
 
