@@ -62,7 +62,7 @@ public sealed partial class ShellPage : Page
         var localSettings = ApplicationData.Current.LocalSettings;
         localSettings.Values.Remove("IconBadgeColor");
         localSettings.Values.Remove("ConnectionStatus");
-        //localSettings.Values.Remove("Password");
+        localSettings.Values.Remove("Password");
         localSettings.Values["Database"] = "p5g3";
         localSettings.Values["Username"] = "p5g3";
         localSettings.Values["SQLConnectionString"] = "Data Source = " + DatabaseStatusPage.ServerAddress + "; " +
