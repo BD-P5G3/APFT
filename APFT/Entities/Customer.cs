@@ -68,7 +68,7 @@ public class Customer
         await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
         
         await cn.OpenAsync();
-        var cmd = new SqlCommand("SELECT * FROM EMPRESA_CONSTRUCAO.CLIENTE", cn);
+        var cmd = new SqlCommand("SELECT * FROM EMPRESA_CONSTRUCAO.CLIENTE ORDER BY nome_proprio", cn);
 
         var reader = await cmd.ExecuteReaderAsync();
 
@@ -116,7 +116,7 @@ public class Customer
         await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
         
         await cn.OpenAsync();
-        var cmd = new SqlCommand("SELECT * FROM getClientByName('" + name + "')", cn);
+        var cmd = new SqlCommand("SELECT * FROM getClientByName('" + name + "') ORDER BY nome_proprio", cn);
 
         var reader = await cmd.ExecuteReaderAsync();
 
@@ -150,6 +150,12 @@ public class Customer
         await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
 
         await cn.OpenAsync();
+        Debug.WriteLine("EXEC update_client " + nif + ", " +
+                        "'" + firstName + "', " +
+                        "'" + lastName + "', " +
+                        "'" + email + "', " +
+                        phone + ", " +
+                        (string.IsNullOrEmpty(address) ? "null" : "'" + address + "'"));
         var cmd = new SqlCommand("EXEC update_client " + nif + ", " +
                                  "'" + firstName + "', " +
                                  "'" + lastName + "', " +

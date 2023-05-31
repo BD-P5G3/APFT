@@ -100,7 +100,7 @@ public class Employee
         await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
         
         await cn.OpenAsync();
-        var cmd = new SqlCommand("SELECT * FROM EMPRESA_CONSTRUCAO.EMPREGADO", cn);
+        var cmd = new SqlCommand("SELECT * FROM EMPRESA_CONSTRUCAO.EMPREGADO ORDER BY nome_proprio", cn);
 
         var reader = await cmd.ExecuteReaderAsync();
 
@@ -151,7 +151,7 @@ public class Employee
         var cmd = new SqlCommand("SELECT * FROM getEmpregadoBySexBirthSalary(" + 
                                  (string.IsNullOrEmpty(gender) ? "null" : "'" + gender + "'") + ", " +
                                  (string.IsNullOrEmpty(birthDateString) ? "null" : "'" + birthDateString + "'") + ", " + 
-                                 salary + ")", cn);
+                                 salary + ") ORDER BY nome_proprio", cn);
 
         var reader = await cmd.ExecuteReaderAsync();
 
@@ -182,7 +182,7 @@ public class Employee
         await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
         
         await cn.OpenAsync();
-        var cmd = new SqlCommand("SELECT * FROM getEmpregadoByName('" + name + "')", cn);
+        var cmd = new SqlCommand("SELECT * FROM getEmpregadoByName('" + name + "') ORDER BY nome_proprio", cn);
 
         var reader = await cmd.ExecuteReaderAsync();
 
