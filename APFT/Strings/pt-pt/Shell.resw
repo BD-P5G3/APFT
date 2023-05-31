@@ -139,4 +139,7 @@
   <data name="Suppliers.Content" xml:space="preserve">
     <value>Fornecedores</value>
   </data>
+  <data name="UnderDevelopment.Text" xml:space="preserve">
+    <value>Em desenvolvimento</value>
+  </data>
 </root>

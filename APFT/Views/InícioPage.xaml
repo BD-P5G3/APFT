@@ -17,6 +17,6 @@
                    x:Uid="/Home/Header"
                    Style="{ThemeResource TitleTextBlockStyle}" />
 
-        <TextBlock Grid.Row="1" Text="AJUDEM-NOS POR FAVOR" />
+        <TextBlock Grid.Row="1" x:Uid="/Shell/UnderDevelopment" />
     </Grid>
 </Page>
