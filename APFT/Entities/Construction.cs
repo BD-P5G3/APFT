@@ -35,6 +35,7 @@ public class Construction
 
     public string StartDateString => StartDate != null ? StartDate.Year + "-" + StartDate.Month + "-" + StartDate.Day : string.Empty;
     public string EndDateString => EndDate != null ? EndDate.Value.Year + "-" + EndDate.Value.Month + "-" + EndDate.Value.Day : string.Empty;
+    public string DateString => StartDateString + " - " + EndDateString;
 
     public Construction(int id, string location, DateTime startDate, DateTime? endDate, int customerNif)
     {
