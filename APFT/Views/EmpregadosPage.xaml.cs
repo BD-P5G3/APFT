@@ -77,20 +77,36 @@ public sealed partial class EmpregadosPage : Page
     {
         var localSettings = ApplicationData.Current.LocalSettings;
 
-        Debug.WriteLine(await Employee.AddEmployee(
-            int.Parse(NifTextBox.Text), 
-            FNameTextBox.Text, 
-            LNameTextBox.Text, 
-            EmailTextBox.Text,
-            int.Parse(PhoneTextBox.Text),
-            AddressTextBox.Text,
-            string.Empty,
-            string.Empty,
-            "0",
-            int.Parse(DepartmentIdTextBox.Text)));
+        try
+        {
+            await Employee.AddEmployee(
+                int.Parse(NifTextBox.Text),
+                FNameTextBox.Text,
+                LNameTextBox.Text,
+                EmailTextBox.Text,
+                int.Parse(PhoneTextBox.Text),
+                AddressTextBox.Text,
+                string.Empty,
+                string.Empty,
+                "0",
+                int.Parse(DepartmentIdTextBox.Text));
 
-        localSettings.Values["EmployeeNif"] = NifTextBox.Text;
-        Frame.Navigate(typeof(EmployeeDetailsPage));
+            localSettings.Values["EmployeeNif"] = NifTextBox.Text;
+            Frame.Navigate(typeof(EmployeeDetailsPage));
+        }
+        catch (Exception ex)
+        {
+            var dialog = new ContentDialog
+            {
+                XamlRoot = ContentArea.XamlRoot,
+                Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+                Title = _resourceLoader.GetString("AddErrorCD_Title"),
+                PrimaryButtonText = _resourceLoader.GetString("ContentDialog_PrimaryButtonText"),
+                DefaultButton = ContentDialogButton.Primary,
+                Content = string.Format(_resourceLoader.GetString("AddErrorCD_Content"), ex.Message)
+            };
+            _ = await dialog.ShowAsyncQueue();
+        }
     }
 
     private async void AutoSuggestBox_OnTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
