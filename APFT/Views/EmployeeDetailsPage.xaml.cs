@@ -170,7 +170,7 @@ public sealed partial class EmployeeDetailsPage : INotifyPropertyChanged
         Salary = employee.Salary;
         DepartmentId = employee.DepartmentId;
 
-        GenderComboBox.SelectedItem = GenderDictionary[employee.Gender ?? "O"];
+        GenderComboBox.SelectedItem = GenderDictionary[employee.Gender == "''" ? employee.Gender : "O"];
         CalendarDatePicker.Date = employee.BirthDate;
 
         ConstructionsGridView.ItemsSource = await Construction.GetConstructionsByEmployeeNifAsync(Nif);
