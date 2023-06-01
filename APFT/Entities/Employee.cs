@@ -263,7 +263,7 @@ public class Employee
                                  phone + ", " +
                                  (string.IsNullOrEmpty(address) ? "null" : "'" + address + "'") + ", " +
                                  (string.IsNullOrEmpty(gender) ? "null" : "'" + gender + "'") + ", " +
-                                 (string.IsNullOrEmpty(birthDateString) ? "null" : "'" + "1978-10-25" + "'") + ", " + 
+                                 (string.IsNullOrEmpty(birthDateString) ? "null" : "'" + birthDateString + "'") + ", " + 
                                  "'" + salaryString + "'", cn);
 
         return await cmd.ExecuteNonQueryAsync();

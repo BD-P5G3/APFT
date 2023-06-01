@@ -123,6 +123,12 @@
   <data name="AddButtonFlyout.Content" xml:space="preserve">
     <value>Adicionar novo empregado</value>
   </data>
+  <data name="AddErrorCD_Content" xml:space="preserve">
+    <value>Não foi possível adicionar um empregado devido ao seguinte erro: {0}. Verifique se o salário é inferior ao SMN ou superior ao de algum dos CEOs.</value>
+  </data>
+  <data name="AddErrorCD_Title" xml:space="preserve">
+    <value>Error adding employee</value>
+  </data>
   <data name="AutoSuggestBox.PlaceholderText" xml:space="preserve">
     <value>Procurar por nome</value>
   </data>

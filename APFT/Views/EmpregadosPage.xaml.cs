@@ -88,7 +88,7 @@ public sealed partial class EmpregadosPage : Page
                 AddressTextBox.Text,
                 string.Empty,
                 string.Empty,
-                "0",
+                "750",
                 int.Parse(DepartmentIdTextBox.Text));
 
             localSettings.Values["EmployeeNif"] = NifTextBox.Text;

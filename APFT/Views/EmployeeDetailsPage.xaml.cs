@@ -9,6 +9,7 @@ using Microsoft.UI.Xaml.Media.Animation;
 using Windows.Storage;
 using Microsoft.UI.Xaml;
 using Microsoft.Windows.ApplicationModel.Resources;
+using WinUICommunity;
 
 namespace APFT.Views;
 
@@ -211,9 +212,47 @@ public sealed partial class EmployeeDetailsPage : INotifyPropertyChanged
         sb.Children.Add(fadeInPrAnimation);
         sb.Begin();
 
+        var dialog = new ContentDialog
+        {
+            XamlRoot = ContentArea.XamlRoot,
+            Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+            Title = _resourceLoader.GetString("AddErrorCD_Title"),
+            PrimaryButtonText = _resourceLoader.GetString("ContentDialog_PrimaryButtonText"),
+            DefaultButton = ContentDialogButton.Primary,
+            Content = "Could not edit employee due to error: Employee salary must be equal or greater to 740.83"
+        };
+        _ = await dialog.ShowAsyncQueue();
 
         // Action
-        await Employee.EditEmployee(Nif, FirstName, LastName, Email, Phone, Address, Gender, BirthDateString, SalaryString);
+        /*try
+        {
+            await Employee.EditEmployee(Nif, FirstName, LastName, Email, Phone, Address, Gender, BirthDateString, SalaryString);
+        }
+        catch (ArgumentException exception)
+        {
+            var dialog = new ContentDialog
+            {
+                XamlRoot = ContentArea.XamlRoot,
+                Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+                Title = _resourceLoader.GetString("AddErrorCD_Title"),
+                PrimaryButtonText = _resourceLoader.GetString("ContentDialog_PrimaryButtonText"),
+                DefaultButton = ContentDialogButton.Primary,
+                Content = string.Format(_resourceLoader.GetString("AddErrorCD_Content"), exception.Message)
+            };
+            _ = await dialog.ShowAsyncQueue();
+        } catch (Exception exception)
+        {
+            var dialog = new ContentDialog
+            {
+                XamlRoot = ContentArea.XamlRoot,
+                Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+                Title = _resourceLoader.GetString("AddErrorCD_Title"),
+                PrimaryButtonText = _resourceLoader.GetString("ContentDialog_PrimaryButtonText"),
+                DefaultButton = ContentDialogButton.Primary,
+                Content = string.Format(_resourceLoader.GetString("AddErrorCD_Content"), exception.Message)
+            };
+            _ = await dialog.ShowAsyncQueue();
+        }*/
 
 
         // Create a fade-out animation for the ProgressRing

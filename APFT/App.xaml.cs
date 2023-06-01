@@ -11,6 +11,8 @@ using APFT.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using WinUICommunity;
 
 namespace APFT;
 
@@ -100,8 +102,18 @@ public partial class App : Application
         UnhandledException += App_UnhandledException;
     }
 
-    private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
+    private async void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
     {
+        var dialog = new ContentDialog
+        {
+            XamlRoot = ShellPage.Current.XamlRoot,
+            Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+            Title = "Unhandled exception",
+            PrimaryButtonText = "Close",
+            DefaultButton = ContentDialogButton.Primary,
+            Content = e.Message
+        };
+        _ = await dialog.ShowAsyncQueue();
         // TODO: Log and handle exceptions as appropriate.
         // https://docs.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.application.unhandledexception.
     }
