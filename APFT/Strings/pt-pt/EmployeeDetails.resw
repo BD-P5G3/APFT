@@ -123,6 +123,24 @@
   <data name="AddErrorCD_Title" xml:space="preserve">
     <value>Erro ao editar o empregado</value>
   </data>
+  <data name="AddHoursButton.Content" xml:space="preserve">
+    <value>Adicionar</value>
+  </data>
+  <data name="AddHoursCalendarPicker.Header" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="AddHoursCalendarPicker.PlaceholderText" xml:space="preserve">
+    <value>Escolha uma data</value>
+  </data>
+  <data name="AddHoursNewButtonFlyout.Content" xml:space="preserve">
+    <value>Adicionar obra a este empregado</value>
+  </data>
+  <data name="AddHoursNewTextBox.Header" xml:space="preserve">
+    <value>ID da obra</value>
+  </data>
+  <data name="AddHoursNumberBox.Header" xml:space="preserve">
+    <value>Horas</value>
+  </data>
   <data name="AddressTextBox.Header" xml:space="preserve">
     <value>Morada</value>
   </data>

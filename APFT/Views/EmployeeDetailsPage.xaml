@@ -166,12 +166,15 @@
                             <Viewbox Height="16" Width="16">
                                 <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE710;"/>
                             </Viewbox>
+                            <ToolTipService.ToolTip>
+                                <ToolTip x:Uid="/EmployeeDetails/AddHoursNewButtonFlyout" />
+                            </ToolTipService.ToolTip>
                             <Button.Flyout>
                                 <Flyout ShouldConstrainToRootBounds="False">
                                     <StackPanel Spacing="16">
-										<TextBox x:Name="AddHoursNewTextBox" Header="Construction ID" PlaceholderText="0"/>
-                                        <CalendarDatePicker x:Name="AddHoursNewCalendarPicker" Width="200" Header="Date" PlaceholderText="Pick a date" />
-                                        <NumberBox Header="Hours"
+										<TextBox x:Name="AddHoursNewTextBox" x:Uid="/EmployeeDetails/AddHoursNewTextBox" PlaceholderText="0"/>
+                                        <CalendarDatePicker x:Name="AddHoursNewCalendarPicker" x:Uid="/EmployeeDetails/AddHoursCalendarPicker" Width="200" />
+                                        <NumberBox x:Uid="/EmployeeDetails/AddHoursNumberBox"
                                                    x:Name="AddHoursNumberBox"
                                                    SpinButtonPlacementMode="Inline"
                                                    SmallChange="1"
@@ -179,7 +182,7 @@
                                                    Value="0"
                                                    Minimum="0"
                                                    Maximum="23"/>
-                                        <Button Content="Add" Click="AddHoursNewButton_OnClick" Style="{StaticResource AccentButtonStyle}" />
+                                        <Button x:Uid="/EmployeeDetails/AddHoursButton" Click="AddHoursNewButton_OnClick" Style="{StaticResource AccentButtonStyle}" />
                                     </StackPanel>
                                 </Flyout>
                             </Button.Flyout>
@@ -274,15 +277,15 @@
                                             <Flyout ShouldConstrainToRootBounds="False">
                                                 <StackPanel Spacing="16">
 													<TextBlock Text="{x:Bind Id, Mode=OneWay}"/>
-                                                    <CalendarDatePicker Width="200" Header="Date" PlaceholderText="Pick a date" />
-													<NumberBox Header="Hours"
+                                                    <CalendarDatePicker x:Uid="/EmployeeDetails/AddHoursCalendarPicker" Width="200" />
+													<NumberBox x:Uid="/EmployeeDetails/AddHoursNumberBox"
                                                                SpinButtonPlacementMode="Inline"
                                                                SmallChange="1"
                                                                LargeChange="1"
                                                                Value="0"
                                                                Minimum="0"
                                                                Maximum="23"/>
-                                                    <Button Content="Add" Click="AddHoursExistingButton_OnClick" Style="{StaticResource AccentButtonStyle}" />
+                                                    <Button x:Uid="/EmployeeDetails/AddHoursButton" Click="AddHoursExistingButton_OnClick" Style="{StaticResource AccentButtonStyle}" />
                                                 </StackPanel>
                                             </Flyout>
                                         </Button.Flyout>
