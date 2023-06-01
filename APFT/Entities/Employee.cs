@@ -256,6 +256,16 @@ public class Employee
 
         await cn.OpenAsync();
 
+        Debug.WriteLine("EXEC update_employee " + nif + ", " +
+                        "'" + firstName + "', " +
+                        "'" + lastName + "', " +
+                        "'" + email + "', " +
+                        phone + ", " +
+                        (string.IsNullOrEmpty(address) ? "null" : "'" + address + "'") + ", " +
+                        (string.IsNullOrEmpty(gender) ? "null" : "'" + gender + "'") + ", " +
+                        (string.IsNullOrEmpty(birthDateString) ? "null" : "'" + birthDateString + "'") + ", " + 
+                        salaryString);
+
         var cmd = new SqlCommand("EXEC update_employee " + nif + ", " +
                                  "'" + firstName + "', " +
                                  "'" + lastName + "', " +
@@ -264,7 +274,7 @@ public class Employee
                                  (string.IsNullOrEmpty(address) ? "null" : "'" + address + "'") + ", " +
                                  (string.IsNullOrEmpty(gender) ? "null" : "'" + gender + "'") + ", " +
                                  (string.IsNullOrEmpty(birthDateString) ? "null" : "'" + birthDateString + "'") + ", " + 
-                                 "'" + salaryString + "'", cn);
+                                 salaryString, cn);
 
         return await cmd.ExecuteNonQueryAsync();
     }

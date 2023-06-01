@@ -212,25 +212,27 @@ public sealed partial class EmployeeDetailsPage : INotifyPropertyChanged
         sb.Children.Add(fadeInPrAnimation);
         sb.Begin();
 
+        // Action
         var dialog = new ContentDialog
         {
             XamlRoot = ContentArea.XamlRoot,
             Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
-            Title = _resourceLoader.GetString("AddErrorCD_Title"),
-            PrimaryButtonText = _resourceLoader.GetString("ContentDialog_PrimaryButtonText"),
+            Title = "Error editing employee",
+            PrimaryButtonText = "Close",
             DefaultButton = ContentDialogButton.Primary,
-            Content = "Could not edit employee due to error: Employee salary must be equal or greater to 740.83"
+            Content = "Unable to edit employee. The salary is below the national minimum wage."
         };
-        _ = await dialog.ShowAsyncQueue();
+        _ = await dialog.ShowAsync();
+        Salary = decimal.Parse("800,00");
 
-        // Action
         /*try
         {
+            Salary = decimal.Parse(SalaryTextBox.Text);
             await Employee.EditEmployee(Nif, FirstName, LastName, Email, Phone, Address, Gender, BirthDateString, SalaryString);
         }
-        catch (ArgumentException exception)
+        catch (Exception exception)
         {
-            var dialog = new ContentDialog
+            dialog = new ContentDialog
             {
                 XamlRoot = ContentArea.XamlRoot,
                 Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
@@ -239,19 +241,7 @@ public sealed partial class EmployeeDetailsPage : INotifyPropertyChanged
                 DefaultButton = ContentDialogButton.Primary,
                 Content = string.Format(_resourceLoader.GetString("AddErrorCD_Content"), exception.Message)
             };
-            _ = await dialog.ShowAsyncQueue();
-        } catch (Exception exception)
-        {
-            var dialog = new ContentDialog
-            {
-                XamlRoot = ContentArea.XamlRoot,
-                Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
-                Title = _resourceLoader.GetString("AddErrorCD_Title"),
-                PrimaryButtonText = _resourceLoader.GetString("ContentDialog_PrimaryButtonText"),
-                DefaultButton = ContentDialogButton.Primary,
-                Content = string.Format(_resourceLoader.GetString("AddErrorCD_Content"), exception.Message)
-            };
-            _ = await dialog.ShowAsyncQueue();
+            _ = await dialog.ShowAsync();
         }*/
 
 

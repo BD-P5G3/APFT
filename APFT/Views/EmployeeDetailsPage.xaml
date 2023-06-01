@@ -135,7 +135,8 @@
                                             x:Name="CalendarDatePicker"
                                             DateChanged="CalendarDatePicker_OnDateChanged"/>
 						<TextBox Grid.Column="2"
-                                 Text="{x:Bind Salary, Mode=TwoWay}"
+								 x:Name="SalaryTextBox"
+                                 Text="{x:Bind Salary, Mode=OneWay}"
 								 x:Uid="/EmployeeDetails/SalaryTextBox"/>
                     </Grid>
                 </Grid>
