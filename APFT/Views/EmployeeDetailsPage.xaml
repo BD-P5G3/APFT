@@ -149,13 +149,44 @@
 					</Grid.RowDefinitions>
 
 					<!-- Header (i.e., a subtitle) -->
-					<TextBlock Grid.Row="0"
-                               x:Uid="/EmployeeDetails/ConstructionsSubheader"
-                               x:Name="ConstructionsSubtitle"
-                               Visibility="Collapsed"
-                               Style="{ThemeResource SubtitleTextBlockStyle}" />
+					<Grid Grid.Row="0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition/>
+							<ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
 
-					<!-- Constructions list -->
+                        <TextBlock Grid.Column="0" x:Uid="/EmployeeDetails/ConstructionsSubheader"
+                                   x:Name="ConstructionsSubtitle"
+                                   Visibility="Collapsed"
+								   VerticalAlignment="Center"
+                                   Style="{ThemeResource SubtitleTextBlockStyle}" />
+
+                        <!-- Add construction button -->
+                        <Button Grid.Column="1" VerticalAlignment="Center">
+                            <Viewbox Height="16" Width="16">
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE710;"/>
+                            </Viewbox>
+                            <Button.Flyout>
+                                <Flyout ShouldConstrainToRootBounds="False">
+                                    <StackPanel Spacing="16">
+										<TextBox x:Name="AddHoursNewTextBox" Header="Construction ID" PlaceholderText="0"/>
+                                        <CalendarDatePicker x:Name="AddHoursNewCalendarPicker" Width="200" Header="Date" PlaceholderText="Pick a date" />
+                                        <NumberBox Header="Hours"
+                                                   x:Name="AddHoursNumberBox"
+                                                   SpinButtonPlacementMode="Inline"
+                                                   SmallChange="1"
+                                                   LargeChange="1"
+                                                   Value="0"
+                                                   Minimum="0"
+                                                   Maximum="23"/>
+                                        <Button Content="Add" Click="AddHoursNewButton_OnClick" Style="{StaticResource AccentButtonStyle}" />
+                                    </StackPanel>
+                                </Flyout>
+                            </Button.Flyout>
+                        </Button>
+                    </Grid>
+
+                    <!-- Constructions list -->
 					<ListView Grid.Row="1"
                               x:Name="ConstructionsGridView"
                               IsItemClickEnabled="True"
@@ -217,6 +248,7 @@
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="*"/>
 										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition Width="Auto"/>
 									</Grid.ColumnDefinitions>
 									<Grid.RowDefinitions>
 										<RowDefinition/>
@@ -233,12 +265,31 @@
 									<!-- Dates -->
 									<TextBlock Grid.Column="0"
                                                Grid.Row="1">
-										<Run Text="{x:Bind StartDateString}"/> -
-										<Run Text="{x:Bind EndDateString}"/>
+										Total hours:
 									</TextBlock>
 
+									<!-- Add date -->
+									<Button Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" Content="Add hours">
+                                        <Button.Flyout>
+                                            <Flyout ShouldConstrainToRootBounds="False">
+                                                <StackPanel Spacing="16">
+													<TextBlock Text="{x:Bind Id, Mode=OneWay}"/>
+                                                    <CalendarDatePicker Width="200" Header="Date" PlaceholderText="Pick a date" />
+													<NumberBox Header="Hours"
+                                                               SpinButtonPlacementMode="Inline"
+                                                               SmallChange="1"
+                                                               LargeChange="1"
+                                                               Value="0"
+                                                               Minimum="0"
+                                                               Maximum="23"/>
+                                                    <Button Content="Add" Click="AddHoursExistingButton_OnClick" Style="{StaticResource AccentButtonStyle}" />
+                                                </StackPanel>
+                                            </Flyout>
+                                        </Button.Flyout>
+                                    </Button>
+
 									<!-- Chevron -->
-									<Viewbox Grid.Column="1"
+									<Viewbox Grid.Column="2"
                                              Grid.Row="0"
                                              Grid.RowSpan="2"
                                              Height="16"

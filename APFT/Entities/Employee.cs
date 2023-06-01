@@ -290,4 +290,17 @@ public class Employee
 
         return await cmd.ExecuteNonQueryAsync();
     }
+
+    public static async Task<int> AddEmployeeToConstruction(int id, int nif, string date, int hours)
+    {
+        var localSettings = ApplicationData.Current.LocalSettings;
+
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+
+        await cn.OpenAsync();
+        Debug.WriteLine("EXEC add_empregado_obra " + id + ", " + nif + ", '" + date + "', '" + hours + ":00:00'");
+        var cmd = new SqlCommand("EXEC add_empregado_obra " + id + ", " + nif + ", '" + date + "', '" + hours + ":00:00'", cn);
+
+        return await cmd.ExecuteNonQueryAsync();
+    }
 }

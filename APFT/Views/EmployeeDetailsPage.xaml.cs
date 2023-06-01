@@ -355,4 +355,26 @@ public sealed partial class EmployeeDetailsPage : INotifyPropertyChanged
     {
         BirthDate = sender.Date != null ? sender.Date.Value.DateTime : null;
     }
+
+    private async void AddHoursExistingButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var sp = (sender as Button).Parent as StackPanel;
+
+        var id = (sp.Children[0] as TextBlock).Text;
+
+        var date = (sp.Children[1] as CalendarDatePicker).Date.Value;
+        var dateString = date.Year + "-" + date.Month + "-" + date.Day;
+
+        var numberBox = sp.Children[2] as NumberBox;
+        
+        Debug.WriteLine(await Employee.AddEmployeeToConstruction(int.Parse(id), Nif, dateString, (int)numberBox.Value));
+    }
+
+    private async void AddHoursNewButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var date = AddHoursNewCalendarPicker.Date;
+        var dateString = date?.Year + "-" + date?.Month + "-" + date?.Day;
+
+        Debug.WriteLine(await Employee.AddEmployeeToConstruction(int.Parse(AddHoursNewTextBox.Text), Nif, dateString, (int)AddHoursNumberBox.Value));
+    }
 }
