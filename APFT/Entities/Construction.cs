@@ -158,6 +158,26 @@ public class Construction
         return constructions;
     }
 
+    public static async Task<Construction> GetConstructionByIdAsync(int id)
+    {
+        var localSettings = ApplicationData.Current.LocalSettings;
+
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+        
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("SELECT * FROM EMPRESA_CONSTRUCAO.OBRA WHERE id=" + id, cn);
+
+        var reader = await cmd.ExecuteReaderAsync();
+        await reader.ReadAsync();
+
+        return new Construction(
+            reader.GetInt32(0),
+            reader.GetString(1),
+            reader.GetDateTime(2),
+            await reader.IsDBNullAsync(3) ? new DateTime() : reader.GetDateTime(3),
+            reader.GetInt32(4));
+    }
+
     public static async Task<int> AddConstruction(int id, string location, string startDateString, string endDateString, int customerNif)
     {
         var localSettings = ApplicationData.Current.LocalSettings;

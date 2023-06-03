@@ -174,6 +174,37 @@ public class Employee
         return employees;
     }
 
+    public static async Task<ObservableCollection<Employee>> GetEmployeesByConstructionIdAsync(int constructionId)
+    {
+        var employees = new ObservableCollection<Employee>();
+        var localSettings = ApplicationData.Current.LocalSettings;
+
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("SELECT * FROM getObraEmpregadoByObra(" + constructionId + ")", cn);
+
+        var reader = await cmd.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            employees.Add(new Employee(
+                reader.GetInt32(1),
+                reader.GetString(4),
+                reader.GetString(5),
+                reader.GetString(6),
+                0,
+                string.Empty,
+                string.Empty,
+                new DateTime(),
+                0,
+                0)
+            );
+        }
+
+        return employees;
+    }
+
     public static async Task<List<string>> GetEmployeesByNameAsync(string name)
     {
         var suitableItems = new List<string>();

@@ -59,7 +59,7 @@ public sealed partial class ObrasPage : Page
         var localSettings = ApplicationData.Current.LocalSettings;
         localSettings.Values["ConstructionId"] = ((Construction)e.ClickedItem).Id.ToString();
 
-        Frame.Navigate(typeof(CustomerDetailsPage)); // TODO: Fix this
+        Frame.Navigate(typeof(ConstructionDetailsPage));
     }
 
     // TODO: Fix this
@@ -75,7 +75,7 @@ public sealed partial class ObrasPage : Page
             int.Parse(CustomerNifTextBox.Text));
 
         localSettings.Values["ConstructionId"] = IdTextBox.Text;
-        Frame.Navigate(typeof(CustomerDetailsPage));
+        Frame.Navigate(typeof(ConstructionDetailsPage));
     }
 
     // Filter

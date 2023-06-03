@@ -1,4 +1,5 @@
-﻿using APFT.Activation;
+﻿using System.Diagnostics;
+using APFT.Activation;
 using APFT.Contracts.Services;
 using APFT.Core.Contracts.Services;
 using APFT.Core.Services;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+
 using WinUICommunity;
 
 namespace APFT;
@@ -71,6 +73,8 @@ public partial class App : Application
             services.AddSingleton<IFileService, FileService>();
 
             // Views and ViewModels
+            services.AddTransient<ConstructionDetailsViewModel>();
+            services.AddTransient<ConstructionDetailsPage>();
             services.AddTransient<EmployeeDetailsViewModel>();
             services.AddTransient<EmployeeDetailsPage>();
             services.AddTransient<CustomerDetailsViewModel>();
