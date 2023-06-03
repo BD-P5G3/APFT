@@ -326,18 +326,12 @@ public sealed partial class EmployeeDetailsPage : INotifyPropertyChanged
         Frame.GoBack();
     }
 
-    private async void ConstructionsGridView_OnItemClick(object sender, ItemClickEventArgs e)
+    private void ConstructionsGridView_OnItemClick(object sender, ItemClickEventArgs e)
     {
-        var dialog = new ContentDialog
-        {
-            XamlRoot = ContentArea.XamlRoot,
-            Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
-            Title = _resourceLoader.GetString("NotImplemented_Title"),
-            PrimaryButtonText = _resourceLoader.GetString("NotImplemented_Close"),
-            DefaultButton = ContentDialogButton.Primary,
-            Content = _resourceLoader.GetString("NotImplemented_Content")
-        };
-        _ = await dialog.ShowAsync();
+        var localSettings = ApplicationData.Current.LocalSettings;
+        localSettings.Values["ConstructionId"] = ((Construction)e.ClickedItem).Id.ToString();
+
+        Frame.Navigate(typeof(ConstructionDetailsPage));
     }
 
     private void GenderComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
