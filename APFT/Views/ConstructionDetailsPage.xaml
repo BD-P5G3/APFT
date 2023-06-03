@@ -202,13 +202,13 @@
 
 												<!-- Background -->
 												<Border x:Name="CardBorder"
-                                                        CornerRadius="8"
+                                                        CornerRadius="6"
                                                         Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"/>
 
 												<!-- Border -->
 												<Border BorderThickness="1"
                                                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                                        CornerRadius="8"
+                                                        CornerRadius="6"
                                                         Padding="12"/>
 
 												<!-- Content template (see ListView.ItemTemplate) -->
@@ -362,13 +362,13 @@
 
 												<!-- Background -->
 												<Border x:Name="CardBorder"
-                                                        CornerRadius="8"
+                                                        CornerRadius="6"
                                                         Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"/>
 
 												<!-- Border -->
 												<Border BorderThickness="1"
                                                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                                        CornerRadius="8"
+                                                        CornerRadius="6"
                                                         Padding="12"/>
 
 												<!-- Content template (see ListView.ItemTemplate) -->
