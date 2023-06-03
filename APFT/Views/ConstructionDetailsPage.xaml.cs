@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.Windows.ApplicationModel.Resources;
+using APFT.Helpers;
 
 namespace APFT.Views;
 
@@ -225,18 +226,12 @@ public sealed partial class ConstructionDetailsPage : INotifyPropertyChanged
         Frame.GoBack();
     }
 
-    private async void EmployeesGridView_OnItemClick(object sender, ItemClickEventArgs e)
+    private void EmployeesGridView_OnItemClick(object sender, ItemClickEventArgs e)
     {
-        var dialog = new ContentDialog
-        {
-            XamlRoot = ContentArea.XamlRoot,
-            Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
-            Title = _resourceLoader.GetString("NotImplemented_Title"),
-            PrimaryButtonText = _resourceLoader.GetString("NotImplemented_Close"),
-            DefaultButton = ContentDialogButton.Primary,
-            Content = _resourceLoader.GetString("NotImplemented_Content")
-        };
-        _ = await dialog.ShowAsync();
+        var localSettings = ApplicationData.Current.LocalSettings;
+        localSettings.Values["EmployeeNif"] = ((Employee)e.ClickedItem).Nif.ToString();
+
+        Frame.Navigate(typeof(EmployeeDetailsPage));
     }
 
     private void StartCalendarDatePicker_OnDateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
