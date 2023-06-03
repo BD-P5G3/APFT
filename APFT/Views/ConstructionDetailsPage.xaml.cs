@@ -108,6 +108,12 @@ public sealed partial class ConstructionDetailsPage : INotifyPropertyChanged
         {
             ConstructionEmployeesGrid.Visibility = Visibility.Visible;
         }
+
+        ServicesGridView.ItemsSource = await Service.GetServicesByConstructionIdAsync(Id);
+        if (ServicesGridView.Items.Count > 0)
+        {
+            ConstructionServicesGrid.Visibility = Visibility.Visible;
+        }
     }
 
     private readonly ResourceLoader _resourceLoader = new("resources.pri", "ConstructionDetails");
@@ -270,5 +276,24 @@ public sealed partial class ConstructionDetailsPage : INotifyPropertyChanged
     {
         StartCalendarDatePicker.Width = DatesGridColumn.ActualWidth;
         EndCalendarDatePicker.Width = DatesGridColumn.ActualWidth;
+    }
+
+    private async void AddServiceNewButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        Debug.WriteLine(await Service.AddServiceToConstruction(Id, (int)AddServiceNumberBox.Value));
+    }
+
+    private async void ServicesGridView_OnItemClick(object sender, ItemClickEventArgs e)
+    {
+        var dialog = new ContentDialog
+        {
+            XamlRoot = ContentArea.XamlRoot,
+            Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+            Title = _resourceLoader.GetString("NotImplemented_Title"),
+            PrimaryButtonText = _resourceLoader.GetString("NotImplemented_Close"),
+            DefaultButton = ContentDialogButton.Primary,
+            Content = _resourceLoader.GetString("NotImplemented_Content")
+        };
+        _ = await dialog.ShowAsync();
     }
 }

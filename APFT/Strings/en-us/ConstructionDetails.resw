@@ -135,6 +135,15 @@
   <data name="AddHoursNumberBox.Header" xml:space="preserve">
     <value>Hours</value>
   </data>
+  <data name="AddServiceButton.Content" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AddServiceNewButtonFlyout.Content" xml:space="preserve">
+    <value>Add service to this construction</value>
+  </data>
+  <data name="AddServiceNumberBox.Header" xml:space="preserve">
+    <value>Service ID</value>
+  </data>
   <data name="CustomerNifTextBox.Header" xml:space="preserve">
     <value>Customer NIF</value>
   </data>
@@ -182,6 +191,12 @@
   </data>
   <data name="NotImplemented_Title" xml:space="preserve">
     <value>Not implemented</value>
+  </data>
+  <data name="ServicesDepartment.Text" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="ServicesSubheader.Text" xml:space="preserve">
+    <value>Services</value>
   </data>
   <data name="StartCalendarDatePicker.Header" xml:space="preserve">
     <value>Start date</value>

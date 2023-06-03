@@ -76,6 +76,7 @@
 				<Grid.RowDefinitions>
 					<RowDefinition/>
 					<RowDefinition/>
+					<RowDefinition/>
 				</Grid.RowDefinitions>
 
 				<!-- Construction info area -->
@@ -269,6 +270,145 @@
 
 									<!-- Chevron -->
 									<Viewbox Grid.Column="2"
+                                             Grid.Row="0"
+                                             Grid.RowSpan="2"
+                                             Height="16"
+                                             Width="16">
+										<FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                                  Glyph="&#xE76C;"/>
+									</Viewbox>
+								</Grid>
+							</DataTemplate>
+						</ListView.ItemTemplate>
+					</ListView>
+				</Grid>
+
+				<!-- Construction's services -->
+				<Grid Grid.Row="2" RowSpacing="8" x:Name="ConstructionServicesGrid" Visibility="Collapsed">
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+
+					<!-- Header (i.e., a subtitle) -->
+					<Grid Grid.Row="0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition/>
+							<ColumnDefinition Width="Auto"/>
+						</Grid.ColumnDefinitions>
+
+						<TextBlock Grid.Column="0" x:Uid="/ConstructionDetails/ServicesSubheader"
+								   VerticalAlignment="Center"
+                                   Style="{ThemeResource SubtitleTextBlockStyle}" />
+
+						<!-- Add service button -->
+						<Button Grid.Column="1" VerticalAlignment="Center">
+							<Viewbox Height="16" Width="16">
+								<FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE710;"/>
+							</Viewbox>
+							<ToolTipService.ToolTip>
+								<ToolTip x:Uid="/ConstructionDetails/AddServiceNewButtonFlyout" />
+							</ToolTipService.ToolTip>
+							<Button.Flyout>
+								<Flyout ShouldConstrainToRootBounds="False">
+									<StackPanel Spacing="16">
+                                        <NumberBox x:Uid="/ConstructionDetails/AddServiceNumberBox"
+                                                   x:Name="AddServiceNumberBox"
+                                                   PlaceholderText="0"
+                                                   Width="200"/>
+
+										<Button x:Uid="/ConstructionDetails/AddServiceButton"
+                                                Click="AddServiceNewButton_OnClick"
+                                                Style="{StaticResource AccentButtonStyle}" />
+									</StackPanel>
+								</Flyout>
+							</Button.Flyout>
+						</Button>
+					</Grid>
+
+					<!-- Services list -->
+					<ListView Grid.Row="1"
+                              x:Name="ServicesGridView"
+                              IsItemClickEnabled="True"
+                              ItemClick="ServicesGridView_OnItemClick"
+                              SelectionMode="None">
+
+						<!-- Card style -->
+						<ListView.ItemContainerStyle>
+							<Style TargetType="ListViewItem">
+								<Setter Property="Template">
+									<Setter.Value>
+										<ControlTemplate TargetType="ListViewItem">
+											<Grid Margin="0, 0, 0 4">
+												<VisualStateManager.VisualStateGroups>
+													<VisualStateGroup x:Name="CommonStates">
+														<VisualState x:Name="Normal" />
+
+														<!-- Hover effect -->
+														<VisualState x:Name="PointerOver">
+															<VisualState.Setters>
+																<Setter Target="CardBorder.Opacity" Value="0.4" />
+															</VisualState.Setters>
+														</VisualState>
+
+														<!-- Pressed effect -->
+														<VisualState x:Name="Pressed">
+															<VisualState.Setters>
+																<Setter Target="CardBorder.Opacity" Value="0.2" />
+															</VisualState.Setters>
+														</VisualState>
+													</VisualStateGroup>
+												</VisualStateManager.VisualStateGroups>
+
+												<!-- Background -->
+												<Border x:Name="CardBorder"
+                                                        CornerRadius="8"
+                                                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"/>
+
+												<!-- Border -->
+												<Border BorderThickness="1"
+                                                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                                        CornerRadius="8"
+                                                        Padding="12"/>
+
+												<!-- Content template (see ListView.ItemTemplate) -->
+												<ContentPresenter Content="{TemplateBinding Content}"
+                                                                  ContentTemplate="{TemplateBinding ContentTemplate}" />
+											</Grid>
+										</ControlTemplate>
+									</Setter.Value>
+								</Setter>
+							</Style>
+						</ListView.ItemContainerStyle>
+
+						<!-- List item template -->
+						<ListView.ItemTemplate>
+							<DataTemplate x:DataType="entities:Service">
+								<Grid ColumnSpacing="8" Padding="12, 12, 8, 12">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*"/>
+										<ColumnDefinition Width="Auto"/>
+									</Grid.ColumnDefinitions>
+									<Grid.RowDefinitions>
+										<RowDefinition/>
+										<RowDefinition/>
+									</Grid.RowDefinitions>
+
+									<!-- Name aka category -->
+									<TextBlock Grid.Column="0"
+                                               Grid.Row="0"
+                                               Text="{x:Bind Category}"
+                                               x:Phase="1"
+                                               Style="{StaticResource BodyStrongTextBlockStyle}"/>
+
+									<!-- Department ID -->
+									<TextBlock Grid.Column="0"
+                                               Grid.Row="1">
+										<Run x:Uid="/ConstructionDetails/ServicesDepartment"/>: <Run Text="{x:Bind DepartmentId}"/>
+									</TextBlock>
+
+									<!-- Chevron -->
+									<Viewbox Grid.Column="1"
                                              Grid.Row="0"
                                              Grid.RowSpan="2"
                                              Height="16"
