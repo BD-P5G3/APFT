@@ -1,9 +1,6 @@
-﻿using System.Data;
-using APFT.Contracts.Services;
+﻿using APFT.Contracts.Services;
 using APFT.Helpers;
 using APFT.ViewModels;
-using Microsoft.UI;
-using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -11,8 +8,6 @@ using Microsoft.UI.Xaml.Media;
 using Windows.Storage;
 using Windows.System;
 using Windows.UI;
-using WinRT.Interop;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace APFT.Views;
 
@@ -21,16 +16,6 @@ public sealed partial class ShellPage : Page
     public ShellViewModel ViewModel
     {
         get;
-    }
-
-    private AppWindow m_AppWindow;
-
-    private AppWindow GetAppWindowForCurrentWindow()
-    {
-        var mainWindow = App.MainWindow;
-        var hWnd = WindowNative.GetWindowHandle(mainWindow);
-        var wndId = Win32Interop.GetWindowIdFromWindow(hWnd);
-        return AppWindow.GetFromWindowId(wndId);
     }
 
     public ShellPage(ShellViewModel viewModel)
@@ -46,15 +31,7 @@ public sealed partial class ShellPage : Page
         // A custom title bar is required for full window theme and Mica support.
         // https://docs.microsoft.com/windows/apps/develop/title-bar?tabs=winui3#full-customization
 
-        m_AppWindow = GetAppWindowForCurrentWindow();
-        var titleBar = m_AppWindow.TitleBar;
-        titleBar.ExtendsContentIntoTitleBar = true;
-        titleBar.ButtonBackgroundColor = Colors.Transparent;
-        titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
-        titleBar.ButtonHoverBackgroundColor = Color.FromArgb(31, 0, 0, 0);
-        titleBar.ButtonPressedBackgroundColor = Color.FromArgb(63, 0, 0, 0);
-
-        //App.MainWindow.ExtendsContentIntoTitleBar = true;
+        App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
         AppTitleBarText.Text = "AppDisplayName".GetLocalized();

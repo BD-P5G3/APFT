@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
@@ -6,6 +7,7 @@ using Microsoft.UI.Xaml.Media;
 
 using Windows.UI;
 using Windows.UI.ViewManagement;
+using WinRT.Interop;
 
 namespace APFT.Helpers;
 
@@ -17,12 +19,16 @@ internal class TitleBarHelper
     private const int WAINACTIVE = 0x00;
     private const int WAACTIVE = 0x01;
     private const int WMACTIVATE = 0x0006;
+    private const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
 
     [DllImport("user32.dll")]
     private static extern IntPtr GetActiveWindow();
 
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
     private static extern IntPtr SendMessage(IntPtr hWnd, int msg, int wParam, IntPtr lParam);
+
+    [DllImport("dwmapi.dll")]
+    private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
 
     public static void UpdateTitleBar(ElementTheme theme)
     {
@@ -57,15 +63,15 @@ internal class TitleBarHelper
 
             Application.Current.Resources["WindowCaptionButtonBackgroundPointerOver"] = theme switch
             {
-                ElementTheme.Dark => new SolidColorBrush(Color.FromArgb(0x33, 0xFF, 0xFF, 0xFF)),
-                ElementTheme.Light => new SolidColorBrush(Color.FromArgb(0x33, 0x00, 0x00, 0x00)),
+                ElementTheme.Dark => new SolidColorBrush(Color.FromArgb(0x15, 0xFF, 0xFF, 0xFF)),
+                ElementTheme.Light => new SolidColorBrush(Color.FromArgb(0x15, 0x00, 0x00, 0x00)),
                 _ => new SolidColorBrush(Colors.Transparent)
             };
 
             Application.Current.Resources["WindowCaptionButtonBackgroundPressed"] = theme switch
             {
-                ElementTheme.Dark => new SolidColorBrush(Color.FromArgb(0x66, 0xFF, 0xFF, 0xFF)),
-                ElementTheme.Light => new SolidColorBrush(Color.FromArgb(0x66, 0x00, 0x00, 0x00)),
+                ElementTheme.Dark => new SolidColorBrush(Color.FromArgb(0x33, 0xFF, 0xFF, 0xFF)),
+                ElementTheme.Light => new SolidColorBrush(Color.FromArgb(0x33, 0x00, 0x00, 0x00)),
                 _ => new SolidColorBrush(Colors.Transparent)
             };
 
@@ -86,7 +92,7 @@ internal class TitleBarHelper
             Application.Current.Resources["WindowCaptionBackground"] = new SolidColorBrush(Colors.Transparent);
             Application.Current.Resources["WindowCaptionBackgroundDisabled"] = new SolidColorBrush(Colors.Transparent);
 
-            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
+            var hwnd = WindowNative.GetWindowHandle(App.MainWindow);
             if (hwnd == GetActiveWindow())
             {
                 SendMessage(hwnd, WMACTIVATE, WAINACTIVE, IntPtr.Zero);
@@ -97,6 +103,14 @@ internal class TitleBarHelper
                 SendMessage(hwnd, WMACTIVATE, WAACTIVE, IntPtr.Zero);
                 SendMessage(hwnd, WMACTIVATE, WAINACTIVE, IntPtr.Zero);
             }
+            
+            var isDarkModeInt = theme switch
+            {
+                ElementTheme.Dark => 1,
+                ElementTheme.Light => 0,
+                _ => 0
+            };
+            DwmSetWindowAttribute(hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, ref isDarkModeInt, sizeof(int));
         }
     }
 
