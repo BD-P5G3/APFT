@@ -207,19 +207,20 @@
 													<VisualStateGroup x:Name="CommonStates">
 														<VisualState x:Name="Normal" />
 
-														<!-- Hover effect -->
-														<VisualState x:Name="PointerOver">
-															<VisualState.Setters>
-																<Setter Target="CardBorder.Opacity" Value="0.4" />
-															</VisualState.Setters>
-														</VisualState>
+                                                        <!-- Hover effect -->
+                                                        <VisualState x:Name="PointerOver">
+                                                            <VisualState.Setters>
+                                                                <Setter Target="CardBorder.Background" Value="{ThemeResource CardBackgroundFillColorSecondaryBrush}" />
+                                                            </VisualState.Setters>
+                                                        </VisualState>
 
-														<!-- Pressed effect -->
-														<VisualState x:Name="Pressed">
-															<VisualState.Setters>
-																<Setter Target="CardBorder.Opacity" Value="0.2" />
-															</VisualState.Setters>
-														</VisualState>
+                                                        <!-- Pressed effect -->
+                                                        <VisualState x:Name="Pressed">
+                                                            <VisualState.Setters>
+                                                                <Setter Target="CardBorder.Background" Value="{ThemeResource CardBackgroundFillColorSecondaryBrush}" />
+                                                                <Setter Target="CardBorder.Opacity" Value="0.7" />
+                                                            </VisualState.Setters>
+                                                        </VisualState>
 													</VisualStateGroup>
 												</VisualStateManager.VisualStateGroups>
 
