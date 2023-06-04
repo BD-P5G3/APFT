@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Windows.Storage;
 
 namespace APFT.Entities;
@@ -78,6 +79,31 @@ public class Order
             reader.GetDateTime(1),
             reader.GetInt32(2),
             reader.GetInt32(3));
+    }
+
+    public static async Task<ObservableCollection<Order>> GetOrdersByConstructionIdAsync(int constructionId)
+    {
+        var orders = new ObservableCollection<Order>();
+        var localSettings = ApplicationData.Current.LocalSettings;
+
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("SELECT * FROM getEncomendaByObraId(" + constructionId + ")", cn);
+
+        var reader = await cmd.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            orders.Add(new Order(
+                reader.GetInt32(0), // change
+                new DateTime(),
+                reader.GetInt32(4),
+                reader.GetInt32(0))
+            );
+        }
+        
+        return orders;
     }
 
     public static async Task<int> AddOrder(int id, string dateString, int supplierNif, int constructionId)

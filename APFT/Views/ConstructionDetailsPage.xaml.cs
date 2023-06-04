@@ -109,6 +109,12 @@ public sealed partial class ConstructionDetailsPage : INotifyPropertyChanged
             ConstructionEmployeesGrid.Visibility = Visibility.Visible;
         }
 
+        OrdersGridView.ItemsSource = await Order.GetOrdersByConstructionIdAsync(Id);
+        if (ServicesGridView.Items.Count > 0)
+        {
+            ConstructionOrdersGrid.Visibility = Visibility.Visible;
+        }
+
         ServicesGridView.ItemsSource = await Service.GetServicesByConstructionIdAsync(Id);
         if (ServicesGridView.Items.Count > 0)
         {
@@ -284,6 +290,20 @@ public sealed partial class ConstructionDetailsPage : INotifyPropertyChanged
     }
 
     private async void ServicesGridView_OnItemClick(object sender, ItemClickEventArgs e)
+    {
+        var dialog = new ContentDialog
+        {
+            XamlRoot = ContentArea.XamlRoot,
+            Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+            Title = _resourceLoader.GetString("NotImplemented_Title"),
+            PrimaryButtonText = _resourceLoader.GetString("NotImplemented_Close"),
+            DefaultButton = ContentDialogButton.Primary,
+            Content = _resourceLoader.GetString("NotImplemented_Content")
+        };
+        _ = await dialog.ShowAsync();
+    }
+
+    private async void OrdersGridView_OnItemClick(object sender, ItemClickEventArgs e)
     {
         var dialog = new ContentDialog
         {

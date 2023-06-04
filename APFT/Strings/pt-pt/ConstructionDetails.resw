@@ -192,6 +192,12 @@
   <data name="NotImplemented_Title" xml:space="preserve">
     <value>Não implementado</value>
   </data>
+  <data name="OrdersSubheader.Text" xml:space="preserve">
+    <value>Encomendas</value>
+  </data>
+  <data name="OrderSupplier.Text" xml:space="preserve">
+    <value>Fornecedor</value>
+  </data>
   <data name="ServicesDepartment.Text" xml:space="preserve">
     <value>Departmento</value>
   </data>
