@@ -540,7 +540,7 @@
 				</Grid>
 
 				<!-- Construction's materials -->
-				<Grid Grid.Column="1" Grid.Row="1" RowSpacing="8" x:Name="ConstructionMaterialsGrid" Visibility="Collapsed">
+				<Grid Grid.Column="1" Grid.Row="2" RowSpacing="8" x:Name="ConstructionMaterialsGrid" Visibility="Collapsed">
 					<Grid.RowDefinitions>
 						<RowDefinition/>
 						<RowDefinition/>
