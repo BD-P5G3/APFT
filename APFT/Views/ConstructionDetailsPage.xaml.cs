@@ -110,7 +110,7 @@ public sealed partial class ConstructionDetailsPage : INotifyPropertyChanged
         }
 
         OrdersGridView.ItemsSource = await Order.GetOrdersByConstructionIdAsync(Id);
-        if (ServicesGridView.Items.Count > 0)
+        if (OrdersGridView.Items.Count > 0)
         {
             ConstructionOrdersGrid.Visibility = Visibility.Visible;
         }
@@ -119,6 +119,12 @@ public sealed partial class ConstructionDetailsPage : INotifyPropertyChanged
         if (ServicesGridView.Items.Count > 0)
         {
             ConstructionServicesGrid.Visibility = Visibility.Visible;
+        }
+
+        MaterialsGridView.ItemsSource = await Service.GetServicesByConstructionIdAsync(Id); // fix (await Zé.getNewUdf())
+        if (MaterialsGridView.Items.Count > 0)
+        {
+            ConstructionMaterialsGrid.Visibility = Visibility.Visible;
         }
     }
 
@@ -304,6 +310,20 @@ public sealed partial class ConstructionDetailsPage : INotifyPropertyChanged
     }
 
     private async void OrdersGridView_OnItemClick(object sender, ItemClickEventArgs e)
+    {
+        var dialog = new ContentDialog
+        {
+            XamlRoot = ContentArea.XamlRoot,
+            Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+            Title = _resourceLoader.GetString("NotImplemented_Title"),
+            PrimaryButtonText = _resourceLoader.GetString("NotImplemented_Close"),
+            DefaultButton = ContentDialogButton.Primary,
+            Content = _resourceLoader.GetString("NotImplemented_Content")
+        };
+        _ = await dialog.ShowAsync();
+    }
+
+    private async void MaterialsGridView_OnItemClick(object sender, ItemClickEventArgs e)
     {
         var dialog = new ContentDialog
         {

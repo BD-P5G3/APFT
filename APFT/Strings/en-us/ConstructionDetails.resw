@@ -135,6 +135,15 @@
   <data name="AddHoursNumberBox.Header" xml:space="preserve">
     <value>Hours</value>
   </data>
+  <data name="AddMaterialButton.Content" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AddMaterialNewButtonFlyout.Content" xml:space="preserve">
+    <value>Add material to this construction</value>
+  </data>
+  <data name="AddMaterialNumberBox.Header" xml:space="preserve">
+    <value>Material ID</value>
+  </data>
   <data name="AddServiceButton.Content" xml:space="preserve">
     <value>Add</value>
   </data>
@@ -182,6 +191,9 @@
   </data>
   <data name="LocationTextBox.Header" xml:space="preserve">
     <value>Location</value>
+  </data>
+  <data name="MaterialsSubheader.Text" xml:space="preserve">
+    <value>Materials used</value>
   </data>
   <data name="NotImplemented_Close" xml:space="preserve">
     <value>Close</value>

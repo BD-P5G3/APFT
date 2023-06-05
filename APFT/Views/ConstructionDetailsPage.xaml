@@ -72,7 +72,7 @@
 
 		<!-- Content -->
 		<ScrollViewer Grid.Row="1" Padding="0,0,56,0" Margin="0,0,-56,0">
-			<Grid RowSpacing="32" Padding="0,0,0,16">
+			<Grid ColumnSpacing="16" RowSpacing="32" Padding="0,0,0,16">
 				<Grid.RowDefinitions>
 					<RowDefinition/>
 					<RowDefinition/>
@@ -80,8 +80,13 @@
 					<RowDefinition/>
 				</Grid.RowDefinitions>
 
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
 				<!-- Construction info area -->
-				<Grid Grid.Row="0" RowSpacing="16">
+				<Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" RowSpacing="16">
 					<Grid.RowDefinitions>
 						<RowDefinition />
 						<RowDefinition />
@@ -122,7 +127,7 @@
 				</Grid>
 
 				<!-- Construction's employees -->
-				<Grid Grid.Row="1" RowSpacing="8" x:Name="ConstructionEmployeesGrid" Visibility="Collapsed">
+				<Grid Grid.Column="0" Grid.Row="1" RowSpacing="8" x:Name="ConstructionEmployeesGrid" Visibility="Collapsed">
 					<Grid.RowDefinitions>
 						<RowDefinition/>
 						<RowDefinition/>
@@ -141,7 +146,7 @@
 
 						<!-- Add employee button -->
 						<Button Grid.Column="1" VerticalAlignment="Center">
-							<Viewbox Height="16" Width="16">
+							<Viewbox Height="12" Width="12">
 								<FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE710;"/>
 							</Viewbox>
 							<ToolTipService.ToolTip>
@@ -286,7 +291,7 @@
 				</Grid>
 
                 <!-- Construction's orders -->
-				<Grid Grid.Row="2" RowSpacing="8" x:Name="ConstructionOrdersGrid" Visibility="Collapsed">
+				<Grid Grid.Column="0" Grid.Row="2" RowSpacing="8" x:Name="ConstructionOrdersGrid" Visibility="Collapsed">
 					<Grid.RowDefinitions>
 						<RowDefinition/>
 						<RowDefinition/>
@@ -395,7 +400,7 @@
 				</Grid>
 
 				<!-- Construction's services -->
-				<Grid Grid.Row="3" RowSpacing="8" x:Name="ConstructionServicesGrid" Visibility="Collapsed">
+				<Grid Grid.Column="1" Grid.Row="1" RowSpacing="8" x:Name="ConstructionServicesGrid" Visibility="Collapsed">
 					<Grid.RowDefinitions>
 						<RowDefinition/>
 						<RowDefinition/>
@@ -414,7 +419,7 @@
 
 						<!-- Add service button -->
 						<Button Grid.Column="1" VerticalAlignment="Center">
-							<Viewbox Height="16" Width="16">
+							<Viewbox Height="12" Width="12">
 								<FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE710;"/>
 							</Viewbox>
 							<ToolTipService.ToolTip>
@@ -533,6 +538,116 @@
 						</ListView.ItemTemplate>
 					</ListView>
 				</Grid>
+
+				<!-- Construction's materials -->
+				<Grid Grid.Column="1" Grid.Row="1" RowSpacing="8" x:Name="ConstructionMaterialsGrid" Visibility="Collapsed">
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+
+					<!-- Header (i.e., a subtitle) -->
+						<TextBlock Grid.Row="0" x:Uid="/ConstructionDetails/MaterialsSubheader"
+								   VerticalAlignment="Center"
+                                   Style="{ThemeResource SubtitleTextBlockStyle}" />
+
+					<!-- Materials list -->
+					<ListView Grid.Row="1"
+                              x:Name="MaterialsGridView"
+                              IsItemClickEnabled="True"
+                              ItemClick="MaterialsGridView_OnItemClick"
+                              SelectionMode="None">
+
+						<!-- Card style -->
+						<ListView.ItemContainerStyle>
+							<Style TargetType="ListViewItem">
+								<Setter Property="Template">
+									<Setter.Value>
+										<ControlTemplate TargetType="ListViewItem">
+											<Grid Margin="0, 0, 0 4">
+												<VisualStateManager.VisualStateGroups>
+													<VisualStateGroup x:Name="CommonStates">
+														<VisualState x:Name="Normal" />
+
+                                                        <!-- Hover effect -->
+                                                        <VisualState x:Name="PointerOver">
+                                                            <VisualState.Setters>
+                                                                <Setter Target="CardBorder.Background" Value="{ThemeResource CardBackgroundFillColorSecondaryBrush}" />
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+
+                                                        <!-- Pressed effect -->
+                                                        <VisualState x:Name="Pressed">
+                                                            <VisualState.Setters>
+                                                                <Setter Target="CardBorder.Background" Value="{ThemeResource CardBackgroundFillColorSecondaryBrush}" />
+                                                                <Setter Target="CardBorder.Opacity" Value="0.7" />
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+													</VisualStateGroup>
+												</VisualStateManager.VisualStateGroups>
+
+												<!-- Background -->
+												<Border x:Name="CardBorder"
+                                                        CornerRadius="6"
+                                                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"/>
+
+												<!-- Border -->
+												<Border BorderThickness="1"
+                                                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                                        CornerRadius="6"
+                                                        Padding="12"/>
+
+												<!-- Content template (see ListView.ItemTemplate) -->
+												<ContentPresenter Content="{TemplateBinding Content}"
+                                                                  ContentTemplate="{TemplateBinding ContentTemplate}" />
+											</Grid>
+										</ControlTemplate>
+									</Setter.Value>
+								</Setter>
+							</Style>
+						</ListView.ItemContainerStyle>
+
+						<!-- List item template -->
+						<ListView.ItemTemplate>
+							<DataTemplate x:DataType="entities:Material">
+								<Grid ColumnSpacing="8" Padding="12, 12, 8, 12">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*"/>
+										<ColumnDefinition Width="Auto"/>
+									</Grid.ColumnDefinitions>
+
+									<Grid.RowDefinitions>
+										<RowDefinition/>
+										<RowDefinition/>
+									</Grid.RowDefinitions>
+
+									<!-- Name aka category -->
+									<TextBlock Grid.Column="0"
+                                               Grid.Row="0"
+                                               Text="{x:Bind Name}"
+                                               x:Phase="1"
+                                               Style="{StaticResource BodyStrongTextBlockStyle}"/>
+
+									<!-- Department ID -->
+									<TextBlock Grid.Column="0"
+                                               Grid.Row="1"
+                                               Text="{x:Bind Category}"/>
+
+									<!-- Chevron -->
+									<Viewbox Grid.Column="1"
+                                             Grid.Row="0"
+                                             Grid.RowSpan="2"
+                                             Height="16"
+                                             Width="16">
+										<FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                                  Glyph="&#xE76C;"/>
+									</Viewbox>
+								</Grid>
+							</DataTemplate>
+						</ListView.ItemTemplate>
+					</ListView>
+				</Grid>
+
 			</Grid>
 		</ScrollViewer>
 	</Grid>
