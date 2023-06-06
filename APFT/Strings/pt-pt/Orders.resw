@@ -117,7 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddButton.Content" xml:space="preserve">
+    <value>Novo</value>
+  </data>
+  <data name="AddButtonFlyout.Content" xml:space="preserve">
+    <value>Adicionar nova encomenda</value>
+  </data>
+  <data name="AddCalendarDatePicker.Header" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="AddCalendarDatePicker.PlaceholderText" xml:space="preserve">
+    <value>Escolha uma data</value>
+  </data>
+  <data name="ClearFilterButton.Content" xml:space="preserve">
+    <value>Limpar filtros</value>
+  </data>
+  <data name="ConstructionIdTextBox.Header" xml:space="preserve">
+    <value>ID da obra</value>
+  </data>
+  <data name="ContentDialog_Content" xml:space="preserve">
+    <value>Não foi possível obter dados devido ao seguinte erro: {0}</value>
+  </data>
+  <data name="ContentDialog_PrimaryButtonText" xml:space="preserve">
+    <value>Fechar</value>
+  </data>
+  <data name="ContentDialog_Title" xml:space="preserve">
+    <value>Erro a obter dados</value>
+  </data>
+  <data name="FetchingDataGridError_Text.Text" xml:space="preserve">
+    <value>Erro a obter dados.</value>
+  </data>
+  <data name="FetchingDataGrid_Text.Text" xml:space="preserve">
+    <value>A obter dados...</value>
+  </data>
+  <data name="FilterButton.Content" xml:space="preserve">
+    <value>Filtrar</value>
+  </data>
   <data name="Header.Text" xml:space="preserve">
     <value>Encomendas</value>
+  </data>
+  <data name="IdTextBox.Header" xml:space="preserve">
+    <value>ID da encomenda</value>
+  </data>
+  <data name="StartCalendarDatePicker.Header" xml:space="preserve">
+    <value>Data de início após</value>
+  </data>
+  <data name="StartCalendarDatePicker.PlaceholderText" xml:space="preserve">
+    <value>Escolha uma data</value>
+  </data>
+  <data name="SupplierNifTextBox.Header" xml:space="preserve">
+    <value>NIF do fornecedor</value>
   </data>
 </root>

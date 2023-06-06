@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Windows.Storage;
@@ -26,6 +27,11 @@ public class Order
     {
         get; set;
     }
+
+    public string? SupplierName
+    {
+        get; set;
+    }
     
     public string DateString => Date != null ? Date.Year + "-" + Date.Month + "-" + Date.Day : string.Empty;
     
@@ -37,6 +43,15 @@ public class Order
         ConstructionId = constructionId;
     }
 
+    public Order(int id, DateTime date, int supplierNif, int constructionId, string supplierName)
+    {
+        Id = id;
+        Date = date;
+        SupplierNif = supplierNif;
+        ConstructionId = constructionId;
+        SupplierName = supplierName;
+    }
+
     public static async Task<ObservableCollection<Order>> GetOrdersAsync()
     {
         var orders = new ObservableCollection<Order>();
@@ -45,7 +60,7 @@ public class Order
         await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
         
         await cn.OpenAsync();
-        var cmd = new SqlCommand("SELECT * FROM EMPRESA_CONSTRUCAO.ENCOMENDA", cn);
+        var cmd = new SqlCommand("SELECT * FROM getTotalEncomendas() ORDER BY nome_fornecedor", cn);
 
         var reader = await cmd.ExecuteReaderAsync();
 
@@ -55,7 +70,8 @@ public class Order
                 reader.GetInt32(0),
                 reader.GetDateTime(1),
                 reader.GetInt32(2),
-                reader.GetInt32(3))
+                reader.GetInt32(3),
+                reader.GetString(4))
             );
         }
 
@@ -89,22 +105,53 @@ public class Order
         await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
 
         await cn.OpenAsync();
-        var cmd = new SqlCommand("SELECT * FROM getEncomendaByObraId(" + constructionId + ")", cn);
+        var cmd = new SqlCommand("SELECT * FROM getEncomendaByDateFornIdObraId(null, null, " + constructionId + ") ORDER BY nome_fornecedor", cn);
 
         var reader = await cmd.ExecuteReaderAsync();
 
         while (await reader.ReadAsync())
         {
             orders.Add(new Order(
-                reader.GetInt32(0), // change
-                new DateTime(),
-                reader.GetInt32(4),
-                reader.GetInt32(0))
+                reader.GetInt32(0),
+                reader.GetDateTime(1),
+                reader.GetInt32(2),
+                reader.GetInt32(3),
+                reader.GetString(4))
             );
         }
         
         return orders;
     }
+
+    public static async Task<ObservableCollection<Order>> GetOrdersFilteredAsync(string dateString, string supplierNif, string constructionId)
+    {
+        var list = new ObservableCollection<Order>();
+        var localSettings = ApplicationData.Current.LocalSettings;
+
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+        
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("SELECT * FROM getEncomendaByDateFornIdObraId(" +
+                                 (string.IsNullOrEmpty(dateString) ? "null" : "'" + dateString + "'") + ", " + 
+                                 (string.IsNullOrEmpty(supplierNif) ? "null" : supplierNif) + ", " +
+                                 (string.IsNullOrEmpty(constructionId) ? "null" : constructionId) + ") ORDER BY nome_fornecedor", cn);
+
+        var reader = await cmd.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            list.Add(new Order(
+                reader.GetInt32(0),
+                reader.GetDateTime(1),
+                reader.GetInt32(2),
+                reader.GetInt32(4),
+                reader.GetString(3))
+            );
+        }
+
+        return list;
+    }
+
 
     public static async Task<int> AddOrder(int id, string dateString, int supplierNif, int constructionId)
     {
