@@ -1,14 +1,8 @@
-﻿using APFT.Entities;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using APFT.Entities;
 using APFT.ViewModels;
-using LiveChartsCore;
-using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore.SkiaSharpView.Painting;
-using LiveChartsCore.SkiaSharpView.VisualElements;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using SkiaSharp;
 
 namespace APFT.Views;
 
@@ -23,5 +17,23 @@ public sealed partial class InícioPage : Page
     {
         ViewModel = App.GetService<InícioViewModel>();
         InitializeComponent();
+    }
+
+    private void FrameworkElement_OnSizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        if (ShellPage.Current.GetNavigationViewDisplayMode() == NavigationViewDisplayMode.Minimal)
+        {
+            PieChartEmployees.SetValue(Grid.ColumnSpanProperty, 2);
+            CartesianChartRows.SetValue(Grid.ColumnSpanProperty, 2);
+            CartesianChartRows.SetValue(Grid.RowProperty, 1);
+            CartesianChartRows.SetValue(Grid.ColumnProperty, 0);
+        }
+        else
+        {
+            PieChartEmployees.SetValue(Grid.ColumnSpanProperty, 1);
+            CartesianChartRows.SetValue(Grid.ColumnSpanProperty, 1);
+            CartesianChartRows.SetValue(Grid.RowProperty, 0);
+            CartesianChartRows.SetValue(Grid.ColumnProperty, 1);
+        }
     }
 }

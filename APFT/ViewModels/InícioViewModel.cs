@@ -1,18 +1,15 @@
 ﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
 using APFT.Entities;
 using CommunityToolkit.Mvvm.ComponentModel;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView.VisualElements;
-using SkiaSharp;
-using Microsoft.UI.Xaml.Controls;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using ABI.Microsoft.UI.Xaml.Data;
-using String = System.String;
+using System.Diagnostics;
+using LiveChartsCore.Drawing;
+using Microsoft.UI.Xaml;
+using SkiaSharp;
 
 namespace APFT.ViewModels;
 
@@ -27,6 +24,8 @@ public partial class InícioViewModel : ObservableObject, INotifyPropertyChanged
 
     public InícioViewModel()
     {
+        RowsXAxes = new Axis[] { new() { Labels = Array.Empty<string>() } }; // Disable X-axis labels
+        RowsYAxes = new Axis[] { new() { MinLimit = 0 } }; // Minimum of 0 in Y-axis
         FetchData();
     }
 
@@ -38,24 +37,21 @@ public partial class InícioViewModel : ObservableObject, INotifyPropertyChanged
         var hoursData = employeeData.Select(employee => employee.Hours.HasValue ? (double)employee.Hours.Value : 0).ToArray();
         EmployeeSeries = hoursData.AsLiveChartsPieSeries((value, series) =>
         {
-            series.Name = employeeData[i].Name;
-            i++;
+            series.Name = employeeData[i++].Name;
             series.InnerRadius = 80;
         });
         
         var tableData = await Info.GetTableInfo();
         var tableDataRowNumbers = tableData.Select(table => table.Rows ?? 0).ToArray();
+        var tableDataLabels = tableData.Select(table => table.TableName ?? string.Empty).ToArray();
+
         RowsSeries = new ISeries[]
         {
-            new ColumnSeries<long> { Values = tableDataRowNumbers}
-        };
-        RowsXAxes = new Axis[] 
-        {
-            new() 
+            new ColumnSeries<long>
             {
-                // Use the labels property for named or static labels 
-                Labels = tableData.Select(table => table.TableName ?? string.Empty).ToArray(), 
-                LabelsRotation = 15
+                Values = tableDataRowNumbers,
+                TooltipLabelFormatter = point => $"{tableDataLabels[point.Context.Index]}: {point.Model}",
+                Fill = new SolidColorPaint(SKColor.Parse(Application.Current.Resources["SystemAccentColor"].ToString()))
             }
         };
     }
@@ -98,6 +94,20 @@ public partial class InícioViewModel : ObservableObject, INotifyPropertyChanged
             {
                 _rowsXAxes = value;
                 OnPropertyChanged(nameof(RowsXAxes));
+            }
+        }
+    }
+
+    private Axis[] _rowsYAxes;
+    public Axis[] RowsYAxes
+    {
+        get => _rowsYAxes;
+        set
+        {
+            if (_rowsYAxes != value)
+            {
+                _rowsYAxes = value;
+                OnPropertyChanged(nameof(RowsYAxes));
             }
         }
     }

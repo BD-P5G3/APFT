@@ -49,6 +49,8 @@ public sealed partial class ShellPage : Page
 
     public static ShellPage Current;
 
+    public NavigationViewDisplayMode GetNavigationViewDisplayMode() => NavigationViewControl.DisplayMode;
+
     public void SetInfoBadgeColor(Color color) => cnInfoBadge_nv.Background = new SolidColorBrush(color);
 
     private void OnLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)

@@ -31,7 +31,6 @@ public class Info
 
     public static async Task<ObservableCollection<Info>> GetTableInfo()
     {
-        Debug.WriteLine("fuck");
         var list = new ObservableCollection<Info>();
         var localSettings = ApplicationData.Current.LocalSettings;
 
@@ -49,11 +48,6 @@ public class Info
                 reader.GetDouble(1),
                 reader.GetInt64(2))
             );
-        }
-
-        foreach (var info in list)
-        {
-            Debug.WriteLine(info.TableName);
         }
 
         return list;

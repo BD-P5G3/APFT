@@ -26,7 +26,7 @@
 
         <!-- Content -->
         <ScrollViewer Grid.Row="1" Padding="0,0,56,0" Margin="0,0,-56,0">
-            <Grid RowSpacing="16" ColumnSpacing="16">
+            <Grid RowSpacing="16" ColumnSpacing="16" SizeChanged="FrameworkElement_OnSizeChanged">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -59,14 +59,14 @@
 
                 <Grid Grid.Column="1"
                       Grid.Row="0"
-                      x:Name="PieChartEmployees1"
+                      x:Name="CartesianChartRows"
                       Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                       CornerRadius="6"
                       BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                       BorderThickness="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0"
@@ -76,7 +76,11 @@
                                Style="{ThemeResource BaseTextBlockStyle}"/>
 
                     <lvc:CartesianChart Grid.Row="1"
-                                        Series="{Binding RowsSeries}">
+                                        MinHeight="300"
+                                        Margin="6,0,0,0"
+                                        Series="{Binding RowsSeries, Mode=OneWay}"
+                                        XAxes="{Binding RowsXAxes, Mode=OneWay}"
+                                        YAxes="{Binding RowsYAxes, Mode=OneWay}">
                     </lvc:CartesianChart>
                     
                 </Grid>
