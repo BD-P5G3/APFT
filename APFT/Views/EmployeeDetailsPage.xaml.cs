@@ -141,7 +141,7 @@ public sealed partial class EmployeeDetailsPage : INotifyPropertyChanged
     public string SalaryString => Salary.ToString().Replace(',', '.');
     
 
-    public Dictionary<string, string> GenderDictionary = new();
+    public readonly Dictionary<string, string> GenderDictionary = new();
 
     public EmployeeDetailsPage()
     {
@@ -213,36 +213,22 @@ public sealed partial class EmployeeDetailsPage : INotifyPropertyChanged
         sb.Begin();
 
         // Action
-        var dialog = new ContentDialog
+        Salary = decimal.Parse(SalaryTextBox.Text);
+        var affectedRows = await Employee.EditEmployee(Nif, FirstName, LastName, Email ?? string.Empty, Phone ?? 0, Address, Gender, BirthDateString, SalaryString);
+        
+        if (affectedRows == 0)
         {
-            XamlRoot = ContentArea.XamlRoot,
-            Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
-            Title = "Error editing employee",
-            PrimaryButtonText = "Close",
-            DefaultButton = ContentDialogButton.Primary,
-            Content = "Unable to edit employee. The salary is below the national minimum wage."
-        };
-        _ = await dialog.ShowAsync();
-        Salary = decimal.Parse("800,00");
-
-        /*try
-        {
-            Salary = decimal.Parse(SalaryTextBox.Text);
-            await Employee.EditEmployee(Nif, FirstName, LastName, Email, Phone, Address, Gender, BirthDateString, SalaryString);
-        }
-        catch (Exception exception)
-        {
-            dialog = new ContentDialog
+            var dialog = new ContentDialog
             {
                 XamlRoot = ContentArea.XamlRoot,
                 Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
                 Title = _resourceLoader.GetString("AddErrorCD_Title"),
                 PrimaryButtonText = _resourceLoader.GetString("ContentDialog_PrimaryButtonText"),
                 DefaultButton = ContentDialogButton.Primary,
-                Content = string.Format(_resourceLoader.GetString("AddErrorCD_Content"), exception.Message)
+                Content = _resourceLoader.GetString("AddErrorCD_Content")
             };
             _ = await dialog.ShowAsync();
-        }*/
+        }
 
 
         // Create a fade-out animation for the ProgressRing

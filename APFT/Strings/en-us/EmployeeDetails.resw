@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddErrorCD_Content" xml:space="preserve">
-    <value>Unable to edit this employee due to the following error: {0}. Check if salary is above the minimum wage and below CEOs' ones.</value>
+    <value>Unable to edit this employee due to an error. Check if salary is above the minimum wage and below CEOs' ones.</value>
   </data>
   <data name="AddErrorCD_Title" xml:space="preserve">
     <value>Error editing employee</value>
@@ -152,6 +152,9 @@
   </data>
   <data name="ConstructionsSubheader.Text" xml:space="preserve">
     <value>Constructions</value>
+  </data>
+  <data name="ContentDialog_PrimaryButtonText" xml:space="preserve">
+    <value>Close</value>
   </data>
   <data name="DeleteButton.Content" xml:space="preserve">
     <value>Delete</value>

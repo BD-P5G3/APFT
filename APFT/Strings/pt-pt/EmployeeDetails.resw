@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddErrorCD_Content" xml:space="preserve">
-    <value>Não foi possível editar este empregado devido ao seguinte erro: {0}. Verifique se o salário é inferior ao SMN ou superior ao de algum dos CEOs.</value>
+    <value>Não foi possível editar este empregado devido a um erro. Verifique se o salário é inferior ao Salário Mínimo Nacional ou superior ao de algum dos CEOs.</value>
   </data>
   <data name="AddErrorCD_Title" xml:space="preserve">
     <value>Erro ao editar o empregado</value>
@@ -152,6 +152,9 @@
   </data>
   <data name="ConstructionsSubheader.Text" xml:space="preserve">
     <value>Obras</value>
+  </data>
+  <data name="ContentDialog_PrimaryButtonText" xml:space="preserve">
+    <value>Fechar</value>
   </data>
   <data name="DeleteButton.Content" xml:space="preserve">
     <value>Eliminar</value>
