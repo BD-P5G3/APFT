@@ -117,7 +117,49 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddButton.Content" xml:space="preserve">
+    <value>Novo</value>
+  </data>
+  <data name="AddButtonFlyout.Content" xml:space="preserve">
+    <value>Adicionar novo fornecedor</value>
+  </data>
+  <data name="AddressTextBox.Header" xml:space="preserve">
+    <value>Morada</value>
+  </data>
+  <data name="AutoSuggestBox.PlaceholderText" xml:space="preserve">
+    <value>Procurar por nome</value>
+  </data>
+  <data name="AutoSuggestBox_NotFound" xml:space="preserve">
+    <value>Sem resultados</value>
+  </data>
+  <data name="ContentDialog_Content" xml:space="preserve">
+    <value>Não foi possível obter a lista de fornecedores devido ao seguinte erro: {0}</value>
+  </data>
+  <data name="ContentDialog_PrimaryButtonText" xml:space="preserve">
+    <value>Fechar</value>
+  </data>
+  <data name="ContentDialog_Title" xml:space="preserve">
+    <value>Erro a obter dados</value>
+  </data>
+  <data name="EmailTextBox.Header" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="FetchingDataGridError_Text.Text" xml:space="preserve">
+    <value>Erro a obter dados.</value>
+  </data>
+  <data name="FetchingDataGrid_Text.Text" xml:space="preserve">
+    <value>A obter dados...</value>
+  </data>
   <data name="Header.Text" xml:space="preserve">
     <value>Fornecedores</value>
+  </data>
+  <data name="NameTextBox.Header" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="NifTextBox.Header" xml:space="preserve">
+    <value>NIF</value>
+  </data>
+  <data name="PhoneTextBox.Header" xml:space="preserve">
+    <value>Telefone</value>
   </data>
 </root>

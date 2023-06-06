@@ -6,7 +6,7 @@ namespace APFT.Entities;
 
 public class Supplier
 {
-    public int Id
+    public int Nif
     {
         get; set;
     }
@@ -31,13 +31,30 @@ public class Supplier
         get; set;
     }
     
-    public Supplier(int id, string name, int phone, string email, string? address)
+    public Supplier(int nif, string name, int phone, string email, string? address)
     {
-        Id = id;
+        Nif = nif;
         Name = name;
         Phone = phone;
         Email = email;
         Address = address;
+    }
+
+    public static async Task<ObservableCollection<GroupInfoList>> GetSuppliersGroupedAsync()
+    {
+        // Grab Contact objects from pre-existing list (list is returned from function GetContactsAsync())
+        var query = from item in await GetSuppliersAsync()
+
+            // Group the items returned from the query, sort and select the ones you want to keep
+            group item by item.Name[..1].ToUpper() into g
+            orderby g.Key
+
+            // GroupInfoList is a simple custom class that has an IEnumerable type attribute, and
+            // a key attribute. The IGrouping-typed variable g now holds the Contact objects,
+            // and these objects will be used to create a new GroupInfoList object.
+            select new GroupInfoList(g) { Key = g.Key };
+
+        return new ObservableCollection<GroupInfoList>(query);
     }
 
     public static async Task<ObservableCollection<Supplier>> GetSuppliersAsync()
@@ -66,9 +83,9 @@ public class Supplier
         return suppliers;
     }
 
-    public static async Task<ObservableCollection<Supplier>> GetSuppliersByNameAsync(string name)
+    public static async Task<List<string>> GetSuppliersByNameAsync(string name)
     {
-        var suppliers = new ObservableCollection<Supplier>();
+        var suitableItems = new List<string>();
         var localSettings = ApplicationData.Current.LocalSettings;
 
         await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
@@ -80,16 +97,10 @@ public class Supplier
 
         while (await reader.ReadAsync())
         {
-            suppliers.Add(new Supplier(
-                reader.GetInt32(0),
-                reader.GetString(1),
-                reader.GetInt32(2),
-                reader.GetString(3),
-                reader.GetString(4))
-            );
+            suitableItems.Add(reader.GetString(1) + " (" + reader.GetInt32(0) + ")");
         }
 
-        return suppliers;
+        return suitableItems;
     }
 
     public static async Task<Supplier> GetSupplierByNifAsync(int nif)
@@ -112,11 +123,11 @@ public class Supplier
             reader.GetString(4));
     }
 
-    public static async Task<int> AddSupplier(int nif, string name, int phone, string email, string? address)
+    public static async Task<int> AddSupplier(int nif, string name, string email, int phone, string? address)
     {
         var localSettings = ApplicationData.Current.LocalSettings;
         await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
-
+        
         await cn.OpenAsync();
         var cmd = new SqlCommand("EXEC create_fornecedor " + nif + ", '" + name + "', " + phone + ", '" + email + "', " + 
                                  (string.IsNullOrEmpty(address) ? "null" : "'" + address + "'"), cn);
