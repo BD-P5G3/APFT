@@ -26,6 +26,8 @@ public partial class InícioViewModel : ObservableObject, INotifyPropertyChanged
     {
         RowsXAxes = new Axis[] { new() { Labels = Array.Empty<string>() } }; // Disable X-axis labels
         RowsYAxes = new Axis[] { new() { MinLimit = 0 } }; // Minimum of 0 in Y-axis
+        EmployeeSeries = Array.Empty<ISeries>();
+        RowsSeries = Array.Empty<ISeries>();
         FetchData();
     }
 
