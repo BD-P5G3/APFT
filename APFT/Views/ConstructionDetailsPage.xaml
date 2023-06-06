@@ -127,7 +127,7 @@
 				</Grid>
 
 				<!-- Construction's employees -->
-				<Grid Grid.Column="0" Grid.Row="1" RowSpacing="8" x:Name="ConstructionEmployeesGrid" Visibility="Collapsed">
+				<Grid Grid.Column="0" Grid.Row="1" RowSpacing="8" x:Name="ConstructionEmployeesGrid" Visibility="Collapsed" VerticalAlignment="Top">
 					<Grid.RowDefinitions>
 						<RowDefinition/>
 						<RowDefinition/>
@@ -291,7 +291,7 @@
 				</Grid>
 
                 <!-- Construction's orders -->
-				<Grid Grid.Column="0" Grid.Row="2" RowSpacing="8" x:Name="ConstructionOrdersGrid" Visibility="Collapsed">
+				<Grid Grid.Column="0" Grid.Row="2" RowSpacing="8" x:Name="ConstructionOrdersGrid" Visibility="Collapsed" VerticalAlignment="Top">
 					<Grid.RowDefinitions>
 						<RowDefinition/>
 						<RowDefinition/>
@@ -400,7 +400,7 @@
 				</Grid>
 
 				<!-- Construction's services -->
-				<Grid Grid.Column="1" Grid.Row="1" RowSpacing="8" x:Name="ConstructionServicesGrid" Visibility="Collapsed">
+				<Grid Grid.Column="1" Grid.Row="1" RowSpacing="8" x:Name="ConstructionServicesGrid" Visibility="Collapsed" VerticalAlignment="Top">
 					<Grid.RowDefinitions>
 						<RowDefinition/>
 						<RowDefinition/>
@@ -540,7 +540,7 @@
 				</Grid>
 
 				<!-- Construction's materials -->
-				<Grid Grid.Column="1" Grid.Row="2" RowSpacing="8" x:Name="ConstructionMaterialsGrid" Visibility="Collapsed">
+				<Grid Grid.Column="1" Grid.Row="2" RowSpacing="8" x:Name="ConstructionMaterialsGrid" Visibility="Collapsed" VerticalAlignment="Top">
 					<Grid.RowDefinitions>
 						<RowDefinition/>
 						<RowDefinition/>
