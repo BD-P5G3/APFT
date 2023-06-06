@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using APFT.Entities;
 using APFT.ViewModels;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
@@ -17,6 +18,11 @@ public sealed partial class InícioPage : Page
     {
         ViewModel = App.GetService<InícioViewModel>();
         InitializeComponent();
+        if (ShellPage.Current.GetInfoBadgeColor() == Microsoft.UI.Colors.Green)
+        {
+            LoginGrid.Visibility = Visibility.Collapsed;
+            GraphsGrid.Visibility = Visibility.Visible;
+        }
     }
 
     private void FrameworkElement_OnSizeChanged(object sender, SizeChangedEventArgs e)

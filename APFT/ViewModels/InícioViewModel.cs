@@ -7,7 +7,9 @@ using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView.VisualElements;
 using System.ComponentModel;
 using System.Diagnostics;
+using APFT.Views;
 using LiveChartsCore.Drawing;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using SkiaSharp;
 
@@ -28,7 +30,11 @@ public partial class InícioViewModel : ObservableObject, INotifyPropertyChanged
         RowsYAxes = new Axis[] { new() { MinLimit = 0 } }; // Minimum of 0 in Y-axis
         EmployeeSeries = Array.Empty<ISeries>();
         RowsSeries = Array.Empty<ISeries>();
-        FetchData();
+
+        if (ShellPage.Current.GetInfoBadgeColor() == Microsoft.UI.Colors.Green)
+        {
+            FetchData();
+        }
     }
 
     private async void FetchData()

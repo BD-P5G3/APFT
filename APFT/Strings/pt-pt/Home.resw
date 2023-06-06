@@ -120,4 +120,13 @@
   <data name="Header.Text" xml:space="preserve">
     <value>Início</value>
   </data>
+  <data name="LoginTextHeader.Text" xml:space="preserve">
+    <value>Sem sessão iniciada, pelo que não é possível ver os gráficos.</value>
+  </data>
+  <data name="LoginTextText1.Text" xml:space="preserve">
+    <value>Abra a página</value>
+  </data>
+  <data name="LoginTextText2.Text" xml:space="preserve">
+    <value>Estado da Base de Dados para iniciar sessão.</value>
+  </data>
 </root>

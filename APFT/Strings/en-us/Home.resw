@@ -120,4 +120,13 @@
   <data name="Header.Text" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="LoginTextHeader.Text" xml:space="preserve">
+    <value>Not signed in, so you can't see graphs here yet.</value>
+  </data>
+  <data name="LoginTextText1.Text" xml:space="preserve">
+    <value>Go to the</value>
+  </data>
+  <data name="LoginTextText2.Text" xml:space="preserve">
+    <value>Database Status page to login.</value>
+  </data>
 </root>

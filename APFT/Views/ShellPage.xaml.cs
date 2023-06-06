@@ -8,6 +8,8 @@ using Microsoft.UI.Xaml.Media;
 using Windows.Storage;
 using Windows.System;
 using Windows.UI;
+using ABI.Microsoft.UI;
+using Colors = Microsoft.UI.Colors;
 
 namespace APFT.Views;
 
@@ -39,7 +41,7 @@ public sealed partial class ShellPage : Page
         var localSettings = ApplicationData.Current.LocalSettings;
         localSettings.Values.Remove("IconBadgeColor");
         localSettings.Values.Remove("ConnectionStatus");
-        //localSettings.Values.Remove("Password");
+        localSettings.Values.Remove("Password");
         localSettings.Values["Database"] = "p5g3";
         localSettings.Values["Username"] = "p5g3";
         localSettings.Values["SQLConnectionString"] = "Data Source = " + DatabaseStatusPage.ServerAddress + "; " +
@@ -49,9 +51,17 @@ public sealed partial class ShellPage : Page
 
     public static ShellPage Current;
 
+    private Color _color = Colors.Red;
+
     public NavigationViewDisplayMode GetNavigationViewDisplayMode() => NavigationViewControl.DisplayMode;
 
-    public void SetInfoBadgeColor(Color color) => cnInfoBadge_nv.Background = new SolidColorBrush(color);
+    public Color GetInfoBadgeColor() => _color;
+
+    public void SetInfoBadgeColor(Color color)
+    {
+        _color = color;
+        cnInfoBadge_nv.Background = new SolidColorBrush(color);
+    }
 
     private void OnLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
