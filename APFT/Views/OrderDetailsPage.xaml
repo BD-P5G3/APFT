@@ -90,7 +90,7 @@
                             </ToolTipService.ToolTip>
                             <Button.Flyout>
                                 <Flyout ShouldConstrainToRootBounds="False">
-                                    <StackPanel Spacing="16">
+                                    <StackPanel Spacing="16" Width="200">
                                         <TextBox x:Name="AddMaterialIdTextBox" x:Uid="/OrderDetails/AddMaterialIdTextBox" PlaceholderText="0"/>
                                         <TextBox x:Name="AddMaterialCostTextBox" x:Uid="/OrderDetails/AddMaterialCostTextBox" PlaceholderText="0"/>
                                         <Button x:Uid="/OrderDetails/AddMaterialButton" Click="AddButtonBase_OnClick" Style="{StaticResource AccentButtonStyle}" />

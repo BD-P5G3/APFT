@@ -116,7 +116,7 @@ public sealed partial class OrderDetailsPage : INotifyPropertyChanged
 
     private async void AddButtonBase_OnClick(object sender, RoutedEventArgs e)
     {
-        Debug.WriteLine(await Material.AddMaterialToOrder(Id, int.Parse(AddMaterialIdTextBox.Text), double.Parse(AddMaterialCostTextBox.Text));
+        Debug.WriteLine(await Material.AddMaterialToOrder(Id, int.Parse(AddMaterialIdTextBox.Text), double.Parse(AddMaterialCostTextBox.Text)));
         FetchData();
     }
 }
