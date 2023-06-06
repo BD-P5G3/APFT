@@ -58,7 +58,7 @@ public sealed partial class EncomendasPage : Page
         var localSettings = ApplicationData.Current.LocalSettings;
         localSettings.Values["OrderId"] = ((Order)e.ClickedItem).Id.ToString();
 
-        Frame.Navigate(typeof(ConstructionDetailsPage));
+        Frame.Navigate(typeof(OrderDetailsPage));
     }
 
     private async void AddButton_OnClick(object sender, RoutedEventArgs e)
@@ -72,7 +72,7 @@ public sealed partial class EncomendasPage : Page
             int.Parse(ConstructionIdTextBox.Text));
 
         localSettings.Values["OrderId"] = IdTextBox.Text;
-        Frame.Navigate(typeof(ConstructionDetailsPage));
+        Frame.Navigate(typeof(OrderDetailsPage));
     }
 
     // Filter

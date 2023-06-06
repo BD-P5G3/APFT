@@ -103,6 +103,31 @@ public class Material
         return list;
     }
 
+    public static async Task<ObservableCollection<Material>> GetMaterialsByOrderIdAsync(int orderId)
+    {
+        var list = new ObservableCollection<Material>();
+        var localSettings = ApplicationData.Current.LocalSettings;
+
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("SELECT * FROM getMateriaisByEncomenda(" + orderId + ")", cn);
+
+        var reader = await cmd.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            list.Add(new Material(
+                reader.GetInt32(1),
+                reader.GetString(3),
+                reader.GetString(2),
+                0)
+            );
+        }
+
+        return list;
+    }
+
     public static async Task<int> AddMaterial(int id, string category, string name, int wharehouseUnits)
     {
         var localSettings = ApplicationData.Current.LocalSettings;

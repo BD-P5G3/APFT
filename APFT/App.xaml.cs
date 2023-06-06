@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+
 using APFT.Activation;
 using APFT.Contracts.Services;
 using APFT.Core.Contracts.Services;
@@ -73,6 +74,8 @@ public partial class App : Application
             services.AddSingleton<IFileService, FileService>();
 
             // Views and ViewModels
+            services.AddTransient<OrderDetailsViewModel>();
+            services.AddTransient<OrderDetailsPage>();
             services.AddTransient<ConstructionDetailsViewModel>();
             services.AddTransient<ConstructionDetailsPage>();
             services.AddTransient<EmployeeDetailsViewModel>();

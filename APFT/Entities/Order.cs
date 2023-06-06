@@ -1,7 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using Windows.Storage;
 
 namespace APFT.Entities;
@@ -33,7 +31,7 @@ public class Order
         get; set;
     }
     
-    public string DateString => Date != null ? Date.Year + "-" + Date.Month + "-" + Date.Day : string.Empty;
+    public string DateString => Date.Year + "-" + Date.Month + "-" + Date.Day;
     
     public Order(int id, DateTime date, int supplierNif, int constructionId)
     {
