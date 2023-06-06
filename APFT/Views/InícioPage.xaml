@@ -4,7 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:APFT.ViewModels"
+    xmlns:lvc="using:LiveChartsCore.SkiaSharpView.WinUI"
     mc:Ignorable="d">
+
+    <Page.DataContext>
+        <local:InícioViewModel/>
+    </Page.DataContext>
 
     <Grid x:Name="ContentArea">
         <Grid.RowDefinitions>
@@ -12,11 +18,45 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        <!-- Header -->
         <TextBlock Grid.Row="0"
                    Margin="0,10,0,24"
                    x:Uid="/Home/Header"
                    Style="{ThemeResource TitleTextBlockStyle}" />
 
-        <TextBlock Grid.Row="1" x:Uid="/Shell/UnderDevelopment" />
+        <!-- Content -->
+        <ScrollViewer Grid.Row="1" Padding="0,0,56,0" Margin="0,0,-56,0">
+        <Grid RowSpacing="16" ColumnSpacing="16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0"
+                  Grid.Row="0"
+                  x:Name="PieChartEmployees"
+                  Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                  CornerRadius="6"
+                  BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                  BorderThickness="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                           Text="Number of hours per employee"
+                           Margin="12, 12, 0, 0"
+                           HorizontalAlignment="Center"
+                           Style="{ThemeResource BaseTextBlockStyle}"/>
+                <lvc:PieChart Grid.Row="1" MinHeight="300" Series="{Binding Series, Mode=OneWay}"/>
+            </Grid>
+        </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

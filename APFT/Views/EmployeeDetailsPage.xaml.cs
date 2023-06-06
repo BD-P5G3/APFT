@@ -60,8 +60,8 @@ public sealed partial class EmployeeDetailsPage : INotifyPropertyChanged
         }
     }
 
-    private string _email;
-    public string Email
+    private string? _email;
+    public string? Email
     {
         get => _email;
         set
@@ -71,8 +71,8 @@ public sealed partial class EmployeeDetailsPage : INotifyPropertyChanged
         }
     }
 
-    private int _phone;
-    public int Phone
+    private int? _phone;
+    public int? Phone
     {
         get => _phone;
         set
@@ -115,8 +115,8 @@ public sealed partial class EmployeeDetailsPage : INotifyPropertyChanged
         }
     }
 
-    private decimal _salary;
-    public decimal Salary
+    private decimal? _salary;
+    public decimal? Salary
     {
         get => _salary;
         set
@@ -126,8 +126,8 @@ public sealed partial class EmployeeDetailsPage : INotifyPropertyChanged
         }
     }
 
-    private int _departmentId;
-    public int DepartmentId
+    private int? _departmentId;
+    public int? DepartmentId
     {
         get => _departmentId;
         set

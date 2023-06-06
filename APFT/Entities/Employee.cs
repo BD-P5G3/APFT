@@ -22,12 +22,12 @@ public class Employee
         get; set;
     }
 
-    public string Email
+    public string? Email
     {
         get; set;
     }
 
-    public int Phone
+    public int? Phone
     {
         get; set;
     }
@@ -47,12 +47,17 @@ public class Employee
         get; set;
     }
 
-    public decimal Salary
+    public decimal? Salary
     {
         get; set;
     }
 
-    public int DepartmentId
+    public int? DepartmentId
+    {
+        get; set;
+    }
+
+    public int? Hours
     {
         get; set;
     }
@@ -73,6 +78,14 @@ public class Employee
         BirthDate = birthDate;
         Salary = salary;
         DepartmentId = departmentId;
+    }
+
+    public Employee(int nif, string firstName, string lastName, int hours)
+    {
+        Nif = nif;
+        FirstName = firstName;
+        LastName = lastName;
+        Hours = hours;
     }
 
     public static async Task<ObservableCollection<GroupInfoList>> GetEmployeesGroupedAsync()
@@ -248,6 +261,31 @@ public class Employee
             await reader.IsDBNullAsync(7) ? new DateTime(1970, 1, 1) : reader.GetDateTime(7),
             reader.GetDecimal(8),
             reader.GetInt32(9));
+    }
+
+    public static async Task<ObservableCollection<Employee>> GetHoursOfAllEmployees()
+    {
+        var orders = new ObservableCollection<Employee>();
+        var localSettings = ApplicationData.Current.LocalSettings;
+
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("SELECT * FROM getTotalHoursAllEmployees()", cn);
+
+        var reader = await cmd.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            orders.Add(new Employee(
+                reader.GetInt32(0),
+                reader.GetString(1),
+                reader.GetString(2),
+                reader.GetInt32(3))
+            );
+        }
+
+        return orders;
     }
 
     public static async Task<int> AddEmployee(int nif, string firstName, string lastName, string email, int phone, string address, string gender, string birthDateString, string salaryString, int departmentId)
