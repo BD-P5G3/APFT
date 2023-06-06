@@ -99,6 +99,6 @@ public sealed partial class FornecedoresPage : Page
         var localSettings = ApplicationData.Current.LocalSettings;
         localSettings.Values["SupplierNif"] = nif;
 
-        Frame.Navigate(typeof(CustomerDetailsPage));
+        Frame.Navigate(typeof(SupplierDetailsPage));
     }
 }
