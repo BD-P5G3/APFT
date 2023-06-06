@@ -121,7 +121,7 @@ public sealed partial class ConstructionDetailsPage : INotifyPropertyChanged
             ConstructionServicesGrid.Visibility = Visibility.Visible;
         }
 
-        MaterialsGridView.ItemsSource = await Service.GetServicesByConstructionIdAsync(Id); // fix (await Zé.getNewUdf())
+        MaterialsGridView.ItemsSource = await Material.GetMaterialsByConstructionIdAsync(Id);
         if (MaterialsGridView.Items.Count > 0)
         {
             ConstructionMaterialsGrid.Visibility = Visibility.Visible;

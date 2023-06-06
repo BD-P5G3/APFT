@@ -72,7 +72,7 @@
 
 		<!-- Content -->
 		<ScrollViewer Grid.Row="1" Padding="0,0,56,0" Margin="0,0,-56,0">
-			<Grid ColumnSpacing="16" RowSpacing="32" Padding="0,0,0,16">
+			<Grid ColumnSpacing="32" RowSpacing="32" Padding="0,0,0,16">
 				<Grid.RowDefinitions>
 					<RowDefinition/>
 					<RowDefinition/>
@@ -97,7 +97,7 @@
                     <TextBox Grid.Column="0" Text="{x:Bind Location, Mode=TwoWay}" x:Uid="/ConstructionDetails/LocationTextBox" />
 
 					<!-- ID & customer NIF -->
-					<Grid Grid.Row="1" ColumnSpacing="16">
+					<Grid Grid.Row="1" ColumnSpacing="32">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="*"/>
 							<ColumnDefinition Width="*"/>
@@ -108,7 +108,7 @@
 					</Grid>
 
 					<!-- Start & end date -->
-					<Grid Grid.Row="2" ColumnSpacing="16" x:Name="DatesGrid" SizeChanged="DatesGrid_OnSizeChanged">
+					<Grid Grid.Row="2" ColumnSpacing="32" x:Name="DatesGrid" SizeChanged="DatesGrid_OnSizeChanged">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition x:Name="DatesGridColumn"/>
 							<ColumnDefinition/>
