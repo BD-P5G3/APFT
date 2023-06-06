@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Windows.Storage;
 
 namespace APFT.Entities;
@@ -161,5 +162,15 @@ public class Material
         return await cmd.ExecuteNonQueryAsync();
     }
 
-    // Complete UDFs here
+    public static async Task<int> AddMaterialToOrder(int orderId, int materialId, double price)
+    {
+        var localSettings = ApplicationData.Current.LocalSettings;
+
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("EXEC add_material_enc " + orderId + ", " + materialId + ", " + price.ToString().Replace(',', '.'), cn);
+
+        return await cmd.ExecuteNonQueryAsync();
+    }
 }

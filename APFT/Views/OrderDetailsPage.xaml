@@ -59,7 +59,7 @@
 					</Grid>
 				</Grid>
 
-				<!-- Customer's constructions -->
+				<!-- Order's materials -->
 				<Grid Grid.Row="1" RowSpacing="8">
 					<Grid.RowDefinitions>
 						<RowDefinition/>
@@ -67,11 +67,38 @@
 					</Grid.RowDefinitions>
 
 					<!-- Header (i.e., a subtitle) -->
-					<TextBlock Grid.Row="0"
-                               x:Uid="/OrderDetails/MaterialsSubheader"
-                               x:Name="MaterialsSubtitle"
-                               Visibility="Collapsed"
-                               Style="{ThemeResource SubtitleTextBlockStyle}" />
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0"
+                                   x:Uid="/OrderDetails/MaterialsSubheader"
+                                   x:Name="MaterialsSubtitle"
+                                   Visibility="Collapsed"
+                                   VerticalAlignment="Center"
+                                   Style="{ThemeResource SubtitleTextBlockStyle}" />
+
+                        <!-- Add material button -->
+                        <Button Grid.Column="1" VerticalAlignment="Center">
+                            <Viewbox Height="12" Width="12">
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE710;"/>
+                            </Viewbox>
+                            <ToolTipService.ToolTip>
+                                <ToolTip x:Uid="/OrderDetails/AddMaterialTooltip" />
+                            </ToolTipService.ToolTip>
+                            <Button.Flyout>
+                                <Flyout ShouldConstrainToRootBounds="False">
+                                    <StackPanel Spacing="16">
+                                        <TextBox x:Name="AddMaterialIdTextBox" x:Uid="/OrderDetails/AddMaterialIdTextBox" PlaceholderText="0"/>
+                                        <TextBox x:Name="AddMaterialCostTextBox" x:Uid="/OrderDetails/AddMaterialCostTextBox" PlaceholderText="0"/>
+                                        <Button x:Uid="/OrderDetails/AddMaterialButton" Click="AddButtonBase_OnClick" Style="{StaticResource AccentButtonStyle}" />
+                                    </StackPanel>
+                                </Flyout>
+                            </Button.Flyout>
+                        </Button>
+                    </Grid>
 
 					<!-- Materials list -->
 					<ListView Grid.Row="1"
