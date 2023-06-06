@@ -26,6 +26,7 @@ public class PageService : IPageService
         Configure<EmployeeDetailsViewModel, EmployeeDetailsPage>();
         Configure<ConstructionDetailsViewModel, ConstructionDetailsPage>();
         Configure<OrderDetailsViewModel, OrderDetailsPage>();
+        Configure<SupplierDetailsViewModel, SupplierDetailsPage>();
     }
 
     public Type GetPageType(string key)

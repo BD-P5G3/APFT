@@ -74,6 +74,8 @@ public partial class App : Application
             services.AddSingleton<IFileService, FileService>();
 
             // Views and ViewModels
+            services.AddTransient<SupplierDetailsViewModel>();
+            services.AddTransient<SupplierDetailsPage>();
             services.AddTransient<OrderDetailsViewModel>();
             services.AddTransient<OrderDetailsPage>();
             services.AddTransient<ConstructionDetailsViewModel>();
@@ -109,7 +111,7 @@ public partial class App : Application
         UnhandledException += App_UnhandledException;
     }
 
-    private async void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
+    private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
     {
         // TODO: Log and handle exceptions as appropriate.
         // https://docs.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.application.unhandledexception.

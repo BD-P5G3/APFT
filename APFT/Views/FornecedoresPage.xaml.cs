@@ -59,7 +59,7 @@ public sealed partial class FornecedoresPage : Page
         var localSettings = ApplicationData.Current.LocalSettings;
         localSettings.Values["SupplierNif"] = ((Supplier)e.ClickedItem).Nif.ToString();
 
-        Frame.Navigate(typeof(CustomerDetailsPage));
+        Frame.Navigate(typeof(SupplierDetailsPage));
     }
     
 
@@ -72,7 +72,7 @@ public sealed partial class FornecedoresPage : Page
             int.Parse(PhoneTextBox.Text), AddressTextBox.Text);
 
         localSettings.Values["SupplierNif"] = NifTextBox.Text;
-        Frame.Navigate(typeof(CustomerDetailsPage));
+        Frame.Navigate(typeof(SupplierDetailsPage));
     }
 
     private async void AutoSuggestBox_OnTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)

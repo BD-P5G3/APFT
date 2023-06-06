@@ -121,6 +121,32 @@ public class Order
         return orders;
     }
 
+    public static async Task<ObservableCollection<Order>> GetOrdersBySupplierNifAsync(int supplierNif)
+    {
+        var orders = new ObservableCollection<Order>();
+        var localSettings = ApplicationData.Current.LocalSettings;
+
+        await using var cn = new SqlConnection(localSettings.Values["SQLConnectionString"].ToString());
+
+        await cn.OpenAsync();
+        var cmd = new SqlCommand("SELECT * FROM getEncomendaByDateFornIdObraId(null, " + supplierNif + ", null) ORDER BY nome_fornecedor", cn);
+
+        var reader = await cmd.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            orders.Add(new Order(
+                reader.GetInt32(0),
+                reader.GetDateTime(1),
+                reader.GetInt32(2),
+                reader.GetInt32(4),
+                reader.GetString(3))
+            );
+        }
+        
+        return orders;
+    }
+
     public static async Task<ObservableCollection<Order>> GetOrdersFilteredAsync(string dateString, string supplierNif, string constructionId)
     {
         var list = new ObservableCollection<Order>();
